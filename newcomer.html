@@ -24,6 +24,12 @@ html,body{margin:0;padding:0}
   --shadow-soft:0 12px 26px rgba(25,31,52,.06);
   --shadow-card:0 20px 40px rgba(25,31,52,.10);
   --shadow-cta:0 18px 32px rgba(80,78,177,.28);
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+html{
+  background:radial-gradient(circle at top, var(--bg1) 0%, var(--bg2) 40%, var(--bg3) 100%);
 }
 
 body{
@@ -34,6 +40,67 @@ body{
   -moz-osx-font-smoothing:grayscale;
 }
 
+/* ===== Page Transition ===== */
+html.is-transitioning,
+html.is-transitioning body{
+  overflow:hidden;
+}
+
+.page-transition-layer{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  pointer-events:none;
+  background:linear-gradient(180deg,#f7f9fc 0%, #eef2f7 100%);
+  opacity:0;
+  transform:translateX(100%);
+  transition:
+    transform .52s var(--ease),
+    opacity .32s ease;
+}
+
+html.is-transitioning .page-transition-layer{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.page-shell{
+  min-height:100vh;
+  opacity:0;
+  transform:translateX(18px);
+}
+
+body.is-ready .page-shell{
+  animation:pageEnter .55s var(--ease) forwards;
+}
+
+body.is-leaving .page-shell{
+  animation:pageLeave .38s cubic-bezier(.55,.08,.68,.53) forwards;
+}
+
+@keyframes pageEnter{
+  from{
+    opacity:0;
+    transform:translateX(22px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes pageLeave{
+  from{
+    opacity:1;
+    transform:translateX(0);
+  }
+  to{
+    opacity:.88;
+    transform:translateX(-16px);
+  }
+}
+
+/* ===== Layout ===== */
 .wrap{
   width:100%;
   max-width:980px;
@@ -217,76 +284,7 @@ body{
   transform:translateX(120%);
 }
 
-@media (max-width:640px){
-  .wrap{padding:22px 12px 44px}
-  .header-logo{margin-bottom:18px;font-size:13px}
-  .card{border-radius:20px;padding:18px 18px}
-  .card h2{font-size:20px}
-  .card p{font-size:14px}
-  .card-arrow{width:38px;height:38px}
-  .main-btn{min-height:62px;font-size:17px;border-radius:18px}
-}
-  /* ===== Page Transition ===== */
-html.is-transitioning,
-html.is-transitioning body{
-  overflow:hidden;
-}
-
-.page-transition-layer{
-  position:fixed;
-  inset:0;
-  z-index:9999;
-  pointer-events:none;
-  background:linear-gradient(180deg,#f7f9fc 0%, #eef2f7 100%);
-  opacity:0;
-  transform:translateX(100%);
-  transition:
-    transform .52s cubic-bezier(.22,.61,.36,1),
-    opacity .32s ease;
-}
-
-html.is-transitioning .page-transition-layer{
-  opacity:1;
-  transform:translateX(0);
-}
-
-.page-shell{
-  min-height:100vh;
-  opacity:0;
-  transform:translateX(18px);
-}
-
-body.is-ready .page-shell{
-  animation:pageEnter .55s cubic-bezier(.22,.61,.36,1) forwards;
-}
-
-body.is-leaving .page-shell{
-  animation:pageLeave .38s cubic-bezier(.55,.08,.68,.53) forwards;
-}
-
-@keyframes pageEnter{
-  from{
-    opacity:0;
-    transform:translateX(22px);
-  }
-  to{
-    opacity:1;
-    transform:translateX(0);
-  }
-}
-
-@keyframes pageLeave{
-  from{
-    opacity:1;
-    transform:translateX(0);
-  }
-  to{
-    opacity:.88;
-    transform:translateX(-16px);
-  }
-}
-
-/* ===== stagger items ===== */
+/* ===== Stagger ===== */
 .fade-item{
   opacity:0;
   transform:translateY(16px);
@@ -296,14 +294,13 @@ body.is-ready .fade-item{
   animation:fadeUpItem .55s var(--ease) forwards;
 }
 
-body.is-ready .fade-item:nth-child(1){ animation-delay:.10s; }
-body.is-ready .fade-item:nth-child(2){ animation-delay:.16s; }
-body.is-ready .fade-item:nth-child(3){ animation-delay:.22s; }
-body.is-ready .fade-item:nth-child(4){ animation-delay:.28s; }
-body.is-ready .fade-item:nth-child(5){ animation-delay:.34s; }
-body.is-ready .fade-item:nth-child(6){ animation-delay:.40s; }
-body.is-ready .fade-item:nth-child(7){ animation-delay:.46s; }
-body.is-ready .fade-item:nth-child(8){ animation-delay:.52s; }
+body.is-ready .hero.fade-item{ animation-delay:.06s; }
+body.is-ready .section-title.fade-item{ animation-delay:.12s; }
+body.is-ready .cards .fade-item:nth-child(1){ animation-delay:.18s; }
+body.is-ready .cards .fade-item:nth-child(2){ animation-delay:.26s; }
+body.is-ready .cards .fade-item:nth-child(3){ animation-delay:.34s; }
+body.is-ready .cards .fade-item:nth-child(4){ animation-delay:.42s; }
+body.is-ready .bottom.fade-item{ animation-delay:.48s; }
 
 @keyframes fadeUpItem{
   from{
@@ -316,11 +313,18 @@ body.is-ready .fade-item:nth-child(8){ animation-delay:.52s; }
   }
 }
 
-/* mobile tuning */
 @media (max-width:640px){
+  .wrap{padding:22px 12px 44px}
+  .header-logo{margin-bottom:18px;font-size:13px}
+  .card{border-radius:20px;padding:18px 18px}
+  .card h2{font-size:20px}
+  .card p{font-size:14px}
+  .card-arrow{width:38px;height:38px}
+  .main-btn{min-height:62px;font-size:17px;border-radius:18px}
+
   .page-transition-layer{
     transition:
-      transform .42s cubic-bezier(.22,.61,.36,1),
+      transform .42s var(--ease),
       opacity .26s ease;
   }
 
@@ -351,11 +355,12 @@ body.is-ready .fade-item:nth-child(8){ animation-delay:.52s; }
   }
 }
 
-/* reduced motion */
 @media (prefers-reduced-motion: reduce){
   .page-transition-layer,
   .page-shell,
-  .fade-item{
+  .fade-item,
+  .card,
+  .main-btn{
     animation:none !important;
     transition:none !important;
     transform:none !important;
@@ -365,40 +370,91 @@ body.is-ready .fade-item:nth-child(8){ animation-delay:.52s; }
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="wrap">
-  <div class="header-logo">PGO Global🌏오픈톡 가이드</div>
+  <div class="page-transition-layer"></div>
 
-  <div class="hero">
-    <h1>신입 이용수칙</h1>
-    <p>처음 오신 분들이 꼭 먼저 확인해야 하는 기본 흐름을 순서대로 정리했습니다.</p>
-  </div>
+  <div class="page-shell">
+    <div class="wrap">
+      <div class="header-logo">PGO Global🌏오픈톡 가이드</div>
 
-  <div class="section">
-    <h2 class="section-title">가이드 목록</h2>
+      <div class="hero fade-item">
+        <h1>신입 이용수칙</h1>
+        <p>처음 오신 분들이 꼭 먼저 확인해야 하는 기본 흐름을 순서대로 정리했습니다.</p>
+      </div>
 
-    <div class="cards">
-      <a href="newcomer-nickname.html" class="card">
-        <div class="card-top">
-          <h2>닉네임 설정</h2>
-          <span class="card-arrow" aria-hidden="true"></span>
+      <div class="section">
+        <h2 class="section-title fade-item">가이드 목록</h2>
+
+        <div class="cards">
+          <a href="newcomer-nickname.html" class="card fade-item">
+            <div class="card-top">
+              <h2>닉네임 설정</h2>
+              <span class="card-arrow" aria-hidden="true"></span>
+            </div>
+            <p>오픈채팅방에서 사용할 닉네임 형식과 작성 기준을 안내합니다.</p>
+          </a>
+
+          <a href="newcomer-chat.html" class="card fade-item">
+            <div class="card-top">
+              <h2>채팅 규칙</h2>
+              <span class="card-arrow" aria-hidden="true"></span>
+            </div>
+            <p>채팅방에서 지켜야 할 기본 예절과 금지되는 표현을 확인할 수 있습니다.</p>
+          </a>
         </div>
-        <p>오픈채팅방에서 사용할 닉네임 형식과 작성 기준을 안내합니다.</p>
-      </a>
+      </div>
 
-      <a href="newcomer-chat.html" class="card">
-        <div class="card-top">
-          <h2>채팅 규칙</h2>
-          <span class="card-arrow" aria-hidden="true"></span>
-        </div>
-        <p>채팅방에서 지켜야 할 기본 예절과 금지되는 표현을 확인할 수 있습니다.</p>
-      </a>
+      <div class="bottom fade-item">
+        <a href="index.html" class="main-btn">메인으로 돌아가기</a>
+      </div>
     </div>
   </div>
 
-  <div class="bottom">
-    <a href="index.html" class="main-btn">메인으로 돌아가기</a>
-  </div>
-</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  requestAnimationFrame(function () {
+    document.body.classList.add('is-ready');
+  });
+
+  const links = document.querySelectorAll('a[href]');
+
+  links.forEach(function(link){
+    link.addEventListener('click', function(e){
+      const href = link.getAttribute('href');
+
+      if (
+        !href ||
+        href.startsWith('#') ||
+        href.startsWith('javascript:') ||
+        href.startsWith('mailto:') ||
+        href.startsWith('tel:') ||
+        link.target === '_blank' ||
+        e.metaKey || e.ctrlKey || e.shiftKey || e.altKey
+      ) {
+        return;
+      }
+
+      const currentUrl = new URL(window.location.href);
+      const nextUrl = new URL(href, window.location.href);
+
+      if (currentUrl.origin !== nextUrl.origin) return;
+
+      e.preventDefault();
+
+      document.documentElement.classList.add('is-transitioning');
+      document.body.classList.add('is-leaving');
+
+      setTimeout(function(){
+        window.location.href = href;
+      }, 380);
+    });
+  });
+
+  window.addEventListener('pageshow', function(){
+    document.documentElement.classList.remove('is-transitioning');
+    document.body.classList.remove('is-leaving');
+    document.body.classList.add('is-ready');
+  });
+});
+</script>
 </body>
 </html>
