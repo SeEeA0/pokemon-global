@@ -1,137 +1,275 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>참여자 가이드 | Pokémon GO Global 🌏 가이드북</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>참여자 가이드 | Pokémon GO Global 🌏</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
 
-  <style>
-    body{
-      margin:0;
-      font-family:'Pretendard', sans-serif;
-      background:#f5f6f8;
-      color:#222;
-    }
+:root{
+  --bg1:#fafbfc;
+  --bg2:#f3f5f8;
+  --bg3:#edf1f6;
 
-    .wrap{
-      max-width:520px;
-      margin:0 auto;
-      padding:28px 20px 60px;
-    }
+  --text1:#1d1d1f;
+  --text2:#70757f;
+  --muted:#8f94a0;
 
-    .top-link{
-      display:inline-block;
-      margin-bottom:18px;
-      color:#666;
-      font-size:14px;
-      text-decoration:none;
-    }
+  --cta1:#7d71ff;
+  --cta2:#5a4de0;
+  --cta3:#283c94;
 
-    .title{
-      font-size:28px;
-      font-weight:900;
-      margin-bottom:10px;
-    }
+  --shadow-soft:0 12px 26px rgba(25,31,52,.06);
+  --shadow-card:0 20px 40px rgba(25,31,52,.10);
+  --shadow-cta:0 18px 32px rgba(80,78,177,.28);
+}
 
-    .desc{
-      color:#666;
-      font-size:15px;
-      line-height:1.6;
-      margin-bottom:28px;
-    }
+body{
+  font-family:'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+  background:radial-gradient(circle at top, var(--bg1) 0%, var(--bg2) 40%, var(--bg3) 100%);
+  color:var(--text1);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
 
-    .card{
-      display:block;
-      padding:20px;
-      margin-bottom:14px;
-      border-radius:18px;
-      background:#fff;
-      text-decoration:none;
-      color:#000;
-      box-shadow:0 10px 25px rgba(0,0,0,0.05);
-      transition:0.2s;
-    }
+.wrap{
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  padding:28px 16px 56px;
+}
 
-    .card:hover{
-      transform:translateY(-3px);
-    }
+.header-logo{
+  text-align:center;
+  font-size:14px;
+  font-weight:700;
+  color:var(--muted);
+  letter-spacing:.08em;
+  margin-bottom:20px;
+}
 
-    .card h2{
-      margin:0;
-      font-size:20px;
-      font-weight:800;
-    }
+.hero{
+  max-width:760px;
+  margin:0 auto 26px;
+  text-align:center;
+}
 
-    .card p{
-      margin:8px 0 0;
-      color:#666;
-      font-size:14px;
-      line-height:1.5;
-    }
+.hero h1{
+  margin:0 0 10px;
+  font-size:clamp(28px, 4vw, 40px);
+  line-height:1.18;
+  font-weight:900;
+  letter-spacing:-0.04em;
+}
 
-    .bottom{
-      margin-top:28px;
-    }
+.hero p{
+  margin:0 auto;
+  max-width:720px;
+  font-size:clamp(15px, 2vw, 18px);
+  line-height:1.8;
+  color:var(--text2);
+  word-break:keep-all;
+}
 
-    .main-btn{
-      display:block;
-      text-align:center;
-      padding:16px;
-      border-radius:14px;
-      background:#4a7aff;
-      color:#fff;
-      text-decoration:none;
-      font-weight:700;
-    }
+.section{
+  max-width:860px;
+  margin:0 auto;
+}
 
-    @media(min-width:900px){
-      .wrap{
-        max-width:600px;
-      }
-    }
-  </style>
+.section-title{
+  margin:0 0 14px;
+  font-size:18px;
+  font-weight:800;
+  color:#252831;
+  letter-spacing:-0.02em;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+
+.card{
+  position:relative;
+  overflow:hidden;
+  display:block;
+  padding:22px 22px;
+  border-radius:24px;
+  background:rgba(255,255,255,.76);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  text-decoration:none;
+  color:var(--text1);
+  box-shadow:
+    var(--shadow-soft),
+    inset 0 1px 0 rgba(255,255,255,.98);
+  border:1px solid rgba(255,255,255,.8);
+  transition:transform .22s ease, box-shadow .24s ease, background .24s ease;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.30) 46%, transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .72s ease;
+  pointer-events:none;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.86);
+  box-shadow:
+    0 16px 32px rgba(25,31,52,.10),
+    inset 0 1px 0 rgba(255,255,255,.98);
+}
+.card:hover::before{
+  transform:translateX(120%);
+}
+
+.card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.card h2{
+  margin:0;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-0.03em;
+}
+
+.card-arrow{
+  flex:0 0 auto;
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 8px 18px rgba(20,24,42,.06);
+  position:relative;
+}
+.card-arrow::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:10px;
+  height:10px;
+  border-top:2.5px solid rgba(39,44,58,.7);
+  border-right:2.5px solid rgba(39,44,58,.7);
+  transform:translate(-65%,-50%) rotate(45deg);
+}
+
+.card p{
+  margin:10px 0 0;
+  color:var(--text2);
+  font-size:15px;
+  line-height:1.75;
+  word-break:keep-all;
+}
+
+.bottom{
+  max-width:860px;
+  margin:18px auto 0;
+}
+
+.main-btn{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:70px;
+  padding:18px 22px;
+  border-radius:24px;
+  background:linear-gradient(135deg, var(--cta1) 0%, var(--cta2) 46%, var(--cta3) 100%);
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  font-size:19px;
+  letter-spacing:-0.02em;
+  box-shadow:
+    var(--shadow-cta),
+    inset 0 1px 0 rgba(255,255,255,.18);
+  transition:transform .22s ease, box-shadow .24s ease;
+}
+.main-btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.24) 46%, transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .72s ease;
+}
+.main-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:
+    0 22px 38px rgba(76,74,173,.34),
+    inset 0 1px 0 rgba(255,255,255,.22);
+}
+.main-btn:hover::before{
+  transform:translateX(120%);
+}
+
+@media (max-width:640px){
+  .wrap{padding:22px 12px 44px}
+  .header-logo{margin-bottom:18px;font-size:13px}
+  .card{border-radius:20px;padding:18px 18px}
+  .card h2{font-size:20px}
+  .card p{font-size:14px}
+  .card-arrow{width:38px;height:38px}
+  .main-btn{min-height:62px;font-size:17px;border-radius:18px}
+}
+</style>
 </head>
 <body>
+<div class="wrap">
+  <div class="header-logo">Pokémon GO Global 🌏</div>
 
-  <div class="wrap">
-
-    <a href="index.html" class="top-link">← 메인으로 돌아가기</a>
-
-    <div class="title">참여자 가이드</div>
-    <div class="desc">
-      레이드에 참여하는 분들을 위한 가이드입니다.  
-      참여 양식 작성, 초대 수락, 친구코드 추가 순서로 확인해주세요.
-    </div>
-
-    <a href="participant-join.html" class="card">
-      <h2>레이드 참여하기</h2>
-      <p>
-        참여 양식 복사, @멘션 선택,
-        친구 추가가 필요한 경우의 흐름까지 안내합니다.
-      </p>
-    </a>
-
-    <a href="participant-accept.html" class="card">
-      <h2>레이드 초대 수락 방법</h2>
-      <p>
-        멘션콜/초대 알림 확인 후 입장하는 방법과
-        리모트 패스, 일일 한도 체크를 안내합니다.
-      </p>
-    </a>
-
-    <a href="participant-friendcode.html" class="card">
-      <h2>친구코드로 친구 추가하기</h2>
-      <p>
-        모집글 전체 복사 후
-        친구코드를 빠르게 입력하는 방법입니다.
-      </p>
-    </a>
-
-    <div class="bottom">
-      <a href="index.html" class="main-btn">메인으로 돌아가기</a>
-    </div>
-
+  <div class="hero">
+    <h1>참여자 가이드</h1>
+    <p>레이드 참여부터 친구코드 추가, 수락과 입장까지 참여자의 흐름을 순서대로 안내합니다.</p>
   </div>
 
+  <div class="section">
+    <h2 class="section-title">가이드 목록</h2>
+
+    <div class="cards">
+      <a href="participant-join.html" class="card">
+        <div class="card-top">
+          <h2>레이드 참여 안내</h2>
+          <span class="card-arrow" aria-hidden="true"></span>
+        </div>
+        <p>모집글 확인, 멘션 입력, 멘션콜 대기까지 기본 참여 흐름을 안내합니다.</p>
+      </a>
+
+      <a href="participant-accept.html" class="card">
+        <div class="card-top">
+          <h2>레이드 수락 및 입장</h2>
+          <span class="card-arrow" aria-hidden="true"></span>
+        </div>
+        <p>초대 알림 확인, 리모트 상태 체크, 문제 발생 시 대응 방법을 확인할 수 있습니다.</p>
+      </a>
+
+      <a href="participant-friendcode.html" class="card">
+        <div class="card-top">
+          <h2>친구코드 추가 안내</h2>
+          <span class="card-arrow" aria-hidden="true"></span>
+        </div>
+        <p>모집글 전체 복사 후 포켓몬 GO에서 친구코드를 추가하는 방법입니다.</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <a href="index.html" class="main-btn">메인으로 돌아가기</a>
+  </div>
+</div>
 </body>
 </html>
