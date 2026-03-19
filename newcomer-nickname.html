@@ -18,7 +18,7 @@ body{
   min-height:100vh;
   display:flex;
   justify-content:center;
-  padding:28px 20px 44px;
+  padding:24px 20px 44px;
 }
 
 .wrap{
@@ -27,43 +27,40 @@ body{
   margin:0 auto;
 }
 
-.breadcrumb{
-  display:inline-block;
-  margin-bottom:20px;
-  color:#666;
+/* 상단 로고 텍스트 */
+.header-logo{
+  margin:0 0 24px;
   font-size:14px;
-  text-decoration:none;
+  font-weight:600;
+  color:#8a8a8a;
+  letter-spacing:.06em;
+  line-height:1.6;
 }
-.breadcrumb:hover{color:#222}
 
-/* 슬라이드 설명을 위로 */
-.top-info{
+/* 상단 텍스트 */
+.top-copy{
   max-width:760px;
   margin:0 auto 22px;
 }
 
-.desc{
-  background:#fff;
-  border-radius:24px;
-  box-shadow:0 10px 24px rgba(0,0,0,.06);
-  padding:26px 22px;
-}
-.desc h2{
+.top-title{
+  margin:0 0 10px;
   font-size:22px;
-  margin:0 0 12px;
   line-height:1.35;
+  font-weight:800;
   letter-spacing:-0.02em;
+  color:#222;
 }
-.desc p{
-  color:#666;
-  line-height:1.8;
+
+.top-sub{
   margin:0;
+  font-size:16px;
+  line-height:1.8;
+  color:#666;
   word-break:keep-all;
 }
 
-/* =========================
-   뷰어 영역
-========================= */
+/* 뷰어 영역 */
 .viewer-row{
   display:grid;
   grid-template-columns:72px minmax(0,1fr) 72px;
@@ -125,8 +122,7 @@ body{
   aspect-ratio:780 / 1480;
   border-radius:58px;
   padding:18px;
-  background:
-    linear-gradient(180deg,#fcfcfc 0%,#f4f4f5 100%);
+  background:linear-gradient(180deg,#fcfcfc 0%,#f4f4f5 100%);
   box-shadow:
     0 28px 64px rgba(0,0,0,.12),
     inset 0 2px 0 rgba(255,255,255,.95),
@@ -156,6 +152,7 @@ body{
   pointer-events:none;
 }
 
+/* 폰 안쪽 */
 .phone-screen{
   position:relative;
   width:100%;
@@ -163,7 +160,7 @@ body{
   border-radius:40px;
   background:#dbe6f1;
   box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
-  padding:28px 16px 22px;
+  padding:0;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -172,8 +169,7 @@ body{
 /* 1080x1728 비율 */
 .image-frame{
   position:relative;
-  width:100%;
-  max-width:540px;
+  width:92%;
   aspect-ratio:1080 / 1728;
   border-radius:30px;
   overflow:hidden;
@@ -214,12 +210,23 @@ body{
   background:#d3deea;
 }
 
-/* =========================
-   하단 버튼
-========================= */
+/* 인디케이터 */
+.pager{
+  margin:14px 0 0;
+  font-size:15px;
+  line-height:1;
+  letter-spacing:.18em;
+  color:#b8bcc2;
+  user-select:none;
+}
+.pager .active{
+  color:#222;
+}
+
+/* 하단 버튼 */
 .bottom{
   max-width:760px;
-  margin:22px auto 0;
+  margin:24px auto 0;
 }
 
 .row{
@@ -262,16 +269,23 @@ body{
   box-shadow:0 16px 30px rgba(74,122,255,.30);
 }
 
-/* 모바일 */
+/* 반응형 */
 @media (max-width:768px){
   .page{
     padding:20px 12px 30px;
   }
-  .breadcrumb{
-    margin-bottom:16px;
-  }
-  .top-info{
+  .header-logo{
     margin-bottom:18px;
+    font-size:13px;
+  }
+  .top-copy{
+    margin-bottom:18px;
+  }
+  .top-title{
+    font-size:20px;
+  }
+  .top-sub{
+    font-size:15px;
   }
   .viewer-row{
     grid-template-columns:44px minmax(0,1fr) 44px;
@@ -302,17 +316,14 @@ body{
   }
   .phone-screen{
     border-radius:28px;
-    padding:20px 10px 16px;
   }
   .image-frame{
+    width:92%;
     border-radius:22px;
   }
-  .desc{
-    padding:20px 16px;
-    border-radius:20px;
-  }
-  .desc h2{
-    font-size:20px;
+  .pager{
+    margin-top:12px;
+    font-size:14px;
   }
   .row{
     flex-direction:row;
@@ -336,8 +347,15 @@ body{
     width:38px;
     height:38px;
   }
-  .desc p{
-    font-size:15px;
+  .top-title{
+    font-size:18px;
+  }
+  .top-sub{
+    font-size:14px;
+  }
+  .pager{
+    font-size:13px;
+    letter-spacing:.14em;
   }
   .row{
     flex-direction:column;
@@ -348,14 +366,11 @@ body{
 <body>
 <div class="page">
   <div class="wrap">
-    <a href="index.html" class="breadcrumb">← 메인으로 돌아가기</a>
+    <div class="header-logo">Pokémon GO Global 🌏</div>
 
-    <!-- 위로 올라온 슬라이드 설명 -->
-    <div class="top-info">
-      <div class="desc">
-        <h2 id="titleText">1. 햄버거 버튼을 클릭</h2>
-        <p id="descText">오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.</p>
-      </div>
+    <div class="top-copy">
+      <h2 class="top-title" id="titleText">1. 햄버거 버튼을 클릭</h2>
+      <p class="top-sub" id="descText">오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.</p>
     </div>
 
     <div class="viewer-row">
@@ -369,9 +384,9 @@ body{
             <div class="image-frame">
               <div class="slider" id="slider">
                 <div class="track" id="track">
-                  <div class="slide"><img src="images/newcomer-nickname-01.jpg" alt="1. 프로필 편집으로 이동"></div>
-                  <div class="slide"><img src="images/newcomer-nickname-02.jpg" alt="2. 닉네임 형식 입력"></div>
-                  <div class="slide"><img src="images/newcomer-nickname-03.jpg" alt="3. 한글 닉네임 설정"></div>
+                  <div class="slide"><img src="images/newcomer-nickname-01.jpg" alt="1. 햄버거 버튼을 클릭"></div>
+                  <div class="slide"><img src="images/newcomer-nickname-02.jpg" alt="2. 프로필 수정"></div>
+                  <div class="slide"><img src="images/newcomer-nickname-03.jpg" alt="3. 글로벌 양식에 맞춰 닉네임 설정"></div>
                   <div class="slide"><img src="images/newcomer-nickname-04.jpg" alt="4. 개인정보 일부 가리기"></div>
                 </div>
               </div>
@@ -384,6 +399,8 @@ body{
         <span></span>
       </button>
     </div>
+
+    <div class="pager" id="pager">● ○ ○ ○</div>
 
     <div class="bottom">
       <div class="row">
@@ -400,6 +417,7 @@ let index = 0;
 const track = document.getElementById("track");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
+const pager = document.getElementById("pager");
 
 const titles = [
   "1. 햄버거 버튼을 클릭",
@@ -417,6 +435,15 @@ const texts = [
 
 const total = titles.length;
 
+function renderPager(){
+  let html = "";
+  for(let i = 0; i < total; i++){
+    html += i === index ? '<span class="active">●</span>' : '<span>○</span>';
+    if(i < total - 1) html += " ";
+  }
+  pager.innerHTML = html;
+}
+
 function update(){
   track.style.transform = `translateX(-${index * 100}%)`;
   document.getElementById("titleText").innerText = titles[index];
@@ -433,6 +460,8 @@ function update(){
   }else{
     nextBtn.classList.remove("hidden");
   }
+
+  renderPager();
 }
 
 function next(){
