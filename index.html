@@ -3,26 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pokémon GO Global🌏 | Guide</title>
-  <meta name="description" content="Pokémon GO Global 레이드 가이드 메인 페이지" />
+  <title>Pokémon GO Global 🌏 가이드북</title>
+  <meta name="description" content="Pokémon GO Global 가이드북 메인 페이지" />
   <style>
     :root{
-      --bg:#f4f7fb;
-      --bg-soft:#eef4fb;
-      --card:rgba(255,255,255,.82);
-      --card-strong:rgba(255,255,255,.92);
+      --bg:#f5f7fb;
+      --bg-soft:#eef3fa;
+      --card:rgba(255,255,255,.86);
       --text:#111827;
       --muted:#667085;
       --line:rgba(15,23,42,.08);
-      --accent:#4da3ff;
-      --accent2:#6f7cff;
-      --accent-soft:rgba(77,163,255,.12);
-      --shadow:0 24px 60px rgba(31,41,55,.08);
-      --shadow-soft:0 10px 24px rgba(31,41,55,.06);
+      --accent:#5aa7ff;
+      --accent2:#7b7cff;
+      --accent-soft:rgba(90,167,255,.10);
+      --shadow:0 20px 50px rgba(17,24,39,.08);
+      --shadow-soft:0 10px 26px rgba(17,24,39,.06);
       --radius-xl:34px;
       --radius-lg:24px;
       --radius-md:18px;
-      --max:1280px;
+      --max:1180px;
       --header-h:74px;
     }
 
@@ -33,9 +32,9 @@
       font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 0% 0%, rgba(77,163,255,.10), transparent 28%),
-        radial-gradient(circle at 100% 10%, rgba(111,124,255,.10), transparent 24%),
-        linear-gradient(180deg, var(--bg), var(--bg-soft));
+        radial-gradient(circle at 0% 0%, rgba(90,167,255,.08), transparent 28%),
+        radial-gradient(circle at 100% 10%, rgba(123,124,255,.08), transparent 24%),
+        linear-gradient(180deg,var(--bg),var(--bg-soft));
       line-height:1.6;
     }
 
@@ -57,7 +56,7 @@
       position:sticky;
       top:0;
       z-index:100;
-      background:rgba(244,247,251,.72);
+      background:rgba(245,247,251,.72);
       backdrop-filter:blur(16px);
       -webkit-backdrop-filter:blur(16px);
       border-bottom:1px solid rgba(15,23,42,.05);
@@ -130,145 +129,39 @@
 
     /* hero */
     .hero{
-      padding:22px 0 24px;
+      padding:28px 0 16px;
     }
 
-    .hero-card{
-      position:relative;
-      overflow:hidden;
-      border-radius:40px;
-      padding:42px;
-      min-height:450px;
-      display:grid;
-      grid-template-columns:1.12fr .88fr;
-      align-items:center;
-      gap:24px;
-      background:
-        radial-gradient(circle at 20% 18%, rgba(77,163,255,.14), transparent 30%),
-        radial-gradient(circle at 82% 8%, rgba(111,124,255,.14), transparent 28%),
-        linear-gradient(135deg, rgba(255,255,255,.88), rgba(255,255,255,.70));
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      min-height:34px;
-      padding:0 14px;
-      border-radius:999px;
-      background:var(--accent-soft);
-      border:1px solid rgba(77,163,255,.18);
-      color:#0f5ea7;
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
+    .hero-title-wrap{
+      text-align:center;
+      margin-bottom:24px;
     }
 
     .hero-title{
-      margin:16px 0 0;
-      font-size:clamp(34px, 6vw, 72px);
-      line-height:1.02;
+      margin:0;
+      font-size:clamp(34px, 6vw, 66px);
+      line-height:1.04;
       letter-spacing:-.06em;
       font-weight:950;
     }
 
-    .hero-sub{
-      margin:18px 0 0;
-      font-size:clamp(15px, 1.8vw, 19px);
-      color:var(--muted);
-      max-width:760px;
-    }
-
-    .hero-cta{
-      margin-top:28px;
-      display:flex;
-      gap:14px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      position:relative;
+    .hero-image-card{
       overflow:hidden;
-      isolation:isolate;
-      min-height:56px;
-      padding:0 22px;
-      border-radius:999px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:800;
-      letter-spacing:-.02em;
-      border:1px solid transparent;
-      transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, background .35s ease;
-      box-shadow:var(--shadow-soft);
+      border-radius:40px;
+      position:relative;
     }
 
-    .btn:before{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-1;
-      transform:translateX(-120%);
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.36), transparent);
+    .hero-image{
+      width:100%;
+      height:auto;
+      aspect-ratio:16 / 9;
+      object-fit:cover;
+      object-position:center;
       transition:transform .8s ease;
     }
 
-    .btn:hover:before{transform:translateX(120%)}
-    .btn:hover{transform:translateY(-2px)}
-
-    .btn-primary{
-      color:#fff;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 16px 34px rgba(77,163,255,.25);
-    }
-
-    .btn-secondary{
-      background:rgba(255,255,255,.84);
-      color:var(--text);
-      border-color:rgba(15,23,42,.07);
-    }
-
-    .hero-visual{
-      position:relative;
-      min-height:340px;
-      display:grid;
-      place-items:center;
-    }
-
-    .hero-orb{
-      width:min(100%, 430px);
-      aspect-ratio:1/1;
-      border-radius:50%;
-      background:
-        radial-gradient(circle at 35% 30%, rgba(255,255,255,.96), rgba(255,255,255,.64) 30%, rgba(77,163,255,.16) 62%, transparent 70%),
-        radial-gradient(circle at 65% 70%, rgba(111,124,255,.18), transparent 30%);
-      filter:drop-shadow(0 28px 40px rgba(31,41,55,.08));
-      position:relative;
-    }
-
-    .hero-pill{
-      position:absolute;
-      padding:14px 18px;
-      border-radius:20px;
-      background:rgba(255,255,255,.84);
-      border:1px solid rgba(15,23,42,.06);
-      box-shadow:var(--shadow-soft);
-      font-size:14px;
-      font-weight:800;
-      color:#24476b;
-      backdrop-filter:blur(12px);
-      -webkit-backdrop-filter:blur(12px);
-      animation:floatY 4.6s ease-in-out infinite;
-    }
-
-    .hero-pill.p1{top:10%; left:7%}
-    .hero-pill.p2{top:16%; right:0; animation-delay:.6s}
-    .hero-pill.p3{bottom:15%; left:2%; animation-delay:1.1s}
-    .hero-pill.p4{bottom:8%; right:9%; animation-delay:1.6s}
-
-    @keyframes floatY{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-8px)}
+    .hero-image-card:hover .hero-image{
+      transform:scale(1.02);
     }
 
     /* section */
@@ -281,8 +174,8 @@
     }
 
     .section-head h2{
-      margin:14px 0 0;
-      font-size:clamp(28px, 3vw, 42px);
+      margin:0;
+      font-size:clamp(26px, 3vw, 40px);
       line-height:1.08;
       letter-spacing:-.04em;
     }
@@ -330,7 +223,7 @@
 
     .side-quick a:hover{
       transform:translateY(-2px);
-      background:linear-gradient(135deg, rgba(77,163,255,.10), rgba(111,124,255,.10));
+      background:linear-gradient(135deg, rgba(90,167,255,.10), rgba(123,124,255,.10));
       color:#0f5ea7;
     }
 
@@ -413,7 +306,7 @@
     .accordion-icon:after{width:2.5px;height:16px}
 
     .accordion.is-open .accordion-icon{
-      background:linear-gradient(135deg, rgba(77,163,255,.14), rgba(111,124,255,.14));
+      background:linear-gradient(135deg, rgba(90,167,255,.14), rgba(123,124,255,.14));
     }
 
     .accordion.is-open .accordion-icon:after{
@@ -456,7 +349,7 @@
 
     .guide-link:hover{
       transform:translateX(2px);
-      background:linear-gradient(135deg, rgba(77,163,255,.08), rgba(111,124,255,.08));
+      background:linear-gradient(135deg, rgba(90,167,255,.08), rgba(123,124,255,.08));
     }
 
     .guide-link strong{
@@ -483,20 +376,15 @@
       margin-top:34px;
       padding:28px;
       border-radius:34px;
-      background:var(--card-strong);
+      background:rgba(255,255,255,.92);
     }
 
     .qna-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:20px;
-      flex-wrap:wrap;
       margin-bottom:18px;
     }
 
     .qna-head h3{
-      margin:14px 0 0;
+      margin:0;
       font-size:clamp(24px, 2.4vw, 34px);
       letter-spacing:-.04em;
       line-height:1.1;
@@ -530,37 +418,10 @@
 
     .qna-chip:hover{
       transform:translateY(-2px);
-      background:linear-gradient(135deg, rgba(77,163,255,.10), rgba(111,124,255,.10));
+      background:linear-gradient(135deg, rgba(90,167,255,.10), rgba(123,124,255,.10));
       color:#0f5ea7;
     }
 
-    /* join */
-    .join-band{
-      margin-top:28px;
-      padding:26px 28px;
-      border-radius:32px;
-      background:linear-gradient(135deg, rgba(77,163,255,.12), rgba(111,124,255,.10));
-      border:1px solid rgba(77,163,255,.14);
-      box-shadow:var(--shadow);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:20px;
-      flex-wrap:wrap;
-    }
-
-    .join-band h3{
-      margin:0 0 8px;
-      font-size:clamp(24px, 2.4vw, 32px);
-      letter-spacing:-.03em;
-    }
-
-    .join-band p{
-      margin:0;
-      color:#35506e;
-    }
-
-    /* footer */
     .footer{
       padding:24px 0 42px;
       color:var(--muted);
@@ -589,18 +450,16 @@
     }
 
     @media (max-width:1100px){
-      .hero-card{
-        grid-template-columns:1fr;
-        min-height:auto;
-      }
       .layout{
         grid-template-columns:1fr;
       }
+
       .side-quick{
         position:static;
         flex-direction:row;
         flex-wrap:wrap;
       }
+
       .side-quick a{
         writing-mode:horizontal-tb;
         min-height:48px;
@@ -615,18 +474,12 @@
         padding:12px 0;
       }
 
-      .hero-card{
-        padding:28px 22px;
-        border-radius:28px;
+      .hero{
+        padding-top:20px;
       }
 
-      .hero-visual{
-        min-height:220px;
-      }
-
-      .hero-pill{
-        font-size:12px;
-        padding:10px 12px;
+      .hero-image-card{
+        border-radius:26px;
       }
 
       .accordion-btn{
@@ -641,11 +494,6 @@
         padding:22px;
         border-radius:26px;
       }
-
-      .join-band{
-        padding:22px;
-        border-radius:26px;
-      }
     }
 
     @media (max-width:560px){
@@ -654,15 +502,13 @@
       }
 
       .top-nav,
-      .hero-cta,
       .qna-grid{
         flex-direction:column;
         align-items:stretch;
       }
 
-      .btn,
-      .qna-chip,
-      .top-nav a{
+      .top-nav a,
+      .qna-chip{
         width:100%;
         justify-content:center;
       }
@@ -679,6 +525,14 @@
         min-height:58px;
         padding:12px 16px;
       }
+
+      .hero-title{
+        font-size:42px;
+      }
+
+      .hero-image{
+        aspect-ratio:4 / 5;
+      }
     }
   </style>
 </head>
@@ -693,7 +547,6 @@
       <nav class="top-nav" aria-label="주요 이동">
         <a href="#guides">가이드</a>
         <a href="#qna">빠른 질문</a>
-        <a href="#join">글로벌방</a>
       </nav>
     </div>
   </header>
@@ -701,44 +554,21 @@
   <main id="top">
     <section class="hero">
       <div class="container">
-        <div class="hero-card glass fade-up">
-          <div class="hero-copy">
-            <span class="eyebrow">Guide Home</span>
-            <h1 class="hero-title">Pokémon GO Global🌏<br>레이드 가이드</h1>
-            <p class="hero-sub">
-              처음 들어온 신입부터 레이드를 모집하는 주최자, 참여자까지
-              필요한 내용을 빠르게 찾을 수 있도록 정리한 메인 가이드 페이지입니다.
-            </p>
+        <div class="hero-title-wrap fade-up">
+          <h1 class="hero-title">Pokémon GO Global 🌏 가이드북</h1>
+        </div>
 
-            <div class="hero-cta">
-              <a class="btn btn-primary" href="https://open.kakao.com/o/gGkkbYHc" target="_blank" rel="noopener noreferrer">글로벌방 바로가기</a>
-              <a class="btn btn-secondary" href="#guides">가이드 보기</a>
-            </div>
-          </div>
-
-          <div class="hero-visual" aria-hidden="true">
-            <div class="hero-orb"></div>
-            <div class="hero-pill p1">신입 가이드</div>
-            <div class="hero-pill p2">주최자 가이드</div>
-            <div class="hero-pill p3">참여자 가이드</div>
-            <div class="hero-pill p4">빠른 질문 Q&amp;A</div>
-          </div>
+        <div class="hero-image-card glass fade-up">
+          <img src="hero-main.jpeg" alt="Pokémon GO Global 메인 이미지" class="hero-image">
         </div>
       </div>
     </section>
 
     <section class="section" id="guides">
       <div class="container">
-        <div class="section-head fade-up">
-          <span class="eyebrow">Guide Menu</span>
-          <h2>가이드 목록</h2>
-          <p>원하는 유형의 가이드를 먼저 선택한 뒤, 세부 항목으로 이동하세요.</p>
-        </div>
-
         <div class="layout">
           <div class="content-col">
             <div class="accordion-list">
-              <!-- newcomer -->
               <section class="accordion glass fade-up is-open" data-accordion>
                 <button class="accordion-btn" type="button" aria-expanded="true">
                   <div class="accordion-title-wrap">
@@ -772,7 +602,6 @@
                 </div>
               </section>
 
-              <!-- host -->
               <section class="accordion glass fade-up" data-accordion>
                 <button class="accordion-btn" type="button" aria-expanded="false">
                   <div class="accordion-title-wrap">
@@ -822,7 +651,6 @@
                 </div>
               </section>
 
-              <!-- participant -->
               <section class="accordion glass fade-up" data-accordion>
                 <button class="accordion-btn" type="button" aria-expanded="false">
                   <div class="accordion-title-wrap">
@@ -867,11 +695,8 @@
 
             <section class="qna-wrap glass fade-up" id="qna">
               <div class="qna-head">
-                <div>
-                  <span class="eyebrow">Quick Q&amp;A</span>
-                  <h3>빠르게 찾기</h3>
-                  <p>자주 찾는 질문을 눌러 관련 가이드로 바로 이동하세요.</p>
-                </div>
+                <h3>빠른 질문 Q&amp;A</h3>
+                <p>궁금한 질문을 눌러 바로 관련 가이드로 이동하세요.</p>
               </div>
 
               <div class="qna-grid">
@@ -883,24 +708,14 @@
                 <a class="qna-chip" href="host-invite-more.html">추가 초대는 언제 가능한가요?</a>
                 <a class="qna-chip" href="participant-join.html">참여 양식은 어떻게 작성하나요?</a>
                 <a class="qna-chip" href="participant-accept.html">초대를 못 받았으면 어떻게 하나요?</a>
-                <a class="qna-chip" href="participant-accept.html">리모트 한도는 꼭 확인해야 하나요?</a>
                 <a class="qna-chip" href="participant-friendcode.html">친구코드는 어떻게 추가하나요?</a>
               </div>
-            </section>
-
-            <section class="join-band glass fade-up" id="join">
-              <div>
-                <h3>Pokémon GO Global🌏 바로가기</h3>
-                <p>글로벌방 링크를 통해 바로 입장하고, 필요한 가이드를 확인해 진행할 수 있습니다.</p>
-              </div>
-              <a class="btn btn-primary" href="https://open.kakao.com/o/gGkkbYHc" target="_blank" rel="noopener noreferrer">글로벌방 입장하기</a>
             </section>
           </div>
 
           <aside class="side-quick fade-up" aria-label="빠른 이동">
             <a href="#guides">가이드</a>
             <a href="#qna">Q&amp;A</a>
-            <a href="#join">입장</a>
           </aside>
         </div>
       </div>
