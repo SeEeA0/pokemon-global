@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>레이드 모집 | Pokémon GO Global</title>
+<title>친구코드 추가 | Pokémon GO Global</title>
 <style>
 body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;background:#f5f6f8;color:#222;text-align:center}
 .wrap{max-width:640px;margin:0 auto;padding:40px 20px 60px}
@@ -33,16 +33,15 @@ body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple S
 <body>
 <div class="wrap">
   <a href="index.html" class="breadcrumb">← 메인으로 돌아가기</a>
-  <div class="kicker">주최자 가이드</div>
-  <div class="title">레이드 모집</div>
-  <p class="lead">주최자는 /레이드모집 명령어로 자동 생성되는 양식을 사용해 모집글을 작성해야 합니다.</p>
+  <div class="kicker">참여자 가이드</div>
+  <div class="title">친구코드 추가</div>
+  <p class="lead">레이드 모집글 전체를 복사하면 친구코드 숫자만 자동으로 인식되어 빠르게 친구를 추가할 수 있습니다.</p>
 
   <div class="slider" id="slider">
     <div class="track" id="track">
-      <div class="slide"><img src="images/host-recruit-01.jpg" alt="1. /레이드모집 입력"></div>
-      <div class="slide"><img src="images/host-recruit-02.jpg" alt="2. 양식 그대로 사용"></div>
-      <div class="slide"><img src="images/host-recruit-03.jpg" alt="3. 작성 규칙 확인"></div>
-      <div class="slide"><img src="images/host-recruit-04.jpg" alt="4. 5명 양식 유지"></div>
+      <div class="slide"><img src="images/participant-friendcode-01.jpg" alt="1. 모집글 전체 복사"></div>
+      <div class="slide"><img src="images/participant-friendcode-02.jpg" alt="2. 친구코드 입력창에 붙여넣기"></div>
+      <div class="slide"><img src="images/participant-friendcode-03.jpg" alt="3. 바로 친구 추가"></div>
     </div>
     <div class="nav">
       <button onclick="prev()">‹</button>
@@ -54,18 +53,17 @@ body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple S
     <span class="active"></span>
     <span></span>
     <span></span>
-    <span></span>
   </div>
 
   <div class="desc">
-    <h2 id="title">1. /레이드모집 입력</h2>
-    <p id="text">채팅 입력창에서 /레이드모집 을 입력하면 자동으로 레이드모집글양식이 표시됩니다.</p>
+    <h2 id="title">1. 모집글 전체 복사</h2>
+    <p id="text">주최자의 모집글을 일부가 아니라 전체 그대로 복사해 주세요.</p>
   </div>
 
   <div class="bottom">
     <div class="row">
-      <a href="host.html">이전 가이드 : 주최자 가이드 목록</a>
-      <a href="host-mention.html">다음 가이드 : 멘션콜 방법</a>
+      <a href="participant-accept.html">이전 가이드 : 초대 수락 방법</a>
+      <a href="index.html">다음 가이드 : 메인</a>
     </div>
     <a href="index.html" class="main">메인으로 돌아가기</a>
   </div>
@@ -76,8 +74,8 @@ body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple S
 let index = 0;
 const track = document.getElementById("track");
 const dots = document.querySelectorAll(".dots span");
-const titles = ["1. /레이드모집 입력", "2. 양식 그대로 사용", "3. 작성 규칙 확인", "4. 5명 양식 유지"];
-const texts = ["채팅 입력창에서 /레이드모집 을 입력하면 자동으로 레이드모집글양식이 표시됩니다.", "표시된 양식을 선택한 뒤, 구조는 그대로 유지한 상태에서 필요한 항목만 작성해 주세요.", "보스명 변경 금지, 주최자 닉네임은 본인 @멘션, 필요한 말은 확성기에 기재, 10분 미만 레이드는 모집 금지입니다.", "모집글은 기본적으로 5명 기준입니다. 6번 이후를 임의로 추가하거나 양식을 수정하지 말아주세요."];
+const titles = ["1. 모집글 전체 복사", "2. 친구코드 입력창에 붙여넣기", "3. 바로 친구 추가"];
+const texts = ["주최자의 모집글을 일부가 아니라 전체 그대로 복사해 주세요.", "포켓몬 GO 친구코드 입력창에 붙여넣으면 필요한 숫자만 자동으로 인식됩니다.", "별도로 숫자를 정리하지 않아도, 인식된 코드로 바로 친구 추가를 진행하면 됩니다."];
 const total = titles.length;
 
 function update(){

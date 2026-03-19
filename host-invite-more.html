@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>레이드 모집 | Pokémon GO Global</title>
+<title>추가 초대 방법 | Pokémon GO Global</title>
 <style>
 body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;background:#f5f6f8;color:#222;text-align:center}
 .wrap{max-width:640px;margin:0 auto;padding:40px 20px 60px}
@@ -34,15 +34,14 @@ body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple S
 <div class="wrap">
   <a href="index.html" class="breadcrumb">← 메인으로 돌아가기</a>
   <div class="kicker">주최자 가이드</div>
-  <div class="title">레이드 모집</div>
-  <p class="lead">주최자는 /레이드모집 명령어로 자동 생성되는 양식을 사용해 모집글을 작성해야 합니다.</p>
+  <div class="title">추가 초대 방법</div>
+  <p class="lead">첫 초대 이후 일정 시간이 지나면 추가 초대가 가능합니다. 리모트 인원 규칙도 함께 확인해 주세요.</p>
 
   <div class="slider" id="slider">
     <div class="track" id="track">
-      <div class="slide"><img src="images/host-recruit-01.jpg" alt="1. /레이드모집 입력"></div>
-      <div class="slide"><img src="images/host-recruit-02.jpg" alt="2. 양식 그대로 사용"></div>
-      <div class="slide"><img src="images/host-recruit-03.jpg" alt="3. 작성 규칙 확인"></div>
-      <div class="slide"><img src="images/host-recruit-04.jpg" alt="4. 5명 양식 유지"></div>
+      <div class="slide"><img src="images/host-invite-more-01.jpg" alt="1. 첫 5명 초대"></div>
+      <div class="slide"><img src="images/host-invite-more-02.jpg" alt="2. 버튼 재활성화 확인"></div>
+      <div class="slide"><img src="images/host-invite-more-03.jpg" alt="3. 리모트 인원 규칙"></div>
     </div>
     <div class="nav">
       <button onclick="prev()">‹</button>
@@ -54,18 +53,17 @@ body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple S
     <span class="active"></span>
     <span></span>
     <span></span>
-    <span></span>
   </div>
 
   <div class="desc">
-    <h2 id="title">1. /레이드모집 입력</h2>
-    <p id="text">채팅 입력창에서 /레이드모집 을 입력하면 자동으로 레이드모집글양식이 표시됩니다.</p>
+    <h2 id="title">1. 첫 5명 초대</h2>
+    <p id="text">친구 초대 버튼을 눌러 먼저 최대 5명까지 초대합니다.</p>
   </div>
 
   <div class="bottom">
     <div class="row">
-      <a href="host.html">이전 가이드 : 주최자 가이드 목록</a>
-      <a href="host-mention.html">다음 가이드 : 멘션콜 방법</a>
+      <a href="host-private-room.html">이전 가이드 : 비밀방 생성</a>
+      <a href="participant-join.html">다음 가이드 : 레이드 참여</a>
     </div>
     <a href="index.html" class="main">메인으로 돌아가기</a>
   </div>
@@ -76,8 +74,8 @@ body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple S
 let index = 0;
 const track = document.getElementById("track");
 const dots = document.querySelectorAll(".dots span");
-const titles = ["1. /레이드모집 입력", "2. 양식 그대로 사용", "3. 작성 규칙 확인", "4. 5명 양식 유지"];
-const texts = ["채팅 입력창에서 /레이드모집 을 입력하면 자동으로 레이드모집글양식이 표시됩니다.", "표시된 양식을 선택한 뒤, 구조는 그대로 유지한 상태에서 필요한 항목만 작성해 주세요.", "보스명 변경 금지, 주최자 닉네임은 본인 @멘션, 필요한 말은 확성기에 기재, 10분 미만 레이드는 모집 금지입니다.", "모집글은 기본적으로 5명 기준입니다. 6번 이후를 임의로 추가하거나 양식을 수정하지 말아주세요."];
+const titles = ["1. 첫 5명 초대", "2. 버튼 재활성화 확인", "3. 리모트 인원 규칙"];
+const texts = ["친구 초대 버튼을 눌러 먼저 최대 5명까지 초대합니다.", "초대 후 버튼이 잠시 비활성화되며, 약 40~50초 후 다시 활성화되면 추가 초대가 가능합니다.", "리모트 최대 인원은 10명입니다. 본인도 리모트 참여 중이면 최대 9명까지만 추가 리모트 인원이 들어올 수 있습니다."];
 const total = titles.length;
 
 function update(){
