@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>레이드 참여 가이드 | Pokémon GO Global</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Pretendard', sans-serif;
+  background:#f5f6f8;
+  color:#222;
+  text-align:center;
+}
+
+.wrap{
+  max-width:520px;
+  margin:0 auto;
+  padding:40px 20px 60px;
+}
+
+.title{
+  font-size:28px;
+  font-weight:900;
+  margin-bottom:30px;
+}
+
+/* 슬라이드 */
+.slider{
+  position:relative;
+  overflow:hidden;
+}
+
+.track{
+  display:flex;
+  transition:0.4s;
+}
+
+.slide{
+  min-width:100%;
+}
+
+.slide img{
+  width:100%;
+  border-radius:28px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* 버튼 */
+.nav{
+  position:absolute;
+  top:50%;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  transform:translateY(-50%);
+}
+
+.nav button{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  border:none;
+  background:#fff;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  cursor:pointer;
+}
+
+/* dots */
+.dots{
+  margin:20px 0;
+}
+
+.dots span{
+  width:10px;
+  height:10px;
+  margin:0 4px;
+  display:inline-block;
+  border-radius:50%;
+  background:#ddd;
+}
+
+.dots .active{
+  background:#222;
+}
+
+/* 설명 */
+.desc h2{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.desc p{
+  color:#666;
+  line-height:1.6;
+}
+
+/* 하단 */
+.bottom{
+  margin-top:40px;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+}
+
+.row a{
+  flex:1;
+  padding:14px;
+  border-radius:14px;
+  background:#fff;
+  text-decoration:none;
+  color:#000;
+  font-weight:600;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.main{
+  margin-top:10px;
+  display:block;
+  padding:16px;
+  border-radius:14px;
+  background:#4a7aff;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+}
+
+@media(min-width:900px){
+  .wrap{max-width:600px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div class="title">
+레이드 참여 방법
+</div>
+
+<div class="slider" id="slider">
+
+  <div class="track" id="track">
+
+    <div class="slide">
+      <img src="images/participant-01.jpg">
+    </div>
+
+    <div class="slide">
+      <img src="images/participant-02.jpg">
+    </div>
+
+    <div class="slide">
+      <img src="images/participant-03.jpg">
+    </div>
+
+    <div class="slide">
+      <img src="images/participant-04.jpg">
+    </div>
+
+  </div>
+
+  <div class="nav">
+    <button onclick="prev()">‹</button>
+    <button onclick="next()">›</button>
+  </div>
+
+</div>
+
+<div class="dots">
+  <span class="active"></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<div class="desc">
+  <h2 id="title">1. 참여양식 작성</h2>
+  <p id="text">
+    참여양식을 복사 후 채팅창에 붙여넣기 → @입력 후 본인 닉네임 선택
+  </p>
+</div>
+
+<div class="bottom">
+
+  <div class="row">
+    <a href="host-mention.html">이전 가이드 : 멘션콜</a>
+    <a href="index.html">다음 가이드 : 메인으로</a>
+  </div>
+
+  <a href="index.html" class="main">메인으로 돌아가기</a>
+
+</div>
+
+</div>
+
+<script>
+let index = 0;
+const track = document.getElementById("track");
+const dots = document.querySelectorAll(".dots span");
+
+const titles = [
+"1. 참여양식 작성",
+"2. 친구 추가",
+"3. 초대 대기",
+"4. 입장 및 주의사항"
+];
+
+const texts = [
+"참여양식을 복사 후 채팅창에 붙여넣기 → @입력 후 본인 닉네임 선택",
+"친구가 안되어 있을 경우 양식 작성 후 친구 추가 진행",
+"멘션콜 또는 초대 알림이 오면 바로 준비",
+"리모트 패스 필요 / 일일 제한 체크 필수"
+];
+
+function update(){
+  track.style.transform = `translateX(-${index * 100}%)`;
+
+  dots.forEach(d=>d.classList.remove("active"));
+  dots[index].classList.add("active");
+
+  document.getElementById("title").innerText = titles[index];
+  document.getElementById("text").innerText = texts[index];
+}
+
+function next(){
+  index = (index+1)%4;
+  update();
+}
+
+function prev(){
+  index = (index-1+4)%4;
+  update();
+}
+
+/* 모바일 스와이프 */
+let startX = 0;
+
+document.getElementById("slider").addEventListener("touchstart", e=>{
+  startX = e.touches[0].clientX;
+});
+
+document.getElementById("slider").addEventListener("touchend", e=>{
+  let endX = e.changedTouches[0].clientX;
+
+  if(startX - endX > 50) next();
+  else if(endX - startX > 50) prev();
+});
+
+/* PC 드래그 */
+let isDown = false;
+
+document.getElementById("slider").addEventListener("mousedown", e=>{
+  isDown = true;
+  startX = e.clientX;
+});
+
+document.addEventListener("mouseup", e=>{
+  if(!isDown) return;
+  isDown = false;
+  let endX = e.clientX;
+
+  if(startX - endX > 50) next();
+  else if(endX - startX > 50) prev();
+});
+</script>
+
+</body>
+</html>
