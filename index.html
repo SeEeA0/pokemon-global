@@ -1,766 +1,191 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pokémon GO Global 🌏 가이드북</title>
-  <meta name="description" content="Pokémon GO Global 가이드북 메인 페이지" />
-  <style>
-    :root{
-      --bg:#f5f7fb;
-      --bg-soft:#eef3fa;
-      --card:rgba(255,255,255,.86);
-      --text:#111827;
-      --muted:#667085;
-      --line:rgba(15,23,42,.08);
-      --accent:#5aa7ff;
-      --accent2:#7b7cff;
-      --accent-soft:rgba(90,167,255,.10);
-      --shadow:0 20px 50px rgba(17,24,39,.08);
-      --shadow-soft:0 10px 26px rgba(17,24,39,.06);
-      --radius-xl:34px;
-      --radius-lg:24px;
-      --radius-md:18px;
-      --max:1180px;
-      --header-h:74px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at 0% 0%, rgba(90,167,255,.08), transparent 28%),
-        radial-gradient(circle at 100% 10%, rgba(123,124,255,.08), transparent 24%),
-        linear-gradient(180deg,var(--bg),var(--bg-soft));
-      line-height:1.6;
-    }
-
-    img{display:block;max-width:100%}
-    a{text-decoration:none;color:inherit}
-    button{font:inherit}
-    .container{width:min(calc(100% - 32px), var(--max)); margin:0 auto}
-
-    .glass{
-      background:var(--card);
-      border:1px solid rgba(255,255,255,.9);
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(18px) saturate(120%);
-      -webkit-backdrop-filter:blur(18px) saturate(120%);
-    }
-
-    /* header */
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:100;
-      background:rgba(245,247,251,.72);
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
-      border-bottom:1px solid rgba(15,23,42,.05);
-    }
-
-    .site-header .inner{
-      min-height:var(--header-h);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      font-weight:900;
-      letter-spacing:-.03em;
-      font-size:18px;
-    }
-
-    .brand-mark{
-      width:40px;
-      height:40px;
-      border-radius:14px;
-      flex:none;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      position:relative;
-      box-shadow:var(--shadow-soft);
-    }
-
-    .brand-mark:before,
-    .brand-mark:after{
-      content:"";
-      position:absolute;
-      left:50%;
-      top:50%;
-      transform:translate(-50%,-50%);
-      background:#fff;
-      border-radius:999px;
-    }
-
-    .brand-mark:before{width:16px;height:3px}
-    .brand-mark:after{width:3px;height:16px}
-
-    .top-nav{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .top-nav a{
-      min-height:42px;
-      padding:0 14px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:999px;
-      color:var(--muted);
-      transition:.28s ease;
-    }
-
-    .top-nav a:hover{
-      background:rgba(255,255,255,.82);
-      color:var(--text);
-      transform:translateY(-1px);
-    }
-
-    /* hero */
-    .hero{
-      padding:28px 0 16px;
-    }
-
-    .hero-title-wrap{
-      text-align:center;
-      margin-bottom:24px;
-    }
-
-    .hero-title{
-      margin:0;
-      font-size:clamp(34px, 6vw, 66px);
-      line-height:1.04;
-      letter-spacing:-.06em;
-      font-weight:950;
-    }
-
-    .hero-image-card{
-      overflow:hidden;
-      border-radius:40px;
-      position:relative;
-    }
-
-    .hero-image{
-      width:100%;
-      height:auto;
-      aspect-ratio:16 / 9;
-      object-fit:cover;
-      object-position:center;
-      transition:transform .8s ease;
-    }
-
-    .hero-image-card:hover .hero-image{
-      transform:scale(1.02);
-    }
-
-    /* section */
-    .section{
-      padding:16px 0 28px;
-    }
-
-    .section-head{
-      margin-bottom:20px;
-    }
-
-    .section-head h2{
-      margin:0;
-      font-size:clamp(26px, 3vw, 40px);
-      line-height:1.08;
-      letter-spacing:-.04em;
-    }
-
-    .section-head p{
-      margin:10px 0 0;
-      color:var(--muted);
-      max-width:760px;
-    }
-
-    .layout{
-      display:grid;
-      grid-template-columns:minmax(0,1fr) 84px;
-      gap:22px;
-      align-items:start;
-    }
-
-    .content-col{min-width:0}
-
-    .side-quick{
-      position:sticky;
-      top:calc(var(--header-h) + 20px);
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-
-    .side-quick a{
-      writing-mode:vertical-rl;
-      text-orientation:mixed;
-      min-height:118px;
-      border-radius:22px;
-      background:rgba(255,255,255,.76);
-      border:1px solid rgba(15,23,42,.07);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:13px;
-      font-weight:800;
-      letter-spacing:.04em;
-      color:#45617f;
-      box-shadow:var(--shadow-soft);
-      transition:.28s ease;
-    }
-
-    .side-quick a:hover{
-      transform:translateY(-2px);
-      background:linear-gradient(135deg, rgba(90,167,255,.10), rgba(123,124,255,.10));
-      color:#0f5ea7;
-    }
-
-    /* accordion */
-    .accordion-list{
-      display:grid;
-      gap:16px;
-    }
-
-    .accordion{
-      border-radius:30px;
-      overflow:hidden;
-    }
-
-    .accordion-btn{
-      width:100%;
-      border:0;
-      background:transparent;
-      text-align:left;
-      padding:24px 28px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      cursor:pointer;
-    }
-
-    .accordion-title-wrap{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      min-width:0;
-    }
-
-    .accordion-kicker{
-      font-size:12px;
-      font-weight:900;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:#0f5ea7;
-    }
-
-    .accordion-title{
-      margin:0;
-      font-size:clamp(24px, 2.4vw, 34px);
-      letter-spacing:-.04em;
-      line-height:1.1;
-    }
-
-    .accordion-desc{
-      margin:0;
-      color:var(--muted);
-      font-size:15px;
-    }
-
-    .accordion-icon{
-      width:46px;
-      height:46px;
-      flex:none;
-      border-radius:999px;
-      background:rgba(255,255,255,.84);
-      border:1px solid rgba(15,23,42,.07);
-      display:grid;
-      place-items:center;
-      box-shadow:var(--shadow-soft);
-      transition:.3s ease;
-      position:relative;
-    }
-
-    .accordion-icon:before,
-    .accordion-icon:after{
-      content:"";
-      position:absolute;
-      background:#20364f;
-      border-radius:999px;
-      transition:.28s ease;
-    }
-
-    .accordion-icon:before{width:16px;height:2.5px}
-    .accordion-icon:after{width:2.5px;height:16px}
-
-    .accordion.is-open .accordion-icon{
-      background:linear-gradient(135deg, rgba(90,167,255,.14), rgba(123,124,255,.14));
-    }
-
-    .accordion.is-open .accordion-icon:after{
-      transform:scaleY(0);
-    }
-
-    .accordion-panel{
-      display:grid;
-      grid-template-rows:0fr;
-      transition:grid-template-rows .42s cubic-bezier(.2,.8,.2,1);
-    }
-
-    .accordion.is-open .accordion-panel{
-      grid-template-rows:1fr;
-    }
-
-    .accordion-panel-inner{
-      overflow:hidden;
-    }
-
-    .accordion-content{
-      padding:0 28px 28px;
-      display:grid;
-      gap:12px;
-    }
-
-    .guide-link{
-      min-height:66px;
-      padding:0 18px;
-      border-radius:20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      background:rgba(255,255,255,.82);
-      border:1px solid rgba(15,23,42,.07);
-      box-shadow:var(--shadow-soft);
-      transition:.28s ease;
-    }
-
-    .guide-link:hover{
-      transform:translateX(2px);
-      background:linear-gradient(135deg, rgba(90,167,255,.08), rgba(123,124,255,.08));
-    }
-
-    .guide-link strong{
-      display:block;
-      font-size:16px;
-      letter-spacing:-.02em;
-    }
-
-    .guide-link span{
-      display:block;
-      font-size:13px;
-      color:var(--muted);
-      margin-top:2px;
-    }
-
-    .guide-link .arrow{
-      font-size:20px;
-      color:#0f5ea7;
-      flex:none;
-    }
-
-    /* qna */
-    .qna-wrap{
-      margin-top:34px;
-      padding:28px;
-      border-radius:34px;
-      background:rgba(255,255,255,.92);
-    }
-
-    .qna-head{
-      margin-bottom:18px;
-    }
-
-    .qna-head h3{
-      margin:0;
-      font-size:clamp(24px, 2.4vw, 34px);
-      letter-spacing:-.04em;
-      line-height:1.1;
-    }
-
-    .qna-head p{
-      margin:8px 0 0;
-      color:var(--muted);
-    }
-
-    .qna-grid{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-    }
-
-    .qna-chip{
-      min-height:56px;
-      padding:0 18px;
-      border-radius:999px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(255,255,255,.88);
-      border:1px solid rgba(15,23,42,.07);
-      box-shadow:var(--shadow-soft);
-      font-weight:700;
-      color:#334155;
-      transition:.28s ease;
-    }
-
-    .qna-chip:hover{
-      transform:translateY(-2px);
-      background:linear-gradient(135deg, rgba(90,167,255,.10), rgba(123,124,255,.10));
-      color:#0f5ea7;
-    }
-
-    .footer{
-      padding:24px 0 42px;
-      color:var(--muted);
-    }
-
-    .footer-inner{
-      border-top:1px solid rgba(15,23,42,.07);
-      padding-top:16px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    /* animation */
-    .fade-up{
-      opacity:0;
-      transform:translateY(26px);
-      transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);
-    }
-
-    .fade-up.is-visible{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    @media (max-width:1100px){
-      .layout{
-        grid-template-columns:1fr;
-      }
-
-      .side-quick{
-        position:static;
-        flex-direction:row;
-        flex-wrap:wrap;
-      }
-
-      .side-quick a{
-        writing-mode:horizontal-tb;
-        min-height:48px;
-        min-width:140px;
-      }
-    }
-
-    @media (max-width:860px){
-      .site-header .inner{
-        flex-direction:column;
-        align-items:flex-start;
-        padding:12px 0;
-      }
-
-      .hero{
-        padding-top:20px;
-      }
-
-      .hero-image-card{
-        border-radius:26px;
-      }
-
-      .accordion-btn{
-        padding:20px 20px;
-      }
-
-      .accordion-content{
-        padding:0 20px 20px;
-      }
-
-      .qna-wrap{
-        padding:22px;
-        border-radius:26px;
-      }
-    }
-
-    @media (max-width:560px){
-      .container{
-        width:min(calc(100% - 20px), var(--max));
-      }
-
-      .top-nav,
-      .qna-grid{
-        flex-direction:column;
-        align-items:stretch;
-      }
-
-      .top-nav a,
-      .qna-chip{
-        width:100%;
-        justify-content:center;
-      }
-
-      .accordion-title{
-        font-size:26px;
-      }
-
-      .accordion-desc{
-        font-size:14px;
-      }
-
-      .guide-link{
-        min-height:58px;
-        padding:12px 16px;
-      }
-
-      .hero-title{
-        font-size:42px;
-      }
-
-      .hero-image{
-        aspect-ratio:4 / 5;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokémon GO Global 🌏 가이드북</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Pretendard', sans-serif;
+  background:#f5f6f8;
+  color:#222;
+}
+
+/* 전체 */
+.wrap{
+  max-width:520px;
+  margin:0 auto;
+}
+
+/* 히어로 이미지 */
+.hero img{
+  width:100%;
+  display:block;
+}
+
+/* 아코디언 */
+.section{
+  padding:20px;
+}
+
+.accordion{
+  margin-top:10px;
+}
+
+.acc-item{
+  margin-bottom:10px;
+}
+
+.acc-header{
+  width:100%;
+  padding:18px;
+  border-radius:16px;
+  background:#fff;
+  border:none;
+  text-align:left;
+  font-size:16px;
+  font-weight:700;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  cursor:pointer;
+}
+
+.acc-body{
+  display:none;
+  padding:10px;
+}
+
+.acc-body a{
+  display:block;
+  padding:14px;
+  border-radius:12px;
+  background:#fafafa;
+  margin-bottom:8px;
+  text-decoration:none;
+  color:#333;
+  font-size:14px;
+}
+
+/* Q&A */
+.qna{
+  margin-top:40px;
+}
+
+.qna h2{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.qna-item{
+  background:#fff;
+  padding:16px;
+  border-radius:14px;
+  margin-bottom:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.q{
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.a{
+  color:#666;
+  font-size:14px;
+}
+
+/* PC 대응 */
+@media(min-width:900px){
+  .wrap{
+    max-width:600px;
+  }
+}
+</style>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container inner">
-      <a href="#top" class="brand" aria-label="상단으로 이동">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>Pokémon GO Global🌏</span>
-      </a>
 
-      <nav class="top-nav" aria-label="주요 이동">
-        <a href="#guides">가이드</a>
-        <a href="#qna">빠른 질문</a>
-      </nav>
-    </div>
-  </header>
+<div class="wrap">
 
-  <main id="top">
-    <section class="hero">
-      <div class="container">
-        <div class="hero-title-wrap fade-up">
-          <h1 class="hero-title">Pokémon GO Global 🌏 가이드북</h1>
-        </div>
+<!-- 메인 이미지 -->
+<div class="hero">
+  <img src="images/main-hero.jpg" alt="메인 이미지">
+</div>
 
-        <div class="hero-image-card glass fade-up">
-          <img src="hero-main.jpg" alt="Pokémon GO Global 메인 이미지" class="hero-image">
-        </div>
+<!-- 가이드 -->
+<div class="section">
+
+  <div class="accordion">
+
+    <!-- 신입 -->
+    <div class="acc-item">
+      <button class="acc-header">신입 가이드</button>
+      <div class="acc-body">
+        <a href="newcomer-nickname.html">닉네임 설정</a>
+        <a href="newcomer-chat.html">채팅 규칙</a>
       </div>
-    </section>
-
-    <section class="section" id="guides">
-      <div class="container">
-        <div class="layout">
-          <div class="content-col">
-            <div class="accordion-list">
-              <section class="accordion glass fade-up is-open" data-accordion>
-                <button class="accordion-btn" type="button" aria-expanded="true">
-                  <div class="accordion-title-wrap">
-                    <span class="accordion-kicker">Newcomer Guide</span>
-                    <h3 class="accordion-title">신입 가이드</h3>
-                    <p class="accordion-desc">처음 입장한 사용자를 위한 기본 설정과 채팅 규칙 안내</p>
-                  </div>
-                  <span class="accordion-icon" aria-hidden="true"></span>
-                </button>
-
-                <div class="accordion-panel">
-                  <div class="accordion-panel-inner">
-                    <div class="accordion-content">
-                      <a class="guide-link" href="newcomer-nickname.html">
-                        <div>
-                          <strong>닉네임 변경 방법</strong>
-                          <span>톡방 닉네임 / 포켓몬고 아이디 / 레벨 형식 안내</span>
-                        </div>
-                        <span class="arrow">→</span>
-                      </a>
-
-                      <a class="guide-link" href="newcomer-chat.html">
-                        <div>
-                          <strong>채팅 시 주의사항</strong>
-                          <span>단타 채팅, 반말, 음슴체 금지 및 기본 예절 안내</span>
-                        </div>
-                        <span class="arrow">→</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section class="accordion glass fade-up" data-accordion>
-                <button class="accordion-btn" type="button" aria-expanded="false">
-                  <div class="accordion-title-wrap">
-                    <span class="accordion-kicker">Host Guide</span>
-                    <h3 class="accordion-title">주최자 가이드</h3>
-                    <p class="accordion-desc">레이드 모집부터 멘션콜, 비밀방 생성, 추가 초대까지 운영용 가이드</p>
-                  </div>
-                  <span class="accordion-icon" aria-hidden="true"></span>
-                </button>
-
-                <div class="accordion-panel">
-                  <div class="accordion-panel-inner">
-                    <div class="accordion-content">
-                      <a class="guide-link" href="host-recruit.html">
-                        <div>
-                          <strong>레이드 모집글 작성하기</strong>
-                          <span>/레이드모집 입력, 양식 사용법, 주의사항 안내</span>
-                        </div>
-                        <span class="arrow">→</span>
-                      </a>
-
-                      <a class="guide-link" href="host-mention.html">
-                        <div>
-                          <strong>멘션콜 방법</strong>
-                          <span>초대 전/후 멘션콜 진행 방법과 확인 포인트</span>
-                        </div>
-                        <span class="arrow">→</span>
-                      </a>
-
-                      <a class="guide-link" href="host-private-room.html">
-                        <div>
-                          <strong>비밀방 생성 방법</strong>
-                          <span>리모트 인원 제한 대응을 위한 비밀방 사용 권장</span>
-                        </div>
-                        <span class="arrow">→</span>
-                      </a>
-
-                      <a class="guide-link" href="host-invite-more.html">
-                        <div>
-                          <strong>추가 초대 방법</strong>
-                          <span>5명 초대 후 재활성화 타이밍과 리모트 인원 안내</span>
-                        </div>
-                        <span class="arrow">→</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section class="accordion glass fade-up" data-accordion>
-                <button class="accordion-btn" type="button" aria-expanded="false">
-                  <div class="accordion-title-wrap">
-                    <span class="accordion-kicker">Participant Guide</span>
-                    <h3 class="accordion-title">참여자 가이드</h3>
-                    <p class="accordion-desc">참여 양식 작성, 초대 수락, 친구코드 추가까지 참여 흐름 안내</p>
-                  </div>
-                  <span class="accordion-icon" aria-hidden="true"></span>
-                </button>
-
-                <div class="accordion-panel">
-                  <div class="accordion-panel-inner">
-                    <div class="accordion-content">
-                      <a class="guide-link" href="participant-join.html">
-                        <div>
-                          <strong>레이드 참여하기</strong>
-                          <span>참여 양식 작성, 닉네임 태그, 친구 추가 흐름 안내</span>
-                        </div>
-                        <span class="arrow">→</span>
-                      </a>
-
-                      <a class="guide-link" href="participant-accept.html">
-                        <div>
-                          <strong>레이드 초대 수락 방법</strong>
-                          <span>멘션콜, 초대 알림 확인, 리모트 패스 및 일일한도 체크</span>
-                        </div>
-                        <span class="arrow">→</span>
-                      </a>
-
-                      <a class="guide-link" href="participant-friendcode.html">
-                        <div>
-                          <strong>친구코드로 친구 추가하기</strong>
-                          <span>모집글 전체 복사 후 친구코드 입력창에 바로 붙여넣기</span>
-                        </div>
-                        <span class="arrow">→</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-
-            <section class="qna-wrap glass fade-up" id="qna">
-              <div class="qna-head">
-                <h3>빠른 질문 Q&amp;A</h3>
-                <p>궁금한 질문을 눌러 바로 관련 가이드로 이동하세요.</p>
-              </div>
-
-              <div class="qna-grid">
-                <a class="qna-chip" href="newcomer-nickname.html">닉네임은 어떻게 설정하나요?</a>
-                <a class="qna-chip" href="newcomer-chat.html">채팅할 때 주의할 점은 무엇인가요?</a>
-                <a class="qna-chip" href="host-recruit.html">레이드 모집글은 어떻게 쓰나요?</a>
-                <a class="qna-chip" href="host-mention.html">멘션콜은 언제 하나요?</a>
-                <a class="qna-chip" href="host-private-room.html">비밀방은 왜 써야 하나요?</a>
-                <a class="qna-chip" href="host-invite-more.html">추가 초대는 언제 가능한가요?</a>
-                <a class="qna-chip" href="participant-join.html">참여 양식은 어떻게 작성하나요?</a>
-                <a class="qna-chip" href="participant-accept.html">초대를 못 받았으면 어떻게 하나요?</a>
-                <a class="qna-chip" href="participant-friendcode.html">친구코드는 어떻게 추가하나요?</a>
-              </div>
-            </section>
-          </div>
-
-          <aside class="side-quick fade-up" aria-label="빠른 이동">
-            <a href="#guides">가이드</a>
-            <a href="#qna">Q&amp;A</a>
-          </aside>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>Pokémon GO Global🌏</div>
-      <a href="#top">상단으로 이동</a>
     </div>
-  </footer>
 
-  <script>
-    (function(){
-      const accordions = document.querySelectorAll('[data-accordion]');
+    <!-- 주최자 -->
+    <div class="acc-item">
+      <button class="acc-header">주최자 가이드</button>
+      <div class="acc-body">
+        <a href="host-recruit.html">레이드 모집</a>
+        <a href="host-mention.html">멘션콜 방법</a>
+      </div>
+    </div>
 
-      accordions.forEach((accordion) => {
-        const btn = accordion.querySelector('.accordion-btn');
+    <!-- 참여자 -->
+    <div class="acc-item">
+      <button class="acc-header">참여자 가이드</button>
+      <div class="acc-body">
+        <a href="participant-join.html">레이드 참여 방법</a>
+      </div>
+    </div>
 
-        btn.addEventListener('click', () => {
-          const isOpen = accordion.classList.contains('is-open');
+  </div>
 
-          accordions.forEach((item) => {
-            item.classList.remove('is-open');
-            item.querySelector('.accordion-btn')?.setAttribute('aria-expanded', 'false');
-          });
+</div>
 
-          if (!isOpen) {
-            accordion.classList.add('is-open');
-            btn.setAttribute('aria-expanded', 'true');
-          }
-        });
-      });
+<!-- Q&A -->
+<div class="section qna">
 
-      const observer = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){
-            entry.target.classList.add('is-visible');
-          }
-        });
-      }, {threshold:0.12});
+  <h2>빠른 질문</h2>
 
-      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-    })();
-  </script>
+  <div class="qna-item">
+    <div class="q">Q. 닉네임은 왜 한글로 해야 하나요?</div>
+    <div class="a">모든 유저분들이 부르기 편하도록 한글 사용을 권장합니다.</div>
+  </div>
+
+  <div class="qna-item">
+    <div class="q">Q. 레이드 모집은 아무나 해도 되나요?</div>
+    <div class="a">가이드 숙지 후 가능합니다. 규칙을 반드시 지켜주세요.</div>
+  </div>
+
+  <div class="qna-item">
+    <div class="q">Q. 채팅 규칙을 안 지키면 어떻게 되나요?</div>
+    <div class="a">경고 또는 불이익이 발생할 수 있습니다.</div>
+  </div>
+
+</div>
+
+</div>
+
+<script>
+document.querySelectorAll(".acc-header").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const body = btn.nextElementSibling;
+    const isOpen = body.style.display === "block";
+
+    document.querySelectorAll(".acc-body").forEach(b=>b.style.display="none");
+
+    if(!isOpen){
+      body.style.display = "block";
+    }
+  });
+});
+</script>
+
 </body>
 </html>
