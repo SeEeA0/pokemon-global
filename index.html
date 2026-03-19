@@ -662,6 +662,142 @@ body.is-ready .card:nth-child(3){
     transform:none !important;
   }
 }
+  /* ===== Page Transition ===== */
+html.is-transitioning,
+html.is-transitioning body{
+  overflow:hidden;
+}
+
+.page-transition-layer{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  pointer-events:none;
+  background:linear-gradient(180deg,#f7f9fc 0%, #eef2f7 100%);
+  opacity:0;
+  transform:translateX(100%);
+  transition:
+    transform .52s cubic-bezier(.22,.61,.36,1),
+    opacity .32s ease;
+}
+
+html.is-transitioning .page-transition-layer{
+  opacity:1;
+  transform:translateX(0);
+}
+
+.page-shell{
+  min-height:100vh;
+  opacity:0;
+  transform:translateX(18px);
+}
+
+body.is-ready .page-shell{
+  animation:pageEnter .55s cubic-bezier(.22,.61,.36,1) forwards;
+}
+
+body.is-leaving .page-shell{
+  animation:pageLeave .38s cubic-bezier(.55,.08,.68,.53) forwards;
+}
+
+@keyframes pageEnter{
+  from{
+    opacity:0;
+    transform:translateX(22px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+@keyframes pageLeave{
+  from{
+    opacity:1;
+    transform:translateX(0);
+  }
+  to{
+    opacity:.88;
+    transform:translateX(-16px);
+  }
+}
+
+/* ===== stagger items ===== */
+.fade-item{
+  opacity:0;
+  transform:translateY(16px);
+}
+
+body.is-ready .fade-item{
+  animation:fadeUpItem .55s var(--ease) forwards;
+}
+
+body.is-ready .fade-item:nth-child(1){ animation-delay:.10s; }
+body.is-ready .fade-item:nth-child(2){ animation-delay:.16s; }
+body.is-ready .fade-item:nth-child(3){ animation-delay:.22s; }
+body.is-ready .fade-item:nth-child(4){ animation-delay:.28s; }
+body.is-ready .fade-item:nth-child(5){ animation-delay:.34s; }
+body.is-ready .fade-item:nth-child(6){ animation-delay:.40s; }
+body.is-ready .fade-item:nth-child(7){ animation-delay:.46s; }
+body.is-ready .fade-item:nth-child(8){ animation-delay:.52s; }
+
+@keyframes fadeUpItem{
+  from{
+    opacity:0;
+    transform:translateY(16px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* mobile tuning */
+@media (max-width:640px){
+  .page-transition-layer{
+    transition:
+      transform .42s cubic-bezier(.22,.61,.36,1),
+      opacity .26s ease;
+  }
+
+  .page-shell{
+    transform:translateX(12px);
+  }
+
+  @keyframes pageEnter{
+    from{
+      opacity:0;
+      transform:translateX(14px);
+    }
+    to{
+      opacity:1;
+      transform:translateX(0);
+    }
+  }
+
+  @keyframes pageLeave{
+    from{
+      opacity:1;
+      transform:translateX(0);
+    }
+    to{
+      opacity:.92;
+      transform:translateX(-10px);
+    }
+  }
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .page-transition-layer,
+  .page-shell,
+  .fade-item{
+    animation:none !important;
+    transition:none !important;
+    transform:none !important;
+    opacity:1 !important;
+  }
+}
 </style>
 </head>
 
@@ -698,7 +834,7 @@ body.is-ready .card:nth-child(3){
   <section class="section">
     <h2 class="section-title">가이드 목록</h2>
 
-    <div class="cards">
+    <div class="cards fade-item">
       <a href="newcomer.html" class="card">
         <div class="card-top">
           <h3 class="card-title">신입 가이드</h3>
@@ -707,7 +843,7 @@ body.is-ready .card:nth-child(3){
         <p class="card-desc">처음 입장했다면 여기부터</p>
       </a>
 
-      <a href="host.html" class="card">
+      <a href="host.html" class="card fade-item">
         <div class="card-top">
           <h3 class="card-title">주최자 가이드</h3>
           <span class="card-arrow" aria-hidden="true"></span>
@@ -715,7 +851,7 @@ body.is-ready .card:nth-child(3){
         <p class="card-desc">모집부터 초대까지</p>
       </a>
 
-      <a href="participant.html" class="card">
+      <a href="participant.html" class="card fade-item">
         <div class="card-top">
           <h3 class="card-title">참여자 가이드</h3>
           <span class="card-arrow" aria-hidden="true"></span>
@@ -730,7 +866,7 @@ body.is-ready .card:nth-child(3){
     <h2 class="qna-title">자주 묻는 질문</h2>
 
     <div class="qna-list">
-      <div class="qna-item">
+      <div class="qna-item fade-item">
         <button class="qna-question" type="button">
           <span class="qna-q">Q. 닉네임은 왜 한글로 해야 하나요?</span>
           <span class="qna-icon" aria-hidden="true"></span>
@@ -830,6 +966,7 @@ body.is-ready .card:nth-child(3){
 </div>
 
 <script>
+/* QNA accordion */
 document.querySelectorAll('.qna-question').forEach(button => {
   button.addEventListener('click', () => {
     const item = button.parentElement;
@@ -837,7 +974,52 @@ document.querySelectorAll('.qna-question').forEach(button => {
   });
 });
 
+/* page enter */
 window.addEventListener('load', () => {
+  requestAnimationFrame(() => {
+    document.body.classList.add('is-ready');
+  });
+});
+
+/* smooth page transition */
+document.querySelectorAll('a[href]').forEach(link => {
+  link.addEventListener('click', function(e){
+    const href = this.getAttribute('href');
+
+    if(
+      !href ||
+      href.startsWith('#') ||
+      href.startsWith('javascript:') ||
+      this.target === '_blank' ||
+      this.hasAttribute('download') ||
+      href.startsWith('mailto:') ||
+      href.startsWith('tel:')
+    ){
+      return;
+    }
+
+    const currentUrl = new URL(window.location.href);
+    const nextUrl = new URL(href, window.location.href);
+
+    if(currentUrl.href === nextUrl.href){
+      return;
+    }
+
+    e.preventDefault();
+
+    document.documentElement.classList.add('is-transitioning');
+    document.body.classList.add('is-leaving');
+
+    setTimeout(() => {
+      window.location.href = nextUrl.href;
+    }, 340);
+  });
+});
+
+/* back-forward cache support */
+window.addEventListener('pageshow', () => {
+  document.documentElement.classList.remove('is-transitioning');
+  document.body.classList.remove('is-leaving');
   document.body.classList.add('is-ready');
 });
 </script>
