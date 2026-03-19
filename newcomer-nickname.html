@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>닉네임 변경 방법 | Pokémon GO Global 🌏 가이드북</title>
+  <meta name="description" content="Pokémon GO Global 신입 가이드 - 닉네임 변경 방법" />
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --bg-soft:#eef3fa;
+      --card:rgba(255,255,255,.88);
+      --card-strong:rgba(255,255,255,.94);
+      --text:#111827;
+      --muted:#667085;
+      --line:rgba(15,23,42,.08);
+      --accent:#5aa7ff;
+      --accent2:#7b7cff;
+      --accent-soft:rgba(90,167,255,.10);
+      --shadow:0 24px 60px rgba(17,24,39,.08);
+      --shadow-soft:0 10px 26px rgba(17,24,39,.06);
+      --radius-xl:34px;
+      --radius-lg:24px;
+      --radius-md:18px;
+      --max:1180px;
+      --header-h:74px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(90,167,255,.08), transparent 28%),
+        radial-gradient(circle at 100% 10%, rgba(123,124,255,.08), transparent 24%),
+        linear-gradient(180deg,var(--bg),var(--bg-soft));
+      line-height:1.6;
+    }
+
+    img{display:block;max-width:100%}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit}
+    .container{width:min(calc(100% - 32px), var(--max)); margin:0 auto}
+
+    .glass{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,.9);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(18px) saturate(120%);
+      -webkit-backdrop-filter:blur(18px) saturate(120%);
+    }
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(245,247,251,.72);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(15,23,42,.05);
+    }
+
+    .site-header .inner{
+      min-height:var(--header-h);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:900;
+      letter-spacing:-.03em;
+      font-size:18px;
+    }
+
+    .brand-mark{
+      width:40px;
+      height:40px;
+      border-radius:14px;
+      flex:none;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      position:relative;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .brand-mark:before,
+    .brand-mark:after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%);
+      background:#fff;
+      border-radius:999px;
+    }
+
+    .brand-mark:before{width:16px;height:3px}
+    .brand-mark:after{width:3px;height:16px}
+
+    .top-nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .top-nav a{
+      min-height:42px;
+      padding:0 14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      color:var(--muted);
+      transition:.28s ease;
+    }
+
+    .top-nav a:hover{
+      background:rgba(255,255,255,.82);
+      color:var(--text);
+      transform:translateY(-1px);
+    }
+
+    .page-hero{
+      padding:28px 0 14px;
+    }
+
+    .breadcrumbs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:18px;
+    }
+
+    .breadcrumbs .sep{opacity:.45}
+
+    .detail-card{
+      padding:28px;
+      border-radius:32px;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      min-height:34px;
+      padding:0 14px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      border:1px solid rgba(90,167,255,.18);
+      color:#0f5ea7;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .detail-title{
+      margin:14px 0 0;
+      font-size:clamp(30px, 4vw, 48px);
+      line-height:1.05;
+      letter-spacing:-.05em;
+    }
+
+    .detail-lead{
+      margin:12px 0 0;
+      color:var(--muted);
+      font-size:16px;
+      max-width:760px;
+    }
+
+    .detail-layout{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:1fr 1.02fr;
+      gap:20px;
+      align-items:start;
+    }
+
+    .steps{
+      display:grid;
+      gap:12px;
+    }
+
+    .step-card{
+      padding:18px 18px 16px;
+      border-radius:22px;
+      background:rgba(255,255,255,.82);
+      border:1px solid rgba(15,23,42,.07);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .step-label{
+      display:inline-flex;
+      min-height:28px;
+      align-items:center;
+      padding:0 10px;
+      border-radius:999px;
+      background:var(--accent-soft);
+      color:#0f5ea7;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.06em;
+    }
+
+    .step-card h3{
+      margin:12px 0 8px;
+      font-size:22px;
+      line-height:1.15;
+      letter-spacing:-.03em;
+    }
+
+    .step-card p{
+      margin:0;
+      color:#485467;
+    }
+
+    .step-card ul{
+      margin:10px 0 0 18px;
+      padding:0;
+      color:#485467;
+    }
+
+    .step-card li+li{margin-top:6px}
+
+    .highlight{
+      margin-top:14px;
+      padding:16px 18px;
+      border-radius:20px;
+      background:linear-gradient(135deg, rgba(90,167,255,.10), rgba(123,124,255,.08));
+      border:1px solid rgba(90,167,255,.16);
+      color:#284c73;
+      font-weight:700;
+    }
+
+    .slider-card{
+      padding:18px;
+      border-radius:28px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(15,23,42,.07);
+      box-shadow:var(--shadow-soft);
+    }
+
+    .slider-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .slider-title{
+      font-weight:900;
+      letter-spacing:-.02em;
+    }
+
+    .slider-controls{
+      display:flex;
+      gap:8px;
+    }
+
+    .slider-btn{
+      width:42px;
+      height:42px;
+      border:0;
+      border-radius:999px;
+      background:rgba(255,255,255,.94);
+      box-shadow:var(--shadow-soft);
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .slider-btn:hover:not(:disabled){
+      transform:translateY(-1px);
+      background:linear-gradient(135deg, rgba(90,167,255,.12), rgba(123,124,255,.12));
+    }
+
+    .slider-btn:disabled{
+      opacity:.4;
+      cursor:default;
+    }
+
+    .slider-viewport{
+      overflow:hidden;
+      border-radius:24px;
+      background:#e9eef8;
+      border:1px solid rgba(15,23,42,.06);
+    }
+
+    .slider-track{
+      display:flex;
+      width:100%;
+      cursor:grab;
+    }
+
+    .slider-track:active{cursor:grabbing}
+
+    .slide{
+      min-width:100%;
+      padding:14px;
+    }
+
+    .slide-media{
+      aspect-ratio:10/16;
+      border-radius:20px;
+      overflow:hidden;
+      position:relative;
+      background:linear-gradient(135deg, rgba(90,167,255,.14), rgba(123,124,255,.12));
+      border:1px solid rgba(15,23,42,.06);
+      display:grid;
+      place-items:center;
+    }
+
+    .slide-media img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      background:#eef3fb;
+    }
+
+    .slide-placeholder{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      color:#55708e;
+      text-align:center;
+      padding:20px;
+    }
+
+    .slide-placeholder strong{
+      font-size:18px;
+      letter-spacing:-.02em;
+    }
+
+    .slide-placeholder span{
+      font-size:13px;
+    }
+
+    .slider-caption{
+      margin-top:12px;
+      padding:14px 16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(15,23,42,.06);
+      color:#425466;
+      min-height:78px;
+    }
+
+    .slider-dots{
+      margin-top:12px;
+      display:flex;
+      justify-content:center;
+      gap:8px;
+    }
+
+    .slider-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      border:0;
+      background:rgba(17,24,39,.14);
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .slider-dot.is-active{
+      width:28px;
+      background:linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+
+    .bottom-nav{
+      margin-top:26px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .bottom-link{
+      min-height:86px;
+      padding:18px 20px;
+      border-radius:24px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(15,23,42,.07);
+      box-shadow:var(--shadow-soft);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:4px;
+      transition:.28s ease;
+    }
+
+    .bottom-link:hover{
+      transform:translateY(-2px);
+      background:linear-gradient(135deg, rgba(90,167,255,.08), rgba(123,124,255,.08));
+    }
+
+    .bottom-link small{
+      color:var(--muted);
+      font-weight:800;
+      letter-spacing:.04em;
+    }
+
+    .bottom-link strong{
+      font-size:18px;
+      line-height:1.2;
+      letter-spacing:-.02em;
+    }
+
+    .bottom-actions{
+      margin-top:14px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+      min-height:56px;
+      padding:0 22px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      letter-spacing:-.02em;
+      border:1px solid transparent;
+      transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, background .35s ease;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .btn:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      transform:translateX(-120%);
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.36), transparent);
+      transition:transform .8s ease;
+    }
+
+    .btn:hover:before{transform:translateX(120%)}
+    .btn:hover{transform:translateY(-2px)}
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 16px 34px rgba(77,163,255,.25);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.84);
+      color:var(--text);
+      border-color:rgba(15,23,42,.07);
+    }
+
+    .footer{
+      padding:24px 0 42px;
+      color:var(--muted);
+    }
+
+    .footer-inner{
+      border-top:1px solid rgba(15,23,42,.07);
+      padding-top:16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .fade-up{
+      opacity:0;
+      transform:translateY(26px);
+      transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .fade-up.is-visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    @media (max-width:1100px){
+      .detail-layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:860px){
+      .site-header .inner{
+        flex-direction:column;
+        align-items:flex-start;
+        padding:12px 0;
+      }
+
+      .detail-card{
+        padding:22px;
+        border-radius:26px;
+      }
+
+      .slider-card{
+        padding:14px;
+      }
+    }
+
+    @media (max-width:560px){
+      .container{
+        width:min(calc(100% - 20px), var(--max));
+      }
+
+      .top-nav,
+      .bottom-actions{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .top-nav a,
+      .bottom-actions .btn{
+        width:100%;
+        justify-content:center;
+      }
+
+      .bottom-nav{
+        grid-template-columns:1fr;
+      }
+
+      .detail-title{
+        font-size:36px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container inner">
+      <a href="index.html" class="brand" aria-label="메인으로 이동">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Pokémon GO Global🌏</span>
+      </a>
+
+      <nav class="top-nav">
+        <a href="index.html#guides">가이드</a>
+        <a href="index.html#qna">빠른 질문</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumbs fade-up">
+          <a href="index.html">메인</a>
+          <span class="sep">/</span>
+          <span>Newcomer Guide</span>
+          <span class="sep">/</span>
+          <strong>닉네임 변경 방법</strong>
+        </div>
+
+        <section class="detail-card glass">
+          <span class="eyebrow fade-up">Newcomer Guide</span>
+          <h1 class="detail-title fade-up">닉네임 변경 방법</h1>
+          <p class="detail-lead fade-up">
+            카카오톡 오픈채팅방에서 사용할 닉네임을 올바른 형식으로 설정하는 방법입니다.
+            톡방 닉네임 / 포켓몬고 아이디 / 레벨 형식을 기준으로 정리했습니다.
+          </p>
+
+          <div class="detail-layout">
+            <div class="steps">
+              <article class="step-card fade-up">
+                <span class="step-label">STEP 1</span>
+                <h3>프로필 편집으로 이동하기</h3>
+                <p>
+                  오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고
+                  닉네임 수정 화면으로 이동합니다.
+                </p>
+              </article>
+
+              <article class="step-card fade-up">
+                <span class="step-label">STEP 2</span>
+                <h3>형식에 맞게 입력하기</h3>
+                <p>닉네임은 아래 3가지 항목만 입력해 주세요.</p>
+                <ul>
+                  <li>톡방 닉네임</li>
+                  <li>포켓몬고 아이디</li>
+                  <li>레벨</li>
+                </ul>
+              </article>
+
+              <article class="step-card fade-up">
+                <span class="step-label">STEP 3</span>
+                <h3>한글 닉네임으로 설정하기</h3>
+                <p>
+                  톡방 닉네임은 다른 분들이 부르기 쉽게 반드시 한글로 작성해 주세요.
+                  중복되지 않도록 설정하는 것이 좋습니다.
+                </p>
+              </article>
+
+              <article class="step-card fade-up">
+                <span class="step-label">STEP 4</span>
+                <h3>개인정보는 일부 가리기</h3>
+                <p>
+                  포켓몬고 아이디에 이름이나 번호가 포함되어 있다면,
+                  민감한 뒷부분은 *** 처리해도 됩니다.
+                </p>
+              </article>
+
+              <div class="highlight fade-up">
+                닉네임은 레이드 진행 시 출석 확인과 호출에 사용되므로,
+                다른 사람이 보기 쉽고 부르기 쉬운 형태로 설정하는 것이 중요합니다.
+              </div>
+            </div>
+
+            <div class="slider-card fade-up" data-slider>
+              <div class="slider-top">
+                <div class="slider-title">가이드 이미지</div>
+                <div class="slider-controls">
+                  <button class="slider-btn" type="button" data-prev aria-label="이전">←</button>
+                  <button class="slider-btn" type="button" data-next aria-label="다음">→</button>
+                </div>
+              </div>
+
+              <div class="slider-viewport">
+                <div class="slider-track">
+                  <div class="slide" data-caption="프로필 편집 화면으로 이동하는 예시 이미지">
+                    <div class="slide-media">
+                      <img src="images/newcomer-nickname-01.jpg" alt="프로필 편집 화면 예시" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      <div class="slide-placeholder" style="display:none;">
+                        <strong>newcomer-nickname-01.jpg</strong>
+                        <span>프로필 편집 화면으로 이동하는 예시 이미지</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slide" data-caption="닉네임 / 포고 아이디 / 레벨 형식 예시">
+                    <div class="slide-media">
+                      <img src="images/newcomer-nickname-02.jpg" alt="닉네임 형식 예시" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      <div class="slide-placeholder" style="display:none;">
+                        <strong>newcomer-nickname-02.jpg</strong>
+                        <span>닉네임 / 포고 아이디 / 레벨 형식 예시</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slide" data-caption="한글 닉네임과 중복 방지 안내 예시">
+                    <div class="slide-media">
+                      <img src="images/newcomer-nickname-03.jpg" alt="한글 닉네임 예시" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      <div class="slide-placeholder" style="display:none;">
+                        <strong>newcomer-nickname-03.jpg</strong>
+                        <span>한글 닉네임과 중복 방지 안내 예시</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="slide" data-caption="개인정보 일부 마스킹 예시">
+                    <div class="slide-media">
+                      <img src="images/newcomer-nickname-04.jpg" alt="개인정보 마스킹 예시" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                      <div class="slide-placeholder" style="display:none;">
+                        <strong>newcomer-nickname-04.jpg</strong>
+                        <span>개인정보 일부 마스킹 예시</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="slider-caption" data-caption></div>
+              <div class="slider-dots" data-dots></div>
+            </div>
+          </div>
+
+          <div class="bottom-nav fade-up">
+            <a class="bottom-link" href="index.html">
+              <small>이전 가이드 보기</small>
+              <strong>메인 가이드 목록</strong>
+            </a>
+
+            <a class="bottom-link" href="newcomer-chat.html">
+              <small>다음 가이드 보기</small>
+              <strong>채팅 시 주의사항</strong>
+            </a>
+          </div>
+
+          <div class="bottom-actions fade-up">
+            <a class="btn btn-secondary" href="index.html#guides">신입 가이드 목록 보기</a>
+            <a class="btn btn-primary" href="index.html">메인으로 돌아가기</a>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>Pokémon GO Global🌏</div>
+      <a href="#top">상단으로 이동</a>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting) entry.target.classList.add('is-visible');
+        });
+      }, {threshold:0.12});
+
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+      document.querySelectorAll('[data-slider]').forEach(slider => {
+        const track = slider.querySelector('.slider-track');
+        const slides = [...slider.querySelectorAll('.slide')];
+        const prev = slider.querySelector('[data-prev]');
+        const next = slider.querySelector('[data-next]');
+        const dotsWrap = slider.querySelector('[data-dots]');
+        const captionEl = slider.querySelector('[data-caption]');
+
+        let index = 0;
+        let startX = 0;
+        let diff = 0;
+        let dragging = false;
+
+        function update(){
+          track.style.transition = dragging ? 'none' : 'transform .35s ease';
+          track.style.transform = `translateX(calc(${-index * 100}% + ${diff}px))`;
+
+          if(prev) prev.disabled = index === 0;
+          if(next) next.disabled = index === slides.length - 1;
+          if(captionEl) captionEl.textContent = slides[index]?.dataset.caption || '';
+
+          if(dotsWrap){
+            [...dotsWrap.children].forEach((dot, i) => {
+              dot.classList.toggle('is-active', i === index);
+            });
+          }
+        }
+
+        function buildDots(){
+          if(!dotsWrap) return;
+          dotsWrap.innerHTML = '';
+
+          slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'slider-dot' + (i === index ? ' is-active' : '');
+            dot.addEventListener('click', () => goTo(i));
+            dotsWrap.appendChild(dot);
+          });
+        }
+
+        function goTo(i){
+          index = Math.max(0, Math.min(i, slides.length - 1));
+          diff = 0;
+          dragging = false;
+          update();
+        }
+
+        prev?.addEventListener('click', () => goTo(index - 1));
+        next?.addEventListener('click', () => goTo(index + 1));
+
+        function down(x){
+          dragging = true;
+          startX = x;
+          diff = 0;
+          update();
+        }
+
+        function move(x){
+          if(!dragging) return;
+          diff = x - startX;
+          update();
+        }
+
+        function up(){
+          if(!dragging) return;
+          const threshold = Math.min(140, slider.offsetWidth * 0.18);
+
+          if(diff < -threshold && index < slides.length - 1) index++;
+          else if(diff > threshold && index > 0) index--;
+
+          dragging = false;
+          diff = 0;
+          update();
+        }
+
+        track.addEventListener('mousedown', e => {
+          e.preventDefault();
+          down(e.clientX);
+        });
+
+        window.addEventListener('mousemove', e => move(e.clientX));
+        window.addEventListener('mouseup', up);
+
+        track.addEventListener('touchstart', e => down(e.touches[0].clientX), {passive:true});
+        track.addEventListener('touchmove', e => move(e.touches[0].clientX), {passive:true});
+        track.addEventListener('touchend', up);
+
+        buildDots();
+        update();
+      });
+    });
+  </script>
+</body>
+</html>
