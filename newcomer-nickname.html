@@ -7,100 +7,147 @@
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+:root{
+  --bg-1:#f7f8fb;
+  --bg-2:#eef1f6;
+  --text-1:#1d1d1f;
+  --text-2:#70757f;
+  --muted:#a5acb8;
+  --line:rgba(255,255,255,.7);
+
+  --cta-1:#6f63ff;
+  --cta-2:#4b46d8;
+  --cta-3:#253a92;
+
+  --card-bg:rgba(255,255,255,.72);
+  --card-shadow:0 12px 28px rgba(27, 33, 58, .08);
+  --phone-shadow:0 26px 44px rgba(34, 39, 68, .10);
+
+  --ease-smooth:cubic-bezier(.22,.61,.36,1);
+}
+
 body{
   font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
-  background:#f3f4f6;
-  color:#222;
+  background:
+    radial-gradient(circle at top, #fafbfc 0%, var(--bg-1) 32%, var(--bg-2) 100%);
+  color:var(--text-1);
   text-align:center;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
 }
 
 .page{
   min-height:100vh;
   display:flex;
   justify-content:center;
-  padding:24px 16px 44px;
+  padding:28px 16px 48px;
 }
 
 .wrap{
   width:100%;
-  max-width:1120px;
+  max-width:1180px;
   margin:0 auto;
 }
 
 /* 상단 로고 */
 .header-logo{
-  margin:0 0 22px;
+  margin:0 0 24px;
   font-size:14px;
-  font-weight:600;
-  color:#8b8b8b;
-  letter-spacing:.06em;
+  font-weight:700;
+  color:#8f94a0;
+  letter-spacing:.08em;
   line-height:1.6;
 }
 
-/* 상단 설명 */
+/* 상단 텍스트 */
 .top-copy{
-  max-width:940px;
-  margin:0 auto 24px;
+  max-width:920px;
+  margin:0 auto 26px;
+  transition:opacity .32s ease, transform .32s ease;
+}
+.top-copy.is-changing{
+  opacity:.4;
+  transform:translateY(4px);
 }
 
 .top-title{
   margin:0 0 12px;
-  font-size:24px;
-  line-height:1.35;
+  font-size:clamp(24px, 3vw, 32px);
+  line-height:1.28;
   font-weight:800;
-  letter-spacing:-0.02em;
-  color:#222;
+  letter-spacing:-0.03em;
+  color:var(--text-1);
   word-break:keep-all;
 }
 
 .top-sub{
   margin:0 auto;
-  max-width:900px;
-  font-size:17px;
-  line-height:1.8;
-  color:#666;
+  max-width:860px;
+  font-size:clamp(16px, 2vw, 19px);
+  line-height:1.78;
+  color:var(--text-2);
   word-break:keep-all;
 }
 
 /* 뷰어 */
 .viewer-row{
   display:grid;
-  grid-template-columns:72px minmax(0,1fr) 72px;
+  grid-template-columns:86px minmax(0,1fr) 86px;
   align-items:center;
-  gap:16px;
-  max-width:1080px;
+  gap:14px;
+  max-width:1120px;
   margin:0 auto;
 }
 
+/* 앱 느낌 원형 네비 버튼 */
 .side-nav{
-  width:64px;
-  height:64px;
+  width:68px;
+  height:68px;
   border:none;
   border-radius:999px;
-  background:rgba(255,255,255,.96);
-  box-shadow:0 10px 24px rgba(0,0,0,.10);
+  background:rgba(255,255,255,.74);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:
+    0 12px 30px rgba(24, 29, 56, .08),
+    inset 0 1px 0 rgba(255,255,255,.92);
   cursor:pointer;
   position:relative;
-  transition:.22s ease;
+  transition:
+    transform .18s ease,
+    box-shadow .22s ease,
+    background .22s ease,
+    opacity .22s ease;
   display:flex;
   align-items:center;
   justify-content:center;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
 }
 .side-nav:hover{
-  transform:translateY(-1px);
-  background:#fff;
-  box-shadow:0 14px 30px rgba(0,0,0,.14);
+  background:rgba(255,255,255,.9);
+  box-shadow:
+    0 16px 32px rgba(24, 29, 56, .12),
+    inset 0 1px 0 rgba(255,255,255,.95);
+}
+.side-nav:active,
+.side-nav.is-pressed{
+  transform:scale(.94);
+  box-shadow:
+    0 6px 14px rgba(24, 29, 56, .10),
+    inset 0 2px 8px rgba(23, 26, 45, .08);
 }
 .side-nav.hidden{
   visibility:hidden;
   pointer-events:none;
+  opacity:0;
 }
 .side-nav span{
   display:block;
   width:16px;
   height:16px;
-  border-top:3px solid rgba(0,0,0,.58);
-  border-right:3px solid rgba(0,0,0,.58);
+  border-top:3px solid rgba(45,49,64,.65);
+  border-right:3px solid rgba(45,49,64,.65);
 }
 .side-nav.prev span{
   transform:rotate(-135deg);
@@ -117,19 +164,18 @@ body{
   align-items:center;
 }
 
-/* 실제 업로드한 폰 프레임 기준 */
+/* 폰 프레임 */
 .phone{
   position:relative;
-  width:min(100%, 760px);
+  width:min(100%, 910px); /* 기존보다 크게 */
   aspect-ratio:1024 / 1280;
   margin:0 auto;
   background:url('phone-frame.png') center center / contain no-repeat;
+  filter:drop-shadow(var(--phone-shadow));
+  transform:translateZ(0);
 }
 
-/*
-  phone-frame.png 기준 삽입 영역
-  필요하면 여기 값만 1~2% 미세조정하면 됩니다.
-*/
+/* 올려주신 phone-frame.png 기준 화면 좌표 */
 .screen{
   position:absolute;
   top:8.6%;
@@ -137,22 +183,31 @@ body{
   width:52.7%;
   height:68.6%;
   overflow:hidden;
-  border-radius:36px;
-  background:#dbe6f1;
+  border-radius:34px;
+  background:
+    linear-gradient(180deg,#e8edf4 0%, #dde5ee 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75),
+    inset 0 0 0 1px rgba(0,0,0,.03);
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-/* 1080x1728 비율 유지 */
+/* 슬라이더 */
 .slider{
   width:100%;
   height:100%;
   overflow:hidden;
+  position:relative;
 }
 
 .track{
   display:flex;
   width:100%;
   height:100%;
-  transition:transform .35s ease;
+  transition:transform .52s var(--ease-smooth);
+  will-change:transform;
 }
 
 .slide{
@@ -161,7 +216,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:#dbe6f1;
+  background:linear-gradient(180deg,#e8edf4 0%, #dde5ee 100%);
 }
 
 .slide img{
@@ -169,91 +224,148 @@ body{
   height:100%;
   object-fit:contain;
   display:block;
-  background:#dbe6f1;
+  background:transparent;
 }
 
 /* 인디케이터 */
 .pager{
-  margin:12px 0 0;
-  font-size:16px;
-  line-height:1;
-  letter-spacing:.18em;
-  color:#b8bcc2;
+  margin:14px 0 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
   user-select:none;
 }
-.pager .active{
-  color:#222;
+.pager-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:#cbd1db;
+  transition:all .28s ease;
+}
+.pager-dot.active{
+  width:24px;
+  background:#21232a;
+  box-shadow:0 4px 12px rgba(33,35,42,.16);
 }
 
 /* 하단 버튼 */
 .bottom{
-  max-width:860px;
-  margin:26px auto 0;
+  max-width:900px;
+  margin:28px auto 0;
 }
 
 .row{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:14px;
 }
 
-.row a{
+.row a,
+.main{
+  position:relative;
+  overflow:hidden;
   display:flex;
   align-items:center;
   justify-content:center;
-  min-height:64px;
-  padding:14px 16px;
-  border-radius:18px;
-  background:#fff;
   text-decoration:none;
-  color:#000;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:
+    transform .18s ease,
+    box-shadow .24s ease,
+    opacity .2s ease,
+    filter .24s ease;
+}
+
+.row a::before,
+.main::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.32) 45%, transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .7s ease;
+  pointer-events:none;
+}
+
+.row a:hover::before,
+.main:hover::before{
+  transform:translateX(120%);
+}
+
+.row a:active,
+.row a.is-pressed,
+.main:active,
+.main.is-pressed{
+  transform:scale(.985);
+}
+
+.row a{
+  min-height:68px;
+  padding:16px 18px;
+  border-radius:20px;
+  background:rgba(255,255,255,.76);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  color:#1d1f26;
   font-weight:700;
   font-size:18px;
-  box-shadow:0 8px 20px rgba(0,0,0,.05);
-  line-height:1.4;
-  transition:.22s ease;
+  line-height:1.35;
+  box-shadow:
+    0 12px 28px rgba(28, 34, 56, .06),
+    inset 0 1px 0 rgba(255,255,255,.95);
   word-break:keep-all;
 }
 .row a:hover{
   transform:translateY(-1px);
-  box-shadow:0 12px 24px rgba(0,0,0,.08);
+  box-shadow:
+    0 16px 30px rgba(28, 34, 56, .10),
+    inset 0 1px 0 rgba(255,255,255,.96);
 }
 
+/* 메인 CTA */
 .main{
   margin-top:14px;
-  display:block;
   width:100%;
-  padding:18px 20px;
-  border-radius:18px;
-  background:#4a7aff;
+  min-height:72px;
+  padding:18px 22px;
+  border-radius:22px;
+  background:
+    linear-gradient(135deg, var(--cta-1) 0%, var(--cta-2) 42%, var(--cta-3) 100%);
   color:#fff;
-  text-decoration:none;
   font-weight:800;
-  font-size:19px;
-  box-shadow:0 12px 28px rgba(74,122,255,.25);
-  transition:.22s ease;
+  font-size:20px;
+  letter-spacing:-0.02em;
+  box-shadow:
+    0 18px 32px rgba(68, 73, 160, .26),
+    inset 0 1px 0 rgba(255,255,255,.18);
 }
 .main:hover{
   transform:translateY(-1px);
-  box-shadow:0 16px 30px rgba(74,122,255,.30);
+  box-shadow:
+    0 22px 38px rgba(68, 73, 160, .32),
+    inset 0 1px 0 rgba(255,255,255,.22);
 }
 
-/* 태블릿 */
+/* 작은 진동 느낌의 리플 */
+.ripple{
+  position:absolute;
+  border-radius:999px;
+  transform:translate(-50%, -50%);
+  background:rgba(255,255,255,.26);
+  pointer-events:none;
+  animation:rippleAnim .55s ease-out forwards;
+}
+@keyframes rippleAnim{
+  0%{width:0;height:0;opacity:.55}
+  100%{width:220px;height:220px;opacity:0}
+}
+
+/* 모바일 */
 @media (max-width:900px){
-  .wrap{
-    max-width:100%;
-  }
-  .top-copy{
-    max-width:860px;
-  }
-  .top-title{
-    font-size:22px;
-  }
-  .top-sub{
-    font-size:16px;
-  }
   .viewer-row{
-    grid-template-columns:56px minmax(0,1fr) 56px;
+    grid-template-columns:58px minmax(0,1fr) 58px;
     gap:10px;
   }
   .side-nav{
@@ -261,48 +373,46 @@ body{
     height:50px;
   }
   .phone{
-    width:min(100%, 700px);
+    width:min(100%, 980px);
   }
-  .screen{
-    border-radius:28px;
+  .top-copy{
+    max-width:96%;
+  }
+  .top-title{
+    font-size:clamp(22px, 5vw, 28px);
+  }
+  .top-sub{
+    max-width:95%;
+    font-size:16px;
   }
   .row a{
     font-size:16px;
-    min-height:58px;
+    min-height:62px;
   }
   .main{
+    min-height:66px;
     font-size:18px;
   }
 }
 
-/* 모바일 */
 @media (max-width:640px){
   .page{
-    padding:20px 12px 32px;
+    padding:20px 12px 34px;
   }
   .header-logo{
     margin-bottom:16px;
     font-size:13px;
   }
   .top-copy{
-    margin-bottom:18px;
-  }
-  .top-title{
-    font-size:20px;
-    margin-bottom:10px;
-  }
-  .top-sub{
-    font-size:15px;
-    line-height:1.75;
-    max-width:95%;
+    margin-bottom:20px;
   }
   .viewer-row{
-    grid-template-columns:42px minmax(0,1fr) 42px;
+    grid-template-columns:44px minmax(0,1fr) 44px;
     gap:8px;
   }
   .side-nav{
-    width:40px;
-    height:40px;
+    width:42px;
+    height:42px;
   }
   .side-nav span{
     width:12px;
@@ -311,38 +421,38 @@ body{
     border-right-width:2.5px;
   }
   .phone{
-    width:min(100%, 640px);
+    width:min(100%, 1000px); /* 모바일도 더 크게 */
   }
   .screen{
-    top:8.6%;
-    left:23.6%;
-    width:52.7%;
-    height:68.6%;
     border-radius:18px;
   }
   .pager{
-    margin-top:10px;
-    font-size:14px;
-    letter-spacing:.15em;
+    gap:8px;
+    margin-top:12px;
   }
-  .bottom{
-    margin-top:22px;
+  .pager-dot{
+    width:9px;
+    height:9px;
+  }
+  .pager-dot.active{
+    width:22px;
   }
   .row{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr 1fr; /* 모바일도 2개 한 줄 유지 */
     gap:10px;
   }
   .row a{
-    min-height:54px;
+    min-height:56px;
     padding:12px 10px;
     font-size:14px;
     border-radius:16px;
   }
   .main{
     margin-top:12px;
-    padding:16px 16px;
+    min-height:60px;
+    padding:16px 14px;
     font-size:17px;
-    border-radius:16px;
+    border-radius:18px;
   }
 }
 </style>
@@ -352,13 +462,16 @@ body{
   <div class="wrap">
     <div class="header-logo">Pokémon GO Global 🌏</div>
 
-    <div class="top-copy">
+    <div class="top-copy" id="topCopy">
       <h2 class="top-title" id="titleText">1. 햄버거 버튼을 클릭</h2>
-      <p class="top-sub" id="descText">오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.</p>
+      <p class="top-sub" id="descText">
+        오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고<br>
+        닉네임 수정 화면으로 이동해 주세요.
+      </p>
     </div>
 
     <div class="viewer-row">
-      <button class="side-nav prev" id="prevBtn" type="button" onclick="prev()" aria-label="이전 이미지">
+      <button class="side-nav prev" id="prevBtn" type="button" aria-label="이전 이미지">
         <span></span>
       </button>
 
@@ -377,19 +490,19 @@ body{
         </div>
       </div>
 
-      <button class="side-nav next" id="nextBtn" type="button" onclick="next()" aria-label="다음 이미지">
+      <button class="side-nav next" id="nextBtn" type="button" aria-label="다음 이미지">
         <span></span>
       </button>
     </div>
 
-    <div class="pager" id="pager">● ○ ○ ○</div>
+    <div class="pager" id="pager"></div>
 
     <div class="bottom">
       <div class="row">
-        <a href="newcomer.html">이전 가이드 : 신입 가이드 목록</a>
-        <a href="newcomer-chat.html">다음 가이드 : 채팅 규칙</a>
+        <a href="newcomer.html" class="pressable">이전 가이드 : 신입 가이드 목록</a>
+        <a href="newcomer-chat.html" class="pressable">다음 가이드 : 채팅 규칙</a>
       </div>
-      <a href="index.html" class="main">메인으로 돌아가기</a>
+      <a href="index.html" class="main pressable">메인으로 돌아가기</a>
     </div>
   </div>
 </div>
@@ -400,6 +513,9 @@ const track = document.getElementById("track");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const pager = document.getElementById("pager");
+const topCopy = document.getElementById("topCopy");
+const titleEl = document.getElementById("titleText");
+const descEl = document.getElementById("descText");
 
 const titles = [
   "1. 햄버거 버튼을 클릭",
@@ -409,39 +525,38 @@ const titles = [
 ];
 
 const texts = [
-  "오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.",
-  "닉네임은 톡방 닉네임 / 포켓몬고 아이디 / 레벨 형식으로 입력해 주세요. 이 3가지 항목만 넣으면 됩니다.",
-  "톡방 닉네임은 다른 분들이 부르기 쉽도록 반드시 한글로 작성하고, 중복되지 않게 설정해 주세요.",
-  "포켓몬고 아이디가 길어서 기재가 안되거나 개인정보가 들어간 경우 뒷부분은 *** 처리해도 됩니다."
+  "오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고<br>닉네임 수정 화면으로 이동해 주세요.",
+  "닉네임은 톡방 닉네임 / 포켓몬고 아이디 / 레벨 형식으로 입력해 주세요.<br>이 3가지 항목만 넣으면 됩니다.",
+  "톡방 닉네임은 다른 분들이 부르기 쉽도록 반드시 한글로 작성하고,<br>중복되지 않게 설정해 주세요.",
+  "포켓몬고 아이디가 길어서 기재가 안되거나 개인정보가 들어간 경우<br>뒷부분은 *** 처리해도 됩니다."
 ];
 
 const total = titles.length;
 
 function renderPager(){
-  let html = "";
+  pager.innerHTML = "";
   for(let i = 0; i < total; i++){
-    html += i === index ? '<span class="active">●</span>' : '<span>○</span>';
-    if(i < total - 1) html += " ";
+    const dot = document.createElement("span");
+    dot.className = "pager-dot" + (i === index ? " active" : "");
+    pager.appendChild(dot);
   }
-  pager.innerHTML = html;
+}
+
+function updateText(){
+  topCopy.classList.add("is-changing");
+  setTimeout(() => {
+    titleEl.innerText = titles[index];
+    descEl.innerHTML = texts[index];
+    topCopy.classList.remove("is-changing");
+  }, 130);
 }
 
 function update(){
   track.style.transform = `translateX(-${index * 100}%)`;
-  document.getElementById("titleText").innerText = titles[index];
-  document.getElementById("descText").innerText = texts[index];
+  updateText();
 
-  if(index === 0){
-    prevBtn.classList.add("hidden");
-  }else{
-    prevBtn.classList.remove("hidden");
-  }
-
-  if(index === total - 1){
-    nextBtn.classList.add("hidden");
-  }else{
-    nextBtn.classList.remove("hidden");
-  }
+  prevBtn.classList.toggle("hidden", index === 0);
+  nextBtn.classList.toggle("hidden", index === total - 1);
 
   renderPager();
 }
@@ -457,6 +572,9 @@ function prev(){
   index--;
   update();
 }
+
+prevBtn.addEventListener("click", prev);
+nextBtn.addEventListener("click", next);
 
 /* 스와이프 */
 let startX = 0;
@@ -486,7 +604,34 @@ document.addEventListener("mouseup", e => {
   else if(endX - startX > 50 && index > 0) prev();
 });
 
+/* haptic 느낌 애니메이션 */
+function addRipple(el, e){
+  const rect = el.getBoundingClientRect();
+  const ripple = document.createElement("span");
+  ripple.className = "ripple";
+
+  const x = e ? (e.clientX - rect.left) : rect.width / 2;
+  const y = e ? (e.clientY - rect.top) : rect.height / 2;
+
+  ripple.style.left = x + "px";
+  ripple.style.top = y + "px";
+
+  el.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 550);
+}
+
+document.querySelectorAll(".pressable, .side-nav").forEach(el => {
+  el.addEventListener("pointerdown", (e) => {
+    el.classList.add("is-pressed");
+    addRipple(el, e);
+  });
+  el.addEventListener("pointerup", () => {
+    setTimeout(() => el.classList.remove("is-pressed"), 90);
+  });
+  el.addEventListener("pointerleave", () => {
+    el.classList.remove("is-pressed");
+  });
+});
+
 update();
 </script>
-</body>
-</html>
