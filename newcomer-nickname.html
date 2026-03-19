@@ -7,21 +7,26 @@
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+
 :root{
   --bg1:#fafbfc;
-  --bg2:#f1f3f7;
-  --bg3:#eceff5;
+  --bg2:#f3f5f8;
+  --bg3:#edf1f6;
 
   --text1:#1d1d1f;
-  --text2:#6f7480;
+  --text2:#70757f;
   --muted:#8f94a0;
 
-  --nav-bg:rgba(255,255,255,.76);
-  --nav-shadow:0 14px 30px rgba(20,24,42,.10);
+  --line:rgba(255,255,255,.72);
+  --card-border:rgba(32,38,58,.08);
 
-  --cta1:#7a6cff;
-  --cta2:#5748dd;
-  --cta3:#243a92;
+  --cta1:#7d71ff;
+  --cta2:#5a4de0;
+  --cta3:#283c94;
+
+  --shadow-soft:0 14px 28px rgba(29,34,58,.06);
+  --shadow-card:0 24px 44px rgba(26,31,53,.12);
+  --shadow-cta:0 18px 32px rgba(80,78,177,.28);
 
   --ease:cubic-bezier(.22,.61,.36,1);
 }
@@ -45,7 +50,7 @@ body{
 
 .wrap{
   width:100%;
-  max-width:1200px;
+  max-width:1160px;
   margin:0 auto;
 }
 
@@ -59,10 +64,10 @@ body{
   line-height:1.6;
 }
 
-/* 상단 설명 */
+/* 상단 텍스트 */
 .top-copy{
   max-width:960px;
-  margin:0 auto 26px;
+  margin:0 auto 28px;
   transition:opacity .32s ease, transform .32s ease;
 }
 .top-copy.is-changing{
@@ -89,28 +94,28 @@ body{
   word-break:keep-all;
 }
 
-/* 메인 뷰어 */
+/* 뷰어 */
 .viewer-row{
   display:grid;
   grid-template-columns:86px minmax(0,1fr) 86px;
   align-items:center;
   gap:16px;
-  max-width:1140px;
+  max-width:1120px;
   margin:0 auto;
 }
 
-/* 좌우 네비 */
+/* 좌우 버튼 */
 .side-nav{
   width:68px;
   height:68px;
   border:none;
   border-radius:999px;
-  background:var(--nav-bg);
+  background:rgba(255,255,255,.78);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
   box-shadow:
-    var(--nav-shadow),
-    inset 0 1px 0 rgba(255,255,255,.95);
+    0 14px 30px rgba(20,24,42,.10),
+    inset 0 1px 0 rgba(255,255,255,.96);
   cursor:pointer;
   position:relative;
   transition:
@@ -125,7 +130,7 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 .side-nav:hover{
-  background:rgba(255,255,255,.9);
+  background:rgba(255,255,255,.92);
   box-shadow:
     0 18px 34px rgba(20,24,42,.14),
     inset 0 1px 0 rgba(255,255,255,.98);
@@ -158,75 +163,87 @@ body{
   margin-right:6px;
 }
 
-/* 폰 영역 */
-.phone-stage{
+/* 이미지 카드 영역 */
+.device-stage{
   display:flex;
   justify-content:center;
   align-items:center;
 }
 
-.phone{
+/* 폰 대신 앱 카드 느낌 */
+.device-card{
   position:relative;
-  width:min(100%, 980px); /* 크게 */
-  aspect-ratio:592 / 900;
+  width:min(100%, 880px);
   margin:0 auto;
-  background:url('phone-frame.png') center center / contain no-repeat;
-  filter:drop-shadow(0 28px 40px rgba(27, 34, 57, .10));
-  transform:translateZ(0);
+  border-radius:42px;
+  padding:20px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.52) 100%);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 1px 0 rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.75);
 }
 
-/*
-  여백 없는 phone-frame.png 기준
-  실제 내부 화면 좌표
-*/
-.screen{
+/* 살짝 디바이스 같은 상단 포인트 */
+.device-card::before{
+  content:"";
   position:absolute;
-  top:4.9%;
-  left:5.5%;
-  width:89%;
-  height:85.4%;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:108px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(30,34,46,.08);
+  box-shadow:inset 0 1px 1px rgba(30,34,46,.08);
+  opacity:.7;
+}
+
+/* 실제 이미지 뷰어 */
+.screen{
+  position:relative;
   overflow:hidden;
   border-radius:34px;
-  background:linear-gradient(180deg,#ebf0f6 0%, #e0e7ef 100%);
+  background:
+    linear-gradient(180deg, #e9eef5 0%, #e0e7ef 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.7),
-    inset 0 0 0 1px rgba(0,0,0,.03);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+    inset 0 1px 0 rgba(255,255,255,.8),
+    inset 0 0 0 1px rgba(25,28,43,.05);
 }
 
-/* 슬라이더 */
 .slider{
   width:100%;
-  height:100%;
   overflow:hidden;
-  position:relative;
 }
 
 .track{
   display:flex;
   width:100%;
-  height:100%;
   transition:transform .56s var(--ease);
   will-change:transform;
 }
 
 .slide{
   min-width:100%;
-  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(180deg,#ebf0f6 0%, #e0e7ef 100%);
+  padding:0;
 }
 
+/* 핵심: 이미지 자체를 디바이스처럼 보이게 */
 .slide img{
   width:100%;
-  height:100%;
-  object-fit:contain;
   display:block;
-  background:transparent;
+  object-fit:contain;
+  border-radius:28px;
+  background:#000;
+  box-shadow:
+    0 0 0 1px rgba(20,24,42,.06),
+    0 12px 24px rgba(20,24,42,.08);
 }
 
 /* 인디케이터 */
@@ -252,7 +269,7 @@ body{
   box-shadow:0 4px 12px rgba(31,33,40,.14);
 }
 
-/* 하단 버튼 */
+/* 버튼들 */
 .bottom{
   max-width:920px;
   margin:28px auto 0;
@@ -337,7 +354,7 @@ body{
   font-size:20px;
   letter-spacing:-0.02em;
   box-shadow:
-    0 18px 32px rgba(76, 74, 173, .28),
+    var(--shadow-cta),
     inset 0 1px 0 rgba(255,255,255,.18);
 }
 .main:hover{
@@ -371,9 +388,6 @@ body{
     width:50px;
     height:50px;
   }
-  .phone{
-    width:min(100%, 1000px);
-  }
   .top-copy{
     max-width:96%;
   }
@@ -383,6 +397,17 @@ body{
   .top-sub{
     max-width:94%;
     font-size:16px;
+  }
+  .device-card{
+    width:min(100%, 920px);
+    border-radius:34px;
+    padding:16px;
+  }
+  .screen{
+    border-radius:28px;
+  }
+  .slide img{
+    border-radius:22px;
   }
   .row a{
     font-size:16px;
@@ -420,11 +445,21 @@ body{
     border-top-width:2.5px;
     border-right-width:2.5px;
   }
-  .phone{
-    width:min(100%, 1040px);
+  .device-card{
+    width:min(100%, 1000px);
+    border-radius:26px;
+    padding:12px;
+  }
+  .device-card::before{
+    width:82px;
+    height:6px;
+    top:8px;
   }
   .screen{
     border-radius:20px;
+  }
+  .slide img{
+    border-radius:18px;
   }
   .pager{
     gap:8px;
@@ -438,7 +473,7 @@ body{
     width:22px;
   }
   .row{
-    grid-template-columns:1fr 1fr; /* 모바일도 2개 한 줄 유지 */
+    grid-template-columns:1fr 1fr;
     gap:10px;
   }
   .row a{
@@ -475,8 +510,8 @@ body{
         <span></span>
       </button>
 
-      <div class="phone-stage">
-        <div class="phone">
+      <div class="device-stage">
+        <div class="device-card">
           <div class="screen">
             <div class="slider" id="slider">
               <div class="track" id="track">
