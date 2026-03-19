@@ -1,111 +1,639 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>추가 초대 방법 | Pokémon GO Global</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>추가 초대 및 최대 리모트 인원 | Pokémon GO Global</title>
 <style>
-body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;background:#f5f6f8;color:#222;text-align:center}
-.wrap{max-width:640px;margin:0 auto;padding:40px 20px 60px}
-.breadcrumb{display:inline-block;margin-bottom:18px;color:#666;font-size:14px;text-decoration:none}
-.kicker{display:inline-block;padding:8px 14px;border-radius:999px;background:#edf4ff;color:#3f6fff;font-size:12px;font-weight:700;margin-bottom:14px}
-.title{font-size:30px;font-weight:900;margin-bottom:10px;line-height:1.2}
-.lead{font-size:15px;color:#666;line-height:1.7;margin:0 auto 28px;max-width:560px}
-.slider{position:relative;overflow:hidden}
-.track{display:flex;transition:transform .35s ease}
-.slide{min-width:100%}
-.slide img{width:100%;border-radius:28px;box-shadow:0 20px 40px rgba(0,0,0,0.10);background:#fff}
-.nav{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;transform:translateY(-50%);pointer-events:none}
-.nav button{width:46px;height:46px;border-radius:50%;border:none;background:#fff;box-shadow:0 5px 15px rgba(0,0,0,0.10);cursor:pointer;font-size:20px;pointer-events:auto}
-.dots{margin:18px 0 22px}
-.dots span{width:10px;height:10px;margin:0 4px;display:inline-block;border-radius:50%;background:#ddd;transition:.2s}
-.dots .active{background:#222;width:24px;border-radius:999px}
-.desc{background:#fff;border-radius:22px;box-shadow:0 8px 20px rgba(0,0,0,0.05);padding:22px 18px}
-.desc h2{font-size:22px;margin:0 0 10px;line-height:1.3}
-.desc p{color:#666;line-height:1.7;margin:0}
-.bottom{margin-top:28px}
-.row{display:flex;gap:10px}
-.row a{flex:1;padding:15px 14px;border-radius:14px;background:#fff;text-decoration:none;color:#000;font-weight:600;box-shadow:0 5px 15px rgba(0,0,0,0.05);line-height:1.45}
-.main{margin-top:10px;display:block;padding:16px;border-radius:14px;background:#4a7aff;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 10px 24px rgba(74,122,255,.25)}
-@media(min-width:900px){.wrap{max-width:720px}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+
+:root{
+  --bg1:#fafbfc;
+  --bg2:#f3f5f8;
+  --bg3:#edf1f6;
+
+  --text1:#1d1d1f;
+  --text2:#70757f;
+  --muted:#8f94a0;
+
+  --cta1:#7d71ff;
+  --cta2:#5a4de0;
+  --cta3:#283c94;
+
+  --shadow-card:0 24px 44px rgba(26,31,53,.12);
+  --shadow-cta:0 18px 32px rgba(80,78,177,.28);
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+body{
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+  background:
+    radial-gradient(circle at top, var(--bg1) 0%, var(--bg2) 38%, var(--bg3) 100%);
+  color:var(--text1);
+  text-align:center;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.page{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  padding:28px 16px 46px;
+}
+
+.wrap{
+  width:100%;
+  max-width:1160px;
+  margin:0 auto;
+}
+
+.header-logo{
+  margin:0 0 22px;
+  font-size:14px;
+  font-weight:700;
+  color:var(--muted);
+  letter-spacing:.08em;
+  line-height:1.6;
+}
+
+.top-copy{
+  max-width:960px;
+  margin:0 auto 28px;
+  transition:opacity .32s ease, transform .32s ease;
+}
+.top-copy.is-changing{
+  opacity:.45;
+  transform:translateY(4px);
+}
+
+.top-title{
+  margin:0 0 12px;
+  font-size:clamp(24px, 3vw, 34px);
+  line-height:1.28;
+  font-weight:800;
+  letter-spacing:-0.03em;
+  color:var(--text1);
+  word-break:keep-all;
+}
+
+.top-sub{
+  margin:0 auto;
+  max-width:900px;
+  font-size:clamp(16px, 2vw, 19px);
+  line-height:1.82;
+  color:var(--text2);
+  word-break:keep-all;
+}
+
+.viewer-row{
+  display:grid;
+  grid-template-columns:86px minmax(0,1fr) 86px;
+  align-items:center;
+  gap:16px;
+  max-width:1120px;
+  margin:0 auto;
+}
+
+.side-nav{
+  width:68px;
+  height:68px;
+  border:none;
+  border-radius:999px;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:
+    0 14px 30px rgba(20,24,42,.10),
+    inset 0 1px 0 rgba(255,255,255,.96);
+  cursor:pointer;
+  position:relative;
+  transition:
+    transform .18s ease,
+    box-shadow .24s ease,
+    background .24s ease,
+    opacity .2s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.side-nav:hover{
+  background:rgba(255,255,255,.92);
+  box-shadow:
+    0 18px 34px rgba(20,24,42,.14),
+    inset 0 1px 0 rgba(255,255,255,.98);
+}
+.side-nav:active,
+.side-nav.is-pressed{
+  transform:scale(.94);
+  box-shadow:
+    0 6px 14px rgba(20,24,42,.10),
+    inset 0 2px 8px rgba(20,24,42,.08);
+}
+.side-nav.hidden{
+  visibility:hidden;
+  pointer-events:none;
+  opacity:0;
+}
+.side-nav span{
+  display:block;
+  width:16px;
+  height:16px;
+  border-top:3px solid rgba(38,43,58,.62);
+  border-right:3px solid rgba(38,43,58,.62);
+}
+.side-nav.prev span{
+  transform:rotate(-135deg);
+  margin-left:6px;
+}
+.side-nav.next span{
+  transform:rotate(45deg);
+  margin-right:6px;
+}
+
+.device-stage{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.device-card{
+  position:relative;
+  width:min(100%, 720px);
+  margin:0 auto;
+  border-radius:42px;
+  padding:20px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.52) 100%);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 1px 0 rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.75);
+}
+.device-card::before{
+  content:"";
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:108px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(30,34,46,.08);
+  box-shadow:inset 0 1px 1px rgba(30,34,46,.08);
+  opacity:.7;
+}
+
+.screen{
+  position:relative;
+  overflow:hidden;
+  border-radius:34px;
+  background:
+    linear-gradient(180deg, #e9eef5 0%, #e0e7ef 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.8),
+    inset 0 0 0 1px rgba(25,28,43,.05);
+}
+
+.slider{
+  width:100%;
+  overflow:hidden;
+}
+
+.track{
+  display:flex;
+  width:100%;
+  transition:transform .56s var(--ease);
+  will-change:transform;
+}
+
+.slide{
+  min-width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.slide img{
+  width:100%;
+  display:block;
+  object-fit:contain;
+  border-radius:28px;
+  background:#000;
+  box-shadow:
+    0 0 0 1px rgba(20,24,42,.06),
+    0 12px 24px rgba(20,24,42,.08);
+}
+
+.pager{
+  margin:16px 0 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  user-select:none;
+}
+
+.pager-dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:#cbd1db;
+  transition:all .28s ease;
+}
+.pager-dot.active{
+  width:24px;
+  background:#1f2128;
+  box-shadow:0 4px 12px rgba(31,33,40,.14);
+}
+
+.bottom{
+  max-width:920px;
+  margin:28px auto 0;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.row a,
+.main{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+  transition:
+    transform .18s ease,
+    box-shadow .24s ease,
+    opacity .2s ease;
+}
+
+.row a::before,
+.main::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.30) 46%, transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .72s ease;
+  pointer-events:none;
+}
+.row a:hover::before,
+.main:hover::before{
+  transform:translateX(120%);
+}
+
+.row a:active,
+.row a.is-pressed,
+.main:active,
+.main.is-pressed{
+  transform:scale(.985);
+}
+
+.row a{
+  min-height:68px;
+  padding:16px 18px;
+  border-radius:20px;
+  background:rgba(255,255,255,.78);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  color:#1d1f26;
+  font-weight:700;
+  font-size:18px;
+  line-height:1.35;
+  box-shadow:
+    0 12px 28px rgba(28,34,56,.06),
+    inset 0 1px 0 rgba(255,255,255,.98);
+  word-break:keep-all;
+}
+
+.main{
+  margin-top:14px;
+  width:100%;
+  min-height:72px;
+  padding:18px 22px;
+  border-radius:22px;
+  background:linear-gradient(135deg, var(--cta1) 0%, var(--cta2) 46%, var(--cta3) 100%);
+  color:#fff;
+  font-weight:800;
+  font-size:20px;
+  letter-spacing:-0.02em;
+  box-shadow:
+    var(--shadow-cta),
+    inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.ripple{
+  position:absolute;
+  border-radius:999px;
+  transform:translate(-50%, -50%);
+  background:rgba(255,255,255,.24);
+  pointer-events:none;
+  animation:rippleAnim .55s ease-out forwards;
+}
+@keyframes rippleAnim{
+  0%{width:0;height:0;opacity:.55}
+  100%{width:220px;height:220px;opacity:0}
+}
+
+@media (min-width:1024px){
+  .device-card{
+    width:720px;
+  }
+}
+
+@media (max-width:900px){
+  .viewer-row{
+    grid-template-columns:58px minmax(0,1fr) 58px;
+    gap:10px;
+  }
+  .side-nav{
+    width:50px;
+    height:50px;
+  }
+  .top-copy{
+    max-width:96%;
+  }
+  .top-title{
+    font-size:clamp(22px, 5vw, 30px);
+  }
+  .top-sub{
+    max-width:94%;
+    font-size:16px;
+  }
+  .device-card{
+    width:min(100%, 920px);
+    border-radius:34px;
+    padding:16px;
+  }
+  .screen{
+    border-radius:28px;
+  }
+  .slide img{
+    border-radius:22px;
+  }
+  .row a{
+    font-size:16px;
+    min-height:62px;
+  }
+  .main{
+    min-height:66px;
+    font-size:18px;
+  }
+}
+
+@media (max-width:640px){
+  .page{
+    padding:20px 12px 34px;
+  }
+  .header-logo{
+    margin-bottom:16px;
+    font-size:13px;
+  }
+  .top-copy{
+    margin-bottom:20px;
+  }
+  .viewer-row{
+    grid-template-columns:44px minmax(0,1fr) 44px;
+    gap:8px;
+  }
+  .side-nav{
+    width:42px;
+    height:42px;
+  }
+  .side-nav span{
+    width:12px;
+    height:12px;
+    border-top-width:2.5px;
+    border-right-width:2.5px;
+  }
+  .device-card{
+    width:min(100%, 1000px);
+    border-radius:26px;
+    padding:12px;
+  }
+  .device-card::before{
+    width:82px;
+    height:6px;
+    top:8px;
+  }
+  .screen{
+    border-radius:20px;
+  }
+  .slide img{
+    border-radius:18px;
+  }
+  .pager{
+    gap:8px;
+    margin-top:12px;
+  }
+  .pager-dot{
+    width:9px;
+    height:9px;
+  }
+  .pager-dot.active{
+    width:22px;
+  }
+  .row{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .row a{
+    min-height:56px;
+    padding:12px 10px;
+    font-size:14px;
+    border-radius:16px;
+  }
+  .main{
+    margin-top:12px;
+    min-height:60px;
+    padding:16px 14px;
+    font-size:17px;
+    border-radius:18px;
+  }
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a href="index.html" class="breadcrumb">← 메인으로 돌아가기</a>
-  <div class="kicker">주최자 가이드</div>
-  <div class="title">추가 초대 방법</div>
-  <p class="lead">첫 초대 이후 일정 시간이 지나면 추가 초대가 가능합니다. 리모트 인원 규칙도 함께 확인해 주세요.</p>
+<div class="page">
+  <div class="wrap">
+    <div class="header-logo">Pokémon GO Global 🌏</div>
 
-  <div class="slider" id="slider">
-    <div class="track" id="track">
-      <div class="slide"><img src="images/host-invite-more-01.jpg" alt="1. 첫 5명 초대"></div>
-      <div class="slide"><img src="images/host-invite-more-02.jpg" alt="2. 버튼 재활성화 확인"></div>
-      <div class="slide"><img src="images/host-invite-more-03.jpg" alt="3. 리모트 인원 규칙"></div>
+<div class="top-copy" id="topCopy">
+  <h2 class="top-title" id="titleText">1. 초대 최대 5명</h2>
+  <p class="top-sub" id="descText">
+    친구 초대 버튼을 눌러<br>
+    먼저 최대 5명까지 초대해 주세요.
+  </p>
+</div>
+
+    <div class="viewer-row">
+      <button class="side-nav prev" id="prevBtn" type="button" aria-label="이전 이미지">
+        <span></span>
+      </button>
+
+      <div class="device-stage">
+        <div class="device-card">
+          <div class="screen">
+            <div class="slider" id="slider">
+<div class="track" id="track">
+  <div class="slide"><img src="images/host-invite-more-01.jpg" alt="1. 초대 최대 5명"></div>
+  <div class="slide"><img src="images/host-invite-more-02.jpg" alt="2. 초대버튼 재활성화"></div>
+  <div class="slide"><img src="images/host-invite-more-03.jpg" alt="3. 리모트 인원 제한"></div>
+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="side-nav next" id="nextBtn" type="button" aria-label="다음 이미지">
+        <span></span>
+      </button>
     </div>
-    <div class="nav">
-      <button onclick="prev()">‹</button>
-      <button onclick="next()">›</button>
+
+    <div class="pager" id="pager"></div>
+
+    <div class="bottom">
+      <div class="row">
+<div class="row">
+  <a href="host-mention.html" class="pressable">이전 가이드 : 멘션 사용 안내</a>
+  <a href="host-finish.html" class="pressable">다음 가이드 : 레이드 마무리</a>
+</div>
+      <a href="index.html" class="main pressable">메인으로 돌아가기</a>
     </div>
-  </div>
-
-  <div class="dots">
-    <span class="active"></span>
-    <span></span>
-    <span></span>
-  </div>
-
-  <div class="desc">
-    <h2 id="title">1. 첫 5명 초대</h2>
-    <p id="text">친구 초대 버튼을 눌러 먼저 최대 5명까지 초대합니다.</p>
-  </div>
-
-  <div class="bottom">
-    <div class="row">
-      <a href="host-private-room.html">이전 가이드 : 비밀방 생성</a>
-      <a href="participant-join.html">다음 가이드 : 레이드 참여</a>
-    </div>
-    <a href="index.html" class="main">메인으로 돌아가기</a>
   </div>
 </div>
 
 <script>
-
 let index = 0;
 const track = document.getElementById("track");
-const dots = document.querySelectorAll(".dots span");
-const titles = ["1. 첫 5명 초대", "2. 버튼 재활성화 확인", "3. 리모트 인원 규칙"];
-const texts = ["친구 초대 버튼을 눌러 먼저 최대 5명까지 초대합니다.", "초대 후 버튼이 잠시 비활성화되며, 약 40~50초 후 다시 활성화되면 추가 초대가 가능합니다.", "리모트 최대 인원은 10명입니다. 본인도 리모트 참여 중이면 최대 9명까지만 추가 리모트 인원이 들어올 수 있습니다."];
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const pager = document.getElementById("pager");
+const topCopy = document.getElementById("topCopy");
+const titleEl = document.getElementById("titleText");
+const descEl = document.getElementById("descText");
+
+const titles = [
+  "1. 초대 최대 5명",
+  "2. 초대버튼 재활성화",
+  "3. 리모트 인원 제한"
+];
+
+const texts = [
+  "친구 초대 버튼을 눌러<br>먼저 최대 5명까지 초대해 주세요.",
+  "5명을 초대하면 초대 버튼이 잠시 비활성화됩니다.<br>약 40~50초 후 재활성화시 추가 초대가 가능합니다."
+  "리모트한도는 레이드당 10명입니다. 주최자 본인도<br>리모트 사용시 주최자 제외 9명까지만 리모트로 입장 가능합니다."
+];
+  
 const total = titles.length;
+
+function renderPager(){
+  pager.innerHTML = "";
+  for(let i = 0; i < total; i++){
+    const dot = document.createElement("span");
+    dot.className = "pager-dot" + (i === index ? " active" : "");
+    pager.appendChild(dot);
+  }
+}
+
+function updateText(){
+  topCopy.classList.add("is-changing");
+  setTimeout(() => {
+    titleEl.innerText = titles[index];
+    descEl.innerHTML = texts[index];
+    topCopy.classList.remove("is-changing");
+  }, 130);
+}
 
 function update(){
   track.style.transform = `translateX(-${index * 100}%)`;
-  dots.forEach(d=>d.classList.remove("active"));
-  dots[index].classList.add("active");
-  document.getElementById("title").innerText = titles[index];
-  document.getElementById("text").innerText = texts[index];
+  updateText();
+  prevBtn.classList.toggle("hidden", index === 0);
+  nextBtn.classList.toggle("hidden", index === total - 1);
+  renderPager();
 }
-function next(){ index = (index + 1) % total; update(); }
-function prev(){ index = (index - 1 + total) % total; update(); }
+
+function next(){
+  if(index >= total - 1) return;
+  index++;
+  update();
+}
+
+function prev(){
+  if(index <= 0) return;
+  index--;
+  update();
+}
+
+prevBtn.addEventListener("click", prev);
+nextBtn.addEventListener("click", next);
 
 let startX = 0;
 let isDown = false;
 const slider = document.getElementById("slider");
-slider.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, {passive:true});
+
+slider.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+}, { passive:true });
+
 slider.addEventListener("touchend", e => {
   const endX = e.changedTouches[0].clientX;
-  if(startX - endX > 50) next();
-  else if(endX - startX > 50) prev();
-}, {passive:true});
-slider.addEventListener("mousedown", e => { isDown = true; startX = e.clientX; });
+  if(startX - endX > 50 && index < total - 1) next();
+  else if(endX - startX > 50 && index > 0) prev();
+}, { passive:true });
+
+slider.addEventListener("mousedown", e => {
+  isDown = true;
+  startX = e.clientX;
+});
+
 document.addEventListener("mouseup", e => {
   if(!isDown) return;
   isDown = false;
   const endX = e.clientX;
-  if(startX - endX > 50) next();
-  else if(endX - startX > 50) prev();
+  if(startX - endX > 50 && index < total - 1) next();
+  else if(endX - startX > 50 && index > 0) prev();
 });
 
+function addRipple(el, e){
+  const rect = el.getBoundingClientRect();
+  const ripple = document.createElement("span");
+  ripple.className = "ripple";
+  const x = e ? (e.clientX - rect.left) : rect.width / 2;
+  const y = e ? (e.clientY - rect.top) : rect.height / 2;
+  ripple.style.left = x + "px";
+  ripple.style.top = y + "px";
+  el.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 550);
+}
+
+document.querySelectorAll(".pressable, .side-nav").forEach(el => {
+  el.addEventListener("pointerdown", (e) => {
+    el.classList.add("is-pressed");
+    addRipple(el, e);
+  });
+  el.addEventListener("pointerup", () => {
+    setTimeout(() => el.classList.remove("is-pressed"), 90);
+  });
+  el.addEventListener("pointerleave", () => {
+    el.classList.remove("is-pressed");
+  });
+});
+
+update();
 </script>
 </body>
 </html>
