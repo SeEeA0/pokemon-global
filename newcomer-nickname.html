@@ -14,23 +14,19 @@ body{
   text-align:center;
 }
 
-/* 전체 래퍼 */
 .page{
   min-height:100vh;
   display:flex;
-  align-items:center;
   justify-content:center;
   padding:36px 20px 44px;
 }
 
-/* 기존 상세 컨텐츠 전체 */
 .wrap{
   width:100%;
-  max-width:1280px;
+  max-width:980px;
   margin:0 auto;
 }
 
-/* 상단 영역 */
 .breadcrumb{
   display:inline-block;
   margin-bottom:18px;
@@ -63,29 +59,28 @@ body{
   font-size:15px;
   color:#666;
   line-height:1.7;
-  margin:0 auto 30px;
+  margin:0 auto 28px;
   max-width:560px;
   word-break:keep-all;
 }
 
-/* 핸드폰 뷰어 + 좌우 버튼 */
+/* 핸드폰 + 좌우버튼 */
 .viewer-row{
   display:grid;
   grid-template-columns:72px minmax(0,1fr) 72px;
   align-items:center;
-  gap:18px;
+  gap:20px;
+  max-width:900px;
   margin:0 auto;
-  max-width:1180px;
 }
 
-/* 좌우 바깥 버튼 */
 .side-nav{
   width:64px;
   height:64px;
   border:none;
   border-radius:999px;
-  background:rgba(255,255,255,.82);
-  box-shadow:0 10px 26px rgba(0,0,0,.08);
+  background:rgba(255,255,255,.92);
+  box-shadow:0 10px 24px rgba(0,0,0,.10);
   cursor:pointer;
   position:relative;
   transition:.22s ease;
@@ -96,9 +91,8 @@ body{
 .side-nav:hover{
   transform:translateY(-1px);
   background:#fff;
-  box-shadow:0 14px 30px rgba(0,0,0,.12);
+  box-shadow:0 14px 30px rgba(0,0,0,.14);
 }
-.side-nav:active{transform:translateY(0)}
 .side-nav span{
   display:block;
   width:16px;
@@ -112,36 +106,32 @@ body{
 /* 핸드폰 프레임 */
 .phone-stage{
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 }
 
 .phone{
   position:relative;
-  width:min(100%, 650px);
-  aspect-ratio:780 / 1420;
-  margin:0 auto;
-  border-radius:56px;
-  padding:24px;
-  background:
-    linear-gradient(180deg,#fdfdfd 0%,#f7f7f8 100%);
+  width:min(100%, 620px);
+  aspect-ratio:780 / 1450;
+  border-radius:58px;
+  padding:22px;
+  background:linear-gradient(180deg,#fdfdfd 0%,#f6f6f7 100%);
   box-shadow:
-    0 24px 60px rgba(0,0,0,.12),
-    inset 0 2px 0 rgba(255,255,255,.9),
+    0 26px 60px rgba(0,0,0,.12),
+    inset 0 2px 0 rgba(255,255,255,.95),
     inset 0 -2px 0 rgba(0,0,0,.03);
 }
 
-/* 외곽 라인 */
 .phone::before{
   content:"";
   position:absolute;
-  inset:12px;
-  border-radius:46px;
+  inset:11px;
+  border-radius:48px;
   border:1px solid rgba(0,0,0,.05);
   pointer-events:none;
 }
 
-/* 상단 스피커 */
 .phone::after{
   content:"";
   position:absolute;
@@ -156,132 +146,83 @@ body{
   pointer-events:none;
 }
 
-/* 실제 화면 */
+/* 폰 내부는 이미지만 */
 .phone-screen{
   position:relative;
   width:100%;
   height:100%;
-  border-radius:38px;
+  border-radius:40px;
   overflow:hidden;
-  background:#dbe7f2;
+  background:#d8e3ee;
   box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
   display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
-}
-
-/* 화면 내부의 슬라이더 */
-.slider-wrap{
-  padding:18px 16px 16px;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
 }
 
 .slider{
   position:relative;
+  width:100%;
+  height:100%;
   overflow:hidden;
   border-radius:30px;
-  background:#d3e1ec;
-  box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+  background:#d3deea;
 }
 
 .track{
   display:flex;
+  width:100%;
+  height:100%;
   transition:transform .35s ease;
 }
 
 .slide{
   min-width:100%;
+  height:100%;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:10px;
-  background:#d3e1ec;
+  padding:0;
 }
 
-/* 이미지가 절대 잘리지 않게 */
+/* 핵심: 이미지 안 잘리게 */
 .slide img{
   width:100%;
-  height:auto;
-  max-height:980px;
+  height:100%;
   object-fit:contain;
   display:block;
-  border-radius:26px;
-  box-shadow:0 20px 40px rgba(0,0,0,0.10);
-  background:#fff;
+  background:#d3deea;
 }
 
-/* 폰 안쪽 작은 화살표 */
-.nav{
-  position:absolute;
-  inset:0;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:0 12px;
-  pointer-events:none;
-}
-.nav button{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  border:none;
-  background:rgba(255,255,255,.92);
-  box-shadow:0 8px 18px rgba(0,0,0,.10);
-  cursor:pointer;
-  font-size:20px;
-  pointer-events:auto;
-  transition:.2s ease;
-}
-.nav button:hover{
-  background:#fff;
-  transform:translateY(-1px);
+/* 폰 아래 설명 */
+.info-area{
+  max-width:760px;
+  margin:26px auto 0;
 }
 
-/* 점 표시 */
-.dots{
-  margin:16px 0 18px;
-}
-.dots span{
-  width:10px;
-  height:10px;
-  margin:0 4px;
-  display:inline-block;
-  border-radius:50%;
-  background:#c9d0d8;
-  transition:.2s;
-}
-.dots .active{
-  background:#222;
-  width:24px;
-  border-radius:999px;
-}
-
-/* 설명 박스 */
 .desc{
-  margin:0 16px 18px;
-  background:rgba(255,255,255,.96);
+  background:#fff;
   border-radius:24px;
-  box-shadow:0 10px 24px rgba(0,0,0,0.06);
-  padding:24px 20px;
+  box-shadow:0 10px 24px rgba(0,0,0,.06);
+  padding:26px 22px;
 }
 .desc h2{
   font-size:22px;
-  margin:0 0 10px;
+  margin:0 0 12px;
   line-height:1.35;
   letter-spacing:-0.02em;
 }
 .desc p{
   color:#666;
-  line-height:1.7;
+  line-height:1.8;
   margin:0;
   word-break:keep-all;
 }
 
-/* 하단 버튼 영역 */
+/* 하단 버튼 */
 .bottom{
-  margin-top:28px;
-  max-width:760px;
-  margin-left:auto;
-  margin-right:auto;
+  margin-top:18px;
 }
 .row{
   display:flex;
@@ -295,21 +236,20 @@ body{
   text-decoration:none;
   color:#000;
   font-weight:600;
-  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+  box-shadow:0 8px 20px rgba(0,0,0,.05);
   line-height:1.45;
   transition:.22s ease;
 }
 .row a:hover{
   transform:translateY(-1px);
-  box-shadow:0 12px 24px rgba(0,0,0,0.08);
+  box-shadow:0 12px 24px rgba(0,0,0,.08);
 }
+
 .main{
   margin-top:12px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-width:220px;
-  padding:16px 24px;
+  display:block;
+  width:100%;
+  padding:16px 20px;
   border-radius:16px;
   background:#4a7aff;
   color:#fff;
@@ -323,21 +263,7 @@ body{
   box-shadow:0 16px 30px rgba(74,122,255,.30);
 }
 
-/* 반응형 */
-@media (max-width:1024px){
-  .viewer-row{
-    grid-template-columns:56px minmax(0,1fr) 56px;
-    gap:12px;
-  }
-  .side-nav{
-    width:52px;
-    height:52px;
-  }
-  .phone{
-    max-width:560px;
-  }
-}
-
+/* 모바일 */
 @media (max-width:768px){
   .page{
     padding:22px 12px 30px;
@@ -347,51 +273,63 @@ body{
   }
   .lead{
     font-size:14px;
-    margin-bottom:24px;
+    margin-bottom:22px;
   }
   .viewer-row{
-    grid-template-columns:1fr;
-    gap:12px;
+    grid-template-columns:44px minmax(0,1fr) 44px;
+    gap:8px;
   }
   .side-nav{
-    display:none;
+    width:42px;
+    height:42px;
+  }
+  .side-nav span{
+    width:12px;
+    height:12px;
+    border-top-width:2.5px;
+    border-right-width:2.5px;
   }
   .phone{
-    width:min(100%, 520px);
     border-radius:42px;
-    padding:18px;
+    padding:16px;
   }
   .phone::before{
-    inset:9px;
+    inset:8px;
     border-radius:34px;
   }
   .phone::after{
-    top:13px;
-    width:86px;
+    top:12px;
+    width:84px;
     height:8px;
   }
   .phone-screen{
     border-radius:28px;
+    padding:12px;
   }
-  .slider-wrap{
-    padding:14px 12px 12px;
+  .slider{
+    border-radius:22px;
+  }
+  .info-area{
+    margin-top:20px;
   }
   .desc{
-    margin:0 12px 14px;
     padding:20px 16px;
+    border-radius:20px;
   }
   .desc h2{
     font-size:20px;
   }
   .row{
-    flex-direction:column;
+    flex-direction:row;
+    gap:10px;
   }
-  .main{
-    width:100%;
+  .row a{
+    font-size:14px;
+    padding:14px 10px;
   }
 }
 
-@media (max-width:480px){
+@media (max-width:520px){
   .wrap{
     max-width:100%;
   }
@@ -401,19 +339,19 @@ body{
   .title{
     font-size:23px;
   }
-  .slide{
-    padding:8px;
+  .viewer-row{
+    grid-template-columns:38px minmax(0,1fr) 38px;
+    gap:6px;
   }
-  .slide img{
-    border-radius:20px;
-  }
-  .nav{
-    padding:0 8px;
-  }
-  .nav button{
+  .side-nav{
     width:38px;
     height:38px;
-    font-size:18px;
+  }
+  .desc p{
+    font-size:15px;
+  }
+  .row{
+    flex-direction:column;
   }
 }
 </style>
@@ -434,32 +372,13 @@ body{
       <div class="phone-stage">
         <div class="phone">
           <div class="phone-screen">
-            <div class="slider-wrap">
-              <div class="slider" id="slider">
-                <div class="track" id="track">
-                  <div class="slide"><img src="images/newcomer-nickname-01.jpg" alt="1. 프로필 편집으로 이동"></div>
-                  <div class="slide"><img src="images/newcomer-nickname-02.jpg" alt="2. 닉네임 형식 입력"></div>
-                  <div class="slide"><img src="images/newcomer-nickname-03.jpg" alt="3. 한글 닉네임 설정"></div>
-                  <div class="slide"><img src="images/newcomer-nickname-04.jpg" alt="4. 개인정보 일부 가리기"></div>
-                </div>
-
-                <div class="nav">
-                  <button type="button" onclick="prev()" aria-label="이전">‹</button>
-                  <button type="button" onclick="next()" aria-label="다음">›</button>
-                </div>
+            <div class="slider" id="slider">
+              <div class="track" id="track">
+                <div class="slide"><img src="images/newcomer-nickname-01.jpg" alt="1. 프로필 편집으로 이동"></div>
+                <div class="slide"><img src="images/newcomer-nickname-02.jpg" alt="2. 닉네임 형식 입력"></div>
+                <div class="slide"><img src="images/newcomer-nickname-03.jpg" alt="3. 한글 닉네임 설정"></div>
+                <div class="slide"><img src="images/newcomer-nickname-04.jpg" alt="4. 개인정보 일부 가리기"></div>
               </div>
-            </div>
-
-            <div class="dots">
-              <span class="active"></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-
-            <div class="desc">
-              <h2 id="title">1. 프로필 편집으로 이동</h2>
-              <p id="text">오픈채팅방 우측 상단 햄버거버튼을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.</p>
             </div>
           </div>
         </div>
@@ -470,12 +389,19 @@ body{
       </button>
     </div>
 
-    <div class="bottom">
-      <div class="row">
-        <a href="newcomer.html">이전 가이드 : 신입 가이드 목록</a>
-        <a href="newcomer-chat.html">다음 가이드 : 채팅 규칙</a>
+    <div class="info-area">
+      <div class="desc">
+        <h2 id="titleText">1. 햄버거 버튼을 클릭</h2>
+        <p id="descText">오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.</p>
       </div>
-      <a href="index.html" class="main">메인으로 돌아가기</a>
+
+      <div class="bottom">
+        <div class="row">
+          <a href="newcomer.html">이전 가이드 : 신입 가이드 목록</a>
+          <a href="newcomer-chat.html">다음 가이드 : 채팅 규칙</a>
+        </div>
+        <a href="index.html" class="main">메인으로 돌아가기</a>
+      </div>
     </div>
   </div>
 </div>
@@ -483,7 +409,6 @@ body{
 <script>
 let index = 0;
 const track = document.getElementById("track");
-const dots = document.querySelectorAll(".dots span");
 const titles = [
   "1. 햄버거 버튼을 클릭",
   "2. 프로필 수정",
@@ -500,10 +425,8 @@ const total = titles.length;
 
 function update(){
   track.style.transform = `translateX(-${index * 100}%)`;
-  dots.forEach(d => d.classList.remove("active"));
-  dots[index].classList.add("active");
-  document.getElementById("title").innerText = titles[index];
-  document.getElementById("text").innerText = texts[index];
+  document.getElementById("titleText").innerText = titles[index];
+  document.getElementById("descText").innerText = texts[index];
 }
 
 function next(){
@@ -543,6 +466,8 @@ document.addEventListener("mouseup", e => {
   if(startX - endX > 50) next();
   else if(endX - startX > 50) prev();
 });
+
+update();
 </script>
 </body>
 </html>
