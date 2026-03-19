@@ -572,6 +572,96 @@ a{
     line-height:1.7;
   }
 }
+  /* mobile-friendly entrance motion */
+.hero-card,
+.main-cta,
+.section,
+.qna{
+  opacity:0;
+  transform:translateY(14px);
+}
+
+body.is-ready .hero-card{
+  animation:fadeUpSoft .65s var(--ease) .05s forwards;
+}
+body.is-ready .main-cta{
+  animation:fadeUpSoft .65s var(--ease) .12s forwards;
+}
+body.is-ready .section{
+  animation:fadeUpSoft .65s var(--ease) .18s forwards;
+}
+body.is-ready .qna{
+  animation:fadeUpSoft .65s var(--ease) .24s forwards;
+}
+
+/* cards stagger */
+body.is-ready .card:nth-child(1){
+  animation:fadeUpSoft .55s var(--ease) .22s forwards;
+}
+body.is-ready .card:nth-child(2){
+  animation:fadeUpSoft .55s var(--ease) .28s forwards;
+}
+body.is-ready .card:nth-child(3){
+  animation:fadeUpSoft .55s var(--ease) .34s forwards;
+}
+
+/* very soft button glow */
+.main-cta a{
+  animation:ctaSoftGlow 2.6s ease-in-out infinite;
+}
+
+@keyframes fadeUpSoft{
+  from{
+    opacity:0;
+    transform:translateY(14px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes ctaSoftGlow{
+  0%,100%{
+    box-shadow:
+      var(--shadow-cta),
+      0 0 0 1px rgba(255,255,255,.10) inset,
+      0 0 10px rgba(95,88,228,.08);
+  }
+  50%{
+    box-shadow:
+      0 16px 28px rgba(67,74,176,.24),
+      0 0 0 1px rgba(255,255,255,.10) inset,
+      0 0 18px rgba(95,88,228,.14);
+  }
+}
+
+/* mobile performance tuning */
+@media (max-width:640px){
+  .card,
+  .qna-item,
+  .main-cta a{
+    will-change:transform, opacity;
+  }
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+  }
+
+  .hero-card,
+  .main-cta,
+  .section,
+  .qna{
+    opacity:1 !important;
+    transform:none !important;
+  }
+}
 </style>
 </head>
 
@@ -746,7 +836,10 @@ document.querySelectorAll('.qna-question').forEach(button => {
     item.classList.toggle('active');
   });
 });
-</script>
 
+window.addEventListener('load', () => {
+  document.body.classList.add('is-ready');
+});
+</script>
 </body>
 </html>
