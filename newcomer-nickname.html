@@ -5,101 +5,537 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>닉네임 설정 | Pokémon GO Global</title>
 <style>
-body{margin:0;font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;background:#f5f6f8;color:#222;text-align:center}
-.wrap{max-width:640px;margin:0 auto;padding:40px 20px 60px}
-.breadcrumb{display:inline-block;margin-bottom:18px;color:#666;font-size:14px;text-decoration:none}
-.kicker{display:inline-block;padding:8px 14px;border-radius:999px;background:#edf4ff;color:#3f6fff;font-size:12px;font-weight:700;margin-bottom:14px}
-.title{font-size:30px;font-weight:900;margin-bottom:10px;line-height:1.2}
-.lead{font-size:15px;color:#666;line-height:1.7;margin:0 auto 28px;max-width:560px}
-.slider{position:relative;overflow:hidden}
-.track{display:flex;transition:transform .35s ease}
-.slide{min-width:100%}
-.slide img{width:100%;border-radius:28px;box-shadow:0 20px 40px rgba(0,0,0,0.10);background:#fff}
-.nav{position:absolute;top:50%;width:100%;display:flex;justify-content:space-between;transform:translateY(-50%);pointer-events:none}
-.nav button{width:46px;height:46px;border-radius:50%;border:none;background:#fff;box-shadow:0 5px 15px rgba(0,0,0,0.10);cursor:pointer;font-size:20px;pointer-events:auto}
-.dots{margin:18px 0 22px}
-.dots span{width:10px;height:10px;margin:0 4px;display:inline-block;border-radius:50%;background:#ddd;transition:.2s}
-.dots .active{background:#222;width:24px;border-radius:999px}
-.desc{background:#fff;border-radius:22px;box-shadow:0 8px 20px rgba(0,0,0,0.05);padding:22px 18px}
-.desc h2{font-size:22px;margin:0 0 10px;line-height:1.3}
-.desc p{color:#666;line-height:1.7;margin:0}
-.bottom{margin-top:28px}
-.row{display:flex;gap:10px}
-.row a{flex:1;padding:15px 14px;border-radius:14px;background:#fff;text-decoration:none;color:#000;font-weight:600;box-shadow:0 5px 15px rgba(0,0,0,0.05);line-height:1.45}
-.main{margin-top:10px;display:block;padding:16px;border-radius:14px;background:#4a7aff;color:#fff;text-decoration:none;font-weight:700;box-shadow:0 10px 24px rgba(74,122,255,.25)}
-@media(min-width:900px){.wrap{max-width:720px}}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+  background:#f3f4f6;
+  color:#222;
+  text-align:center;
+}
+
+/* 전체 래퍼 */
+.page{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:36px 20px 44px;
+}
+
+/* 기존 상세 컨텐츠 전체 */
+.wrap{
+  width:100%;
+  max-width:1280px;
+  margin:0 auto;
+}
+
+/* 상단 영역 */
+.breadcrumb{
+  display:inline-block;
+  margin-bottom:18px;
+  color:#666;
+  font-size:14px;
+  text-decoration:none;
+}
+.breadcrumb:hover{color:#222}
+
+.kicker{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  background:#edf4ff;
+  color:#3f6fff;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+
+.title{
+  font-size:30px;
+  font-weight:900;
+  margin-bottom:10px;
+  line-height:1.2;
+  letter-spacing:-0.03em;
+}
+
+.lead{
+  font-size:15px;
+  color:#666;
+  line-height:1.7;
+  margin:0 auto 30px;
+  max-width:560px;
+  word-break:keep-all;
+}
+
+/* 핸드폰 뷰어 + 좌우 버튼 */
+.viewer-row{
+  display:grid;
+  grid-template-columns:72px minmax(0,1fr) 72px;
+  align-items:center;
+  gap:18px;
+  margin:0 auto;
+  max-width:1180px;
+}
+
+/* 좌우 바깥 버튼 */
+.side-nav{
+  width:64px;
+  height:64px;
+  border:none;
+  border-radius:999px;
+  background:rgba(255,255,255,.82);
+  box-shadow:0 10px 26px rgba(0,0,0,.08);
+  cursor:pointer;
+  position:relative;
+  transition:.22s ease;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.side-nav:hover{
+  transform:translateY(-1px);
+  background:#fff;
+  box-shadow:0 14px 30px rgba(0,0,0,.12);
+}
+.side-nav:active{transform:translateY(0)}
+.side-nav span{
+  display:block;
+  width:16px;
+  height:16px;
+  border-top:3px solid rgba(0,0,0,.58);
+  border-right:3px solid rgba(0,0,0,.58);
+}
+.side-nav.prev span{transform:rotate(-135deg);margin-left:6px}
+.side-nav.next span{transform:rotate(45deg);margin-right:6px}
+
+/* 핸드폰 프레임 */
+.phone-stage{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.phone{
+  position:relative;
+  width:min(100%, 650px);
+  aspect-ratio:780 / 1420;
+  margin:0 auto;
+  border-radius:56px;
+  padding:24px;
+  background:
+    linear-gradient(180deg,#fdfdfd 0%,#f7f7f8 100%);
+  box-shadow:
+    0 24px 60px rgba(0,0,0,.12),
+    inset 0 2px 0 rgba(255,255,255,.9),
+    inset 0 -2px 0 rgba(0,0,0,.03);
+}
+
+/* 외곽 라인 */
+.phone::before{
+  content:"";
+  position:absolute;
+  inset:12px;
+  border-radius:46px;
+  border:1px solid rgba(0,0,0,.05);
+  pointer-events:none;
+}
+
+/* 상단 스피커 */
+.phone::after{
+  content:"";
+  position:absolute;
+  top:18px;
+  left:50%;
+  transform:translateX(-50%);
+  width:110px;
+  height:10px;
+  border-radius:999px;
+  background:rgba(0,0,0,.08);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.08);
+  pointer-events:none;
+}
+
+/* 실제 화면 */
+.phone-screen{
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:38px;
+  overflow:hidden;
+  background:#dbe7f2;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+
+/* 화면 내부의 슬라이더 */
+.slider-wrap{
+  padding:18px 16px 16px;
+}
+
+.slider{
+  position:relative;
+  overflow:hidden;
+  border-radius:30px;
+  background:#d3e1ec;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+}
+
+.track{
+  display:flex;
+  transition:transform .35s ease;
+}
+
+.slide{
+  min-width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px;
+  background:#d3e1ec;
+}
+
+/* 이미지가 절대 잘리지 않게 */
+.slide img{
+  width:100%;
+  height:auto;
+  max-height:980px;
+  object-fit:contain;
+  display:block;
+  border-radius:26px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.10);
+  background:#fff;
+}
+
+/* 폰 안쪽 작은 화살표 */
+.nav{
+  position:absolute;
+  inset:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 12px;
+  pointer-events:none;
+}
+.nav button{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 8px 18px rgba(0,0,0,.10);
+  cursor:pointer;
+  font-size:20px;
+  pointer-events:auto;
+  transition:.2s ease;
+}
+.nav button:hover{
+  background:#fff;
+  transform:translateY(-1px);
+}
+
+/* 점 표시 */
+.dots{
+  margin:16px 0 18px;
+}
+.dots span{
+  width:10px;
+  height:10px;
+  margin:0 4px;
+  display:inline-block;
+  border-radius:50%;
+  background:#c9d0d8;
+  transition:.2s;
+}
+.dots .active{
+  background:#222;
+  width:24px;
+  border-radius:999px;
+}
+
+/* 설명 박스 */
+.desc{
+  margin:0 16px 18px;
+  background:rgba(255,255,255,.96);
+  border-radius:24px;
+  box-shadow:0 10px 24px rgba(0,0,0,0.06);
+  padding:24px 20px;
+}
+.desc h2{
+  font-size:22px;
+  margin:0 0 10px;
+  line-height:1.35;
+  letter-spacing:-0.02em;
+}
+.desc p{
+  color:#666;
+  line-height:1.7;
+  margin:0;
+  word-break:keep-all;
+}
+
+/* 하단 버튼 영역 */
+.bottom{
+  margin-top:28px;
+  max-width:760px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.row{
+  display:flex;
+  gap:12px;
+}
+.row a{
+  flex:1;
+  padding:15px 14px;
+  border-radius:16px;
+  background:#fff;
+  text-decoration:none;
+  color:#000;
+  font-weight:600;
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+  line-height:1.45;
+  transition:.22s ease;
+}
+.row a:hover{
+  transform:translateY(-1px);
+  box-shadow:0 12px 24px rgba(0,0,0,0.08);
+}
+.main{
+  margin-top:12px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:220px;
+  padding:16px 24px;
+  border-radius:16px;
+  background:#4a7aff;
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  box-shadow:0 12px 28px rgba(74,122,255,.25);
+  transition:.22s ease;
+}
+.main:hover{
+  transform:translateY(-1px);
+  box-shadow:0 16px 30px rgba(74,122,255,.30);
+}
+
+/* 반응형 */
+@media (max-width:1024px){
+  .viewer-row{
+    grid-template-columns:56px minmax(0,1fr) 56px;
+    gap:12px;
+  }
+  .side-nav{
+    width:52px;
+    height:52px;
+  }
+  .phone{
+    max-width:560px;
+  }
+}
+
+@media (max-width:768px){
+  .page{
+    padding:22px 12px 30px;
+  }
+  .title{
+    font-size:26px;
+  }
+  .lead{
+    font-size:14px;
+    margin-bottom:24px;
+  }
+  .viewer-row{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .side-nav{
+    display:none;
+  }
+  .phone{
+    width:min(100%, 520px);
+    border-radius:42px;
+    padding:18px;
+  }
+  .phone::before{
+    inset:9px;
+    border-radius:34px;
+  }
+  .phone::after{
+    top:13px;
+    width:86px;
+    height:8px;
+  }
+  .phone-screen{
+    border-radius:28px;
+  }
+  .slider-wrap{
+    padding:14px 12px 12px;
+  }
+  .desc{
+    margin:0 12px 14px;
+    padding:20px 16px;
+  }
+  .desc h2{
+    font-size:20px;
+  }
+  .row{
+    flex-direction:column;
+  }
+  .main{
+    width:100%;
+  }
+}
+
+@media (max-width:480px){
+  .wrap{
+    max-width:100%;
+  }
+  .kicker{
+    font-size:11px;
+  }
+  .title{
+    font-size:23px;
+  }
+  .slide{
+    padding:8px;
+  }
+  .slide img{
+    border-radius:20px;
+  }
+  .nav{
+    padding:0 8px;
+  }
+  .nav button{
+    width:38px;
+    height:38px;
+    font-size:18px;
+  }
+}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <a href="index.html" class="breadcrumb">← 메인으로 돌아가기</a>
-  <div class="kicker">신입 가이드</div>
-  <div class="title">닉네임 설정</div>
-  <p class="lead">오픈채팅방에서 사용할 닉네임은 톡방 닉네임 / 포켓몬고 아이디 / 레벨 형식으로 설정해 주세요.</p>
+<div class="page">
+  <div class="wrap">
+    <a href="index.html" class="breadcrumb">← 메인으로 돌아가기</a>
+    <div class="kicker">신입 가이드</div>
+    <div class="title">닉네임 설정</div>
+    <p class="lead">오픈채팅방에서 사용할 닉네임은 톡방 닉네임 / 포켓몬고 아이디 / 레벨 형식으로 설정해 주세요.</p>
 
-  <div class="slider" id="slider">
-    <div class="track" id="track">
-      <div class="slide"><img src="images/newcomer-nickname-01.jpg" alt="1. 프로필 편집으로 이동"></div>
-      <div class="slide"><img src="images/newcomer-nickname-02.jpg" alt="2. 닉네임 형식 입력"></div>
-      <div class="slide"><img src="images/newcomer-nickname-03.jpg" alt="3. 한글 닉네임 설정"></div>
-      <div class="slide"><img src="images/newcomer-nickname-04.jpg" alt="4. 개인정보 일부 가리기"></div>
+    <div class="viewer-row">
+      <button class="side-nav prev" type="button" onclick="prev()" aria-label="이전 이미지">
+        <span></span>
+      </button>
+
+      <div class="phone-stage">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="slider-wrap">
+              <div class="slider" id="slider">
+                <div class="track" id="track">
+                  <div class="slide"><img src="images/newcomer-nickname-01.jpg" alt="1. 프로필 편집으로 이동"></div>
+                  <div class="slide"><img src="images/newcomer-nickname-02.jpg" alt="2. 닉네임 형식 입력"></div>
+                  <div class="slide"><img src="images/newcomer-nickname-03.jpg" alt="3. 한글 닉네임 설정"></div>
+                  <div class="slide"><img src="images/newcomer-nickname-04.jpg" alt="4. 개인정보 일부 가리기"></div>
+                </div>
+
+                <div class="nav">
+                  <button type="button" onclick="prev()" aria-label="이전">‹</button>
+                  <button type="button" onclick="next()" aria-label="다음">›</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dots">
+              <span class="active"></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <div class="desc">
+              <h2 id="title">1. 프로필 편집으로 이동</h2>
+              <p id="text">오픈채팅방 우측 상단 햄버거버튼을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="side-nav next" type="button" onclick="next()" aria-label="다음 이미지">
+        <span></span>
+      </button>
     </div>
-    <div class="nav">
-      <button onclick="prev()">‹</button>
-      <button onclick="next()">›</button>
+
+    <div class="bottom">
+      <div class="row">
+        <a href="newcomer.html">이전 가이드 : 신입 가이드 목록</a>
+        <a href="newcomer-chat.html">다음 가이드 : 채팅 규칙</a>
+      </div>
+      <a href="index.html" class="main">메인으로 돌아가기</a>
     </div>
-  </div>
-
-  <div class="dots">
-    <span class="active"></span>
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-
-  <div class="desc">
-    <h2 id="title">1. 프로필 편집으로 이동</h2>
-    <p id="text">오픈채팅방 우측 상단 햄버거버튼을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.</p>
-  </div>
-
-  <div class="bottom">
-    <div class="row">
-      <a href="newcomer.html">이전 가이드 : 신입 가이드 목록</a>
-      <a href="newcomer-chat.html">다음 가이드 : 채팅 규칙</a>
-    </div>
-    <a href="index.html" class="main">메인으로 돌아가기</a>
   </div>
 </div>
 
 <script>
-
 let index = 0;
 const track = document.getElementById("track");
 const dots = document.querySelectorAll(".dots span");
-const titles = ["1. 햄버거 버튼을 클릭", "2. 프로필 수정", "3. 글로벌 양식에 맞춰 닉네임 설정", "4. 개인정보 일부 가리기"];
-const texts = ["오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.", "닉네임은 톡방 닉네임 / 포켓몬고 아이디 / 레벨 형식으로 입력해 주세요. 이 3가지 항목만 넣으면 됩니다.", "톡방 닉네임은 다른 분들이 부르기 쉽도록 반드시 한글로 작성하고, 중복되지 않게 설정해 주세요.", "포켓몬고 아이디가 길어서 기재가 안되거나 개인정보가 들어간 경우 뒷부분은 *** 처리해도 됩니다."];
+const titles = [
+  "1. 햄버거 버튼을 클릭",
+  "2. 프로필 수정",
+  "3. 글로벌 양식에 맞춰 닉네임 설정",
+  "4. 개인정보 일부 가리기"
+];
+const texts = [
+  "오픈채팅방 상단 프로필을 누른 뒤, 본인 프로필을 선택하고 닉네임 수정 화면으로 이동해 주세요.",
+  "닉네임은 톡방 닉네임 / 포켓몬고 아이디 / 레벨 형식으로 입력해 주세요. 이 3가지 항목만 넣으면 됩니다.",
+  "톡방 닉네임은 다른 분들이 부르기 쉽도록 반드시 한글로 작성하고, 중복되지 않게 설정해 주세요.",
+  "포켓몬고 아이디가 길어서 기재가 안되거나 개인정보가 들어간 경우 뒷부분은 *** 처리해도 됩니다."
+];
 const total = titles.length;
 
 function update(){
   track.style.transform = `translateX(-${index * 100}%)`;
-  dots.forEach(d=>d.classList.remove("active"));
+  dots.forEach(d => d.classList.remove("active"));
   dots[index].classList.add("active");
   document.getElementById("title").innerText = titles[index];
   document.getElementById("text").innerText = texts[index];
 }
-function next(){ index = (index + 1) % total; update(); }
-function prev(){ index = (index - 1 + total) % total; update(); }
 
+function next(){
+  index = (index + 1) % total;
+  update();
+}
+
+function prev(){
+  index = (index - 1 + total) % total;
+  update();
+}
+
+/* 스와이프 */
 let startX = 0;
 let isDown = false;
 const slider = document.getElementById("slider");
-slider.addEventListener("touchstart", e => { startX = e.touches[0].clientX; }, {passive:true});
+
+slider.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+}, { passive:true });
+
 slider.addEventListener("touchend", e => {
   const endX = e.changedTouches[0].clientX;
   if(startX - endX > 50) next();
   else if(endX - startX > 50) prev();
-}, {passive:true});
-slider.addEventListener("mousedown", e => { isDown = true; startX = e.clientX; });
+}, { passive:true });
+
+slider.addEventListener("mousedown", e => {
+  isDown = true;
+  startX = e.clientX;
+});
+
 document.addEventListener("mouseup", e => {
   if(!isDown) return;
   isDown = false;
@@ -107,7 +543,6 @@ document.addEventListener("mouseup", e => {
   if(startX - endX > 50) next();
   else if(endX - startX > 50) prev();
 });
-
 </script>
 </body>
 </html>
