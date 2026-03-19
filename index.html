@@ -6,89 +6,420 @@
 <title>Pokémon GO Global 🌏 가이드북</title>
 
 <style>
-body{
-  margin:0;
-  font-family:'Pretendard', sans-serif;
-  background:#f5f6f8;
-  color:#222;
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+
+:root{
+  --bg1:#fafbfc;
+  --bg2:#f3f5f8;
+  --bg3:#edf1f6;
+
+  --text1:#1d1d1f;
+  --text2:#70757f;
+  --muted:#8f94a0;
+
+  --card-bg:rgba(255,255,255,.74);
+  --card-line:rgba(255,255,255,.78);
+
+  --cta1:#7d71ff;
+  --cta2:#5a4de0;
+  --cta3:#283c94;
+
+  --shadow-soft:0 12px 26px rgba(25,31,52,.06);
+  --shadow-card:0 20px 40px rgba(25,31,52,.10);
+  --shadow-cta:0 18px 32px rgba(80,78,177,.28);
+
+  --ease:cubic-bezier(.22,.61,.36,1);
 }
 
-/* 전체 */
+body{
+  font-family:'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+  background:
+    radial-gradient(circle at top, var(--bg1) 0%, var(--bg2) 40%, var(--bg3) 100%);
+  color:var(--text1);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
 .wrap{
-  max-width:520px;
+  width:100%;
+  max-width:980px;
   margin:0 auto;
+  padding:28px 16px 56px;
+}
+
+/* 상단 로고 */
+.header-logo{
+  text-align:center;
+  font-size:14px;
+  font-weight:700;
+  color:var(--muted);
+  letter-spacing:.08em;
+  margin-bottom:22px;
 }
 
 /* 히어로 */
-.hero img{
+.hero{
+  max-width:760px;
+  margin:0 auto 22px;
+}
+
+.hero-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:34px;
+  padding:14px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.52) 100%);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 1px 0 rgba(255,255,255,.96);
+  border:1px solid var(--card-line);
+}
+
+.hero-card::before{
+  content:"";
+  position:absolute;
+  top:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:96px;
+  height:8px;
+  border-radius:999px;
+  background:rgba(30,34,46,.08);
+  box-shadow:inset 0 1px 1px rgba(30,34,46,.08);
+  opacity:.75;
+}
+
+.hero-inner{
+  overflow:hidden;
+  border-radius:26px;
+  background:linear-gradient(180deg,#e9eef5 0%, #e0e7ef 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.8),
+    inset 0 0 0 1px rgba(25,28,43,.05);
+}
+
+.hero-inner img{
   width:100%;
   display:block;
+  border-radius:20px;
+  object-fit:cover;
+}
+
+.hero-copy{
+  text-align:center;
+  max-width:780px;
+  margin:20px auto 0;
+}
+
+.hero-title{
+  margin:0 0 10px;
+  font-size:clamp(28px, 4vw, 40px);
+  line-height:1.18;
+  font-weight:900;
+  letter-spacing:-0.04em;
+  color:var(--text1);
+  word-break:keep-all;
+}
+
+.hero-sub{
+  margin:0 auto;
+  max-width:720px;
+  font-size:clamp(15px, 2vw, 18px);
+  line-height:1.8;
+  color:var(--text2);
+  word-break:keep-all;
 }
 
 /* 카테고리 */
 .section{
-  padding:24px;
+  max-width:860px;
+  margin:30px auto 0;
+}
+
+.section-title{
+  margin:0 0 14px;
+  font-size:18px;
+  font-weight:800;
+  color:#252831;
+  letter-spacing:-0.02em;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
 }
 
 .card{
+  position:relative;
+  overflow:hidden;
   display:block;
-  padding:20px;
-  margin-bottom:14px;
-  border-radius:18px;
-  background:#fff;
+  padding:22px 22px;
+  border-radius:24px;
+  background:rgba(255,255,255,.76);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
   text-decoration:none;
-  color:#000;
-  box-shadow:0 10px 25px rgba(0,0,0,0.05);
-  transition:0.2s;
+  color:var(--text1);
+  box-shadow:
+    var(--shadow-soft),
+    inset 0 1px 0 rgba(255,255,255,.98);
+  border:1px solid rgba(255,255,255,.8);
+  transition:
+    transform .22s ease,
+    box-shadow .24s ease,
+    background .24s ease;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.30) 46%, transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .72s ease;
+  pointer-events:none;
 }
 
 .card:hover{
-  transform:translateY(-3px);
+  transform:translateY(-2px);
+  background:rgba(255,255,255,.86);
+  box-shadow:
+    0 16px 32px rgba(25,31,52,.10),
+    inset 0 1px 0 rgba(255,255,255,.98);
+}
+
+.card:hover::before{
+  transform:translateX(120%);
+}
+
+.card-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
 }
 
 .card h2{
   margin:0;
-  font-size:20px;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:-0.03em;
+}
+
+.card-arrow{
+  flex:0 0 auto;
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 8px 18px rgba(20,24,42,.06);
+  position:relative;
+}
+
+.card-arrow::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:10px;
+  height:10px;
+  border-top:2.5px solid rgba(39,44,58,.7);
+  border-right:2.5px solid rgba(39,44,58,.7);
+  transform:translate(-65%,-50%) rotate(45deg);
 }
 
 .card p{
-  margin-top:6px;
-  color:#666;
-  font-size:14px;
+  margin:10px 0 0;
+  color:var(--text2);
+  font-size:15px;
+  line-height:1.75;
+  word-break:keep-all;
+}
+
+/* 메인 CTA */
+.main-cta{
+  max-width:860px;
+  margin:18px auto 0;
+}
+
+.main-cta a{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:70px;
+  padding:18px 22px;
+  border-radius:24px;
+  background:linear-gradient(135deg, var(--cta1) 0%, var(--cta2) 46%, var(--cta3) 100%);
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  font-size:19px;
+  letter-spacing:-0.02em;
+  box-shadow:
+    var(--shadow-cta),
+    inset 0 1px 0 rgba(255,255,255,.18);
+  transition:transform .22s ease, box-shadow .24s ease;
+}
+
+.main-cta a::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.24) 46%, transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .72s ease;
+}
+
+.main-cta a:hover{
+  transform:translateY(-1px);
+  box-shadow:
+    0 22px 38px rgba(76,74,173,.34),
+    inset 0 1px 0 rgba(255,255,255,.22);
+}
+
+.main-cta a:hover::before{
+  transform:translateX(120%);
 }
 
 /* Q&A */
 .qna{
-  padding:24px;
+  max-width:860px;
+  margin:34px auto 0;
 }
 
 .qna h2{
-  font-size:20px;
-  margin-bottom:12px;
+  margin:0 0 14px;
+  font-size:18px;
+  font-weight:800;
+  color:#252831;
+  letter-spacing:-0.02em;
+}
+
+.qna-list{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
 }
 
 .qna-item{
-  background:#fff;
-  padding:16px;
-  border-radius:14px;
-  margin-bottom:10px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  padding:18px 18px;
+  border-radius:20px;
+  background:rgba(255,255,255,.68);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  box-shadow:
+    0 10px 22px rgba(20,24,42,.05),
+    inset 0 1px 0 rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.78);
+  text-align:left;
 }
 
 .q{
-  font-weight:700;
-  margin-bottom:6px;
+  font-weight:800;
+  margin-bottom:8px;
+  font-size:15px;
+  line-height:1.5;
+  color:#22252d;
 }
 
 .a{
-  color:#666;
+  color:var(--text2);
   font-size:14px;
+  line-height:1.75;
+  word-break:keep-all;
 }
 
 /* PC */
-@media(min-width:900px){
+@media (min-width:900px){
+  .cards{
+    grid-template-columns:1fr 1fr 1fr;
+  }
+
+  .card{
+    min-height:170px;
+  }
+
+  .card-top{
+    align-items:flex-start;
+  }
+}
+
+/* 모바일 */
+@media (max-width:640px){
   .wrap{
-    max-width:600px;
+    padding:22px 12px 44px;
+  }
+
+  .header-logo{
+    margin-bottom:18px;
+    font-size:13px;
+  }
+
+  .hero{
+    margin-bottom:18px;
+  }
+
+  .hero-card{
+    border-radius:26px;
+    padding:10px;
+  }
+
+  .hero-card::before{
+    width:78px;
+    height:6px;
+    top:8px;
+  }
+
+  .hero-inner{
+    border-radius:18px;
+  }
+
+  .hero-inner img{
+    border-radius:14px;
+  }
+
+  .hero-title{
+    font-size:26px;
+  }
+
+  .hero-sub{
+    font-size:15px;
+  }
+
+  .card{
+    border-radius:20px;
+    padding:18px 18px;
+  }
+
+  .card h2{
+    font-size:20px;
+  }
+
+  .card p{
+    font-size:14px;
+  }
+
+  .card-arrow{
+    width:38px;
+    height:38px;
+  }
+
+  .main-cta a{
+    min-height:62px;
+    font-size:17px;
+    border-radius:18px;
+  }
+
+  .qna-item{
+    border-radius:16px;
+    padding:16px 16px;
   }
 }
 </style>
@@ -98,52 +429,106 @@ body{
 
 <div class="wrap">
 
-<!-- 메인 이미지 -->
-<div class="hero">
-  <img src="/hero-main.jpg" alt="메인">
-</div>
+  <div class="header-logo">Pokémon GO Global 🌏</div>
 
-<!-- 카테고리 -->
-<div class="section">
+  <!-- 히어로 -->
+  <div class="hero">
+    <div class="hero-card">
+      <div class="hero-inner">
+        <img src="/hero-main.jpg" alt="Pokémon GO Global 메인 가이드">
+      </div>
+    </div>
 
-  <a href="newcomer.html" class="card">
-    <h2>신입 가이드</h2>
-    <p>처음 오신 분들을 위한 필수 가이드</p>
-  </a>
-
-  <a href="host.html" class="card">
-    <h2>주최자 가이드</h2>
-    <p>레이드를 주최할 때 필요한 모든 방법</p>
-  </a>
-
-  <a href="participant.html" class="card">
-    <h2>참여자 가이드</h2>
-    <p>레이드 참여 방법과 주의사항</p>
-  </a>
-
-</div>
-
-<!-- Q&A -->
-<div class="qna">
-
-  <h2>빠른 질문</h2>
-
-  <div class="qna-item">
-    <div class="q">Q. 닉네임은 왜 한글로 해야하나요?</div>
-    <div class="a">톡방 유저분들이 부르기 편하기 위함입니다.</div>
+    <div class="hero-copy">
+      <h1 class="hero-title">글로벌 레이드 가이드북</h1>
+      <p class="hero-sub">
+        처음 오신 분부터 주최자, 참여자까지<br>
+        필요한 흐름을 한눈에 확인할 수 있도록 정리한 안내 페이지입니다.
+      </p>
+    </div>
   </div>
 
-  <div class="qna-item">
-    <div class="q">Q. 레이드 참여는 어떻게 하나요?</div>
-    <div class="a">참여 가이드를 확인해주세요.</div>
+  <!-- 카테고리 -->
+  <div class="section">
+    <h2 class="section-title">가이드 목록</h2>
+
+    <div class="cards">
+      <a href="newcomer.html" class="card">
+        <div class="card-top">
+          <h2>신입 가이드</h2>
+          <span class="card-arrow" aria-hidden="true"></span>
+        </div>
+        <p>처음 오신 분들이 꼭 먼저 확인해야 하는 기본 이용 가이드입니다.</p>
+      </a>
+
+      <a href="host.html" class="card">
+        <div class="card-top">
+          <h2>주최자 가이드</h2>
+          <span class="card-arrow" aria-hidden="true"></span>
+        </div>
+        <p>레이드 모집, 비공개방 생성, 멘션과 추가 초대까지 주최 흐름을 안내합니다.</p>
+      </a>
+
+      <a href="participant.html" class="card">
+        <div class="card-top">
+          <h2>참여자 가이드</h2>
+          <span class="card-arrow" aria-hidden="true"></span>
+        </div>
+        <p>레이드 참여, 친구코드 추가, 수락과 입장까지 참여자의 흐름을 정리했습니다.</p>
+      </a>
+    </div>
   </div>
 
-    <div class="qna-item">
-    <div class="q">Q. 레이드 주최를 하려는데 10분 미만이면 안되나요?</div>
-    <div class="a">레이드를 급하게 하다보면 많은 문제가발생할수 있기에 10분 미만의 레이드 주최는 삼가 부탁드립니다.</div>
+  <!-- 메인 CTA -->
+  <div class="main-cta">
+    <a href="newcomer.html">가이드 바로 시작하기</a>
   </div>
 
-</div>
+  <!-- Q&A -->
+  <div class="qna">
+    <h2>Q&A</h2>
+
+    <div class="qna-list">
+      <div class="qna-item">
+        <div class="q">Q. 닉네임은 왜 한글로 해야 하나요?</div>
+        <div class="a">톡방 안에서 서로 부르기 쉽고, 빠르게 인식할 수 있도록 하기 위한 기준입니다.</div>
+      </div>
+
+      <div class="qna-item">
+        <div class="q">Q. 레이드 참여는 어떻게 하나요?</div>
+        <div class="a">참여자 가이드를 순서대로 보면, 모집글 확인부터 수락과 입장까지 자연스럽게 따라갈 수 있습니다.</div>
+      </div>
+
+      <div class="qna-item">
+        <div class="q">Q. 레이드 주최를 하려는데 10분 미만이면 안 되나요?</div>
+        <div class="a">너무 촉박한 모집은 참여자 혼선이나 초대 누락이 생길 수 있어, 여유 있는 시간대에 진행하는 것을 권장합니다.</div>
+      </div>
+
+            <div class="qna-item">
+        <div class="q">Q. 오픈프로필이 더이상 생성이 되지않으면 어떻게 하나요?</div>
+        <div class="a">꼭 오픈 프로필이 아니어도 괜찮으니 양식에 맞게 카카오 프로필로 부탁드립니다.</div>
+      </div>
+            <div class="qna-item">
+        <div class="q">Q. 먼저 참여한 레이드가 시간이 남아서 그런데 다른 곳데 명단에 올려도 되나요?</div>
+        <div class="a">중복참여는 혼선을 야기할 수 있음으로 한 곳에만 작성을 부탁드리며 참여와 포기 의사를 명확하게 알려주세요.</div>
+      </div>
+            <div class="qna-item">
+        <div class="q">Q. 포켓몬 거래 가능한 방인가요?</div>
+        <div class="a">교환은 만나서 자유롭게 하시면되지만 계정거래, 대리충전 등 금전적인 부분은 모두 금지입니다.</div>
+      </div>
+
+            <div class="qna-item">
+        <div class="q">Q. 취미로 유튜브, 개인방송을 하고 있어요 홍보해도 괜찮을까요?</div>
+        <div class="a">타 채팅방 및 방송 홍보에 대해서는 관리진 분들에게 먼저 문의 부탁드립니다.</div>
+      </div>
+
+                  <div class="qna-item">
+        <div class="q">Q. 친구 코드 공유해도 괜찮을까요? 베프작하실분~??</div>
+        <div class="a">공지사항 댓글란을 참고하여 신청 및 등록을 해주시면 됩니다.</div>
+      </div>
+      
+    </div>
+  </div>
 
 </div>
 
