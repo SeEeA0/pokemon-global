@@ -19,62 +19,52 @@ body{
   margin:0 auto;
 }
 
-/* 히어로 이미지 */
+/* 히어로 */
 .hero img{
   width:100%;
   display:block;
 }
 
-/* 아코디언 */
+/* 카테고리 */
 .section{
-  padding:20px;
+  padding:24px;
 }
 
-.accordion{
-  margin-top:10px;
-}
-
-.acc-item{
-  margin-bottom:10px;
-}
-
-.acc-header{
-  width:100%;
-  padding:18px;
-  border-radius:16px;
-  background:#fff;
-  border:none;
-  text-align:left;
-  font-size:16px;
-  font-weight:700;
-  box-shadow:0 5px 15px rgba(0,0,0,0.05);
-  cursor:pointer;
-}
-
-.acc-body{
-  display:none;
-  padding:10px;
-}
-
-.acc-body a{
+.card{
   display:block;
-  padding:14px;
-  border-radius:12px;
-  background:#fafafa;
-  margin-bottom:8px;
+  padding:20px;
+  margin-bottom:14px;
+  border-radius:18px;
+  background:#fff;
   text-decoration:none;
-  color:#333;
+  color:#000;
+  box-shadow:0 10px 25px rgba(0,0,0,0.05);
+  transition:0.2s;
+}
+
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.card h2{
+  margin:0;
+  font-size:20px;
+}
+
+.card p{
+  margin-top:6px;
+  color:#666;
   font-size:14px;
 }
 
 /* Q&A */
 .qna{
-  margin-top:40px;
+  padding:24px;
 }
 
 .qna h2{
   font-size:20px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .qna-item{
@@ -95,7 +85,7 @@ body{
   font-size:14px;
 }
 
-/* PC 대응 */
+/* PC */
 @media(min-width:900px){
   .wrap{
     max-width:600px;
@@ -110,82 +100,47 @@ body{
 
 <!-- 메인 이미지 -->
 <div class="hero">
-  <img src="images/main-hero.jpg" alt="메인 이미지">
+  <img src="images/main-hero.jpg" alt="메인">
 </div>
 
-<!-- 가이드 -->
+<!-- 카테고리 -->
 <div class="section">
 
-  <div class="accordion">
+  <a href="newcomer.html" class="card">
+    <h2>신입 가이드</h2>
+    <p>처음 오신 분들을 위한 필수 가이드</p>
+  </a>
 
-    <!-- 신입 -->
-    <div class="acc-item">
-      <button class="acc-header">신입 가이드</button>
-      <div class="acc-body">
-        <a href="newcomer-nickname.html">닉네임 설정</a>
-        <a href="newcomer-chat.html">채팅 규칙</a>
-      </div>
-    </div>
+  <a href="host.html" class="card">
+    <h2>주최자 가이드</h2>
+    <p>레이드를 주최할 때 필요한 모든 방법</p>
+  </a>
 
-    <!-- 주최자 -->
-    <div class="acc-item">
-      <button class="acc-header">주최자 가이드</button>
-      <div class="acc-body">
-        <a href="host-recruit.html">레이드 모집</a>
-        <a href="host-mention.html">멘션콜 방법</a>
-      </div>
-    </div>
-
-    <!-- 참여자 -->
-    <div class="acc-item">
-      <button class="acc-header">참여자 가이드</button>
-      <div class="acc-body">
-        <a href="participant-join.html">레이드 참여 방법</a>
-      </div>
-    </div>
-
-  </div>
+  <a href="participant.html" class="card">
+    <h2>참여자 가이드</h2>
+    <p>레이드 참여 방법과 주의사항</p>
+  </a>
 
 </div>
 
 <!-- Q&A -->
-<div class="section qna">
+<div class="qna">
 
   <h2>빠른 질문</h2>
 
   <div class="qna-item">
-    <div class="q">Q. 닉네임은 왜 한글로 해야 하나요?</div>
-    <div class="a">모든 유저분들이 부르기 편하도록 한글 사용을 권장합니다.</div>
+    <div class="q">Q. 닉네임은 왜 영어로 해야 하나요?</div>
+    <div class="a">인게임 검색을 위해 영문 사용을 권장합니다.</div>
   </div>
 
   <div class="qna-item">
-    <div class="q">Q. 레이드 모집은 아무나 해도 되나요?</div>
-    <div class="a">가이드 숙지 후 가능합니다. 규칙을 반드시 지켜주세요.</div>
-  </div>
-
-  <div class="qna-item">
-    <div class="q">Q. 채팅 규칙을 안 지키면 어떻게 되나요?</div>
-    <div class="a">경고 또는 불이익이 발생할 수 있습니다.</div>
+    <div class="q">Q. 레이드 참여는 어떻게 하나요?</div>
+    <div class="a">참여 가이드를 확인해주세요.</div>
   </div>
 
 </div>
 
 </div>
-
-<script>
-document.querySelectorAll(".acc-header").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const body = btn.nextElementSibling;
-    const isOpen = body.style.display === "block";
-
-    document.querySelectorAll(".acc-body").forEach(b=>b.style.display="none");
-
-    if(!isOpen){
-      body.style.display = "block";
-    }
-  });
-});
-</script>
 
 </body>
 </html>
