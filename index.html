@@ -16,59 +16,63 @@ html,body{margin:0;padding:0}
 
   --text1:#1d1d1f;
   --text2:#70757f;
-  --muted:#8f94a0;
+  --text3:#9298a5;
 
-  --card-bg:rgba(255,255,255,.74);
+  --card-bg:rgba(255,255,255,.76);
+  --card-bg-strong:rgba(255,255,255,.88);
   --card-line:rgba(255,255,255,.78);
 
-  --cta1:#7d71ff;
-  --cta2:#5a4de0;
-  --cta3:#283c94;
+  --navy:#283c94;
+  --purple:#5a4de0;
+  --purple-soft:#7d71ff;
 
   --shadow-soft:0 12px 26px rgba(25,31,52,.06);
   --shadow-card:0 20px 40px rgba(25,31,52,.10);
-  --shadow-cta:0 18px 32px rgba(80,78,177,.28);
+  --shadow-cta:0 16px 28px rgba(67,74,176,.22);
 
   --ease:cubic-bezier(.22,.61,.36,1);
 }
 
 body{
-  font-family:'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+  font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
   background:
-    radial-gradient(circle at top, var(--bg1) 0%, var(--bg2) 40%, var(--bg3) 100%);
+    radial-gradient(circle at top, var(--bg1) 0%, var(--bg2) 42%, var(--bg3) 100%);
   color:var(--text1);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
 }
 
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
 .wrap{
   width:100%;
-  max-width:980px;
+  max-width:920px;
   margin:0 auto;
-  padding:28px 16px 56px;
+  padding:24px 14px 44px;
 }
 
-/* 상단 로고 */
 .header-logo{
   text-align:center;
-  font-size:14px;
+  font-size:13px;
   font-weight:700;
-  color:var(--muted);
+  color:var(--text3);
   letter-spacing:.08em;
-  margin-bottom:22px;
+  margin-bottom:18px;
 }
 
-/* 히어로 */
+/* HERO */
 .hero{
-  max-width:760px;
-  margin:0 auto 22px;
+  margin:0 auto 18px;
 }
 
 .hero-card{
   position:relative;
+  display:block;
   overflow:hidden;
-  border-radius:34px;
-  padding:14px;
+  border-radius:32px;
   background:
     linear-gradient(180deg, rgba(255,255,255,.72) 0%, rgba(255,255,255,.52) 100%);
   backdrop-filter:blur(10px);
@@ -77,6 +81,7 @@ body{
     var(--shadow-card),
     inset 0 1px 0 rgba(255,255,255,.96);
   border:1px solid var(--card-line);
+  padding:12px;
 }
 
 .hero-card::before{
@@ -85,90 +90,179 @@ body{
   top:10px;
   left:50%;
   transform:translateX(-50%);
-  width:96px;
-  height:8px;
+  width:90px;
+  height:7px;
   border-radius:999px;
   background:rgba(30,34,46,.08);
   box-shadow:inset 0 1px 1px rgba(30,34,46,.08);
   opacity:.75;
+  z-index:3;
 }
 
 .hero-inner{
+  position:relative;
   overflow:hidden;
-  border-radius:26px;
-  background:linear-gradient(180deg,#e9eef5 0%, #e0e7ef 100%);
+  border-radius:24px;
+  background:linear-gradient(180deg,#e9eef5 0%,#e0e7ef 100%);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.8),
     inset 0 0 0 1px rgba(25,28,43,.05);
+  aspect-ratio:16 / 10;
 }
 
 .hero-inner img{
   width:100%;
+  height:100%;
   display:block;
-  border-radius:20px;
   object-fit:cover;
+  transform:scale(1.01);
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(20,24,42,.08) 0%, rgba(20,24,42,.10) 28%, rgba(15,19,34,.42) 100%);
 }
 
 .hero-copy{
-  text-align:center;
-  max-width:780px;
-  margin:20px auto 0;
+  position:absolute;
+  left:22px;
+  right:22px;
+  bottom:22px;
+  z-index:2;
+  text-align:left;
+}
+
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:7px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.20);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  color:rgba(255,255,255,.92);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.04em;
+  margin-bottom:12px;
 }
 
 .hero-title{
-  margin:0 0 10px;
-  font-size:clamp(28px, 4vw, 40px);
-  line-height:1.18;
-  font-weight:900;
-  letter-spacing:-0.04em;
-  color:var(--text1);
-  word-break:keep-all;
+  margin:0;
+  color:#fff;
+  font-size:clamp(28px, 4vw, 38px);
+  line-height:1.08;
+  font-weight:800;
+  letter-spacing:-0.045em;
+  text-shadow:0 8px 20px rgba(0,0,0,.16);
 }
 
 .hero-sub{
-  margin:0 auto;
-  max-width:720px;
-  font-size:clamp(15px, 2vw, 18px);
-  line-height:1.8;
-  color:var(--text2);
+  margin:10px 0 0;
+  color:rgba(255,255,255,.86);
+  font-size:15px;
+  line-height:1.65;
+  font-weight:500;
+  letter-spacing:-0.01em;
+  text-shadow:0 6px 18px rgba(0,0,0,.12);
   word-break:keep-all;
 }
 
-/* 카테고리 */
+/* CTA */
+.main-cta{
+  margin:14px auto 28px;
+}
+
+.main-cta a{
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:58px;
+  padding:14px 18px;
+  border-radius:18px;
+  background:linear-gradient(135deg, var(--purple-soft) 0%, var(--purple) 46%, var(--navy) 100%);
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
+  letter-spacing:-0.02em;
+  box-shadow:
+    var(--shadow-cta),
+    0 0 0 1px rgba(255,255,255,.10) inset,
+    0 0 24px rgba(95,88,228,.14);
+  transition:
+    transform .22s ease,
+    box-shadow .26s ease;
+}
+
+.main-cta a::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.26) 46%, transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .72s ease;
+}
+
+.main-cta a::after{
+  content:"";
+  position:absolute;
+  inset:-30% -10%;
+  background:radial-gradient(circle, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 58%);
+  pointer-events:none;
+}
+
+.main-cta a:hover{
+  transform:translateY(-1px);
+  box-shadow:
+    0 18px 32px rgba(67,74,176,.28),
+    0 0 28px rgba(95,88,228,.18),
+    0 0 0 1px rgba(255,255,255,.12) inset;
+}
+
+.main-cta a:hover::before{
+  transform:translateX(120%);
+}
+
+/* SECTION */
 .section{
-  max-width:860px;
-  margin:30px auto 0;
+  margin:0 auto 28px;
 }
 
 .section-title{
-  margin:0 0 14px;
-  font-size:18px;
+  margin:0 0 12px;
+  padding-left:4px;
+  font-size:16px;
   font-weight:800;
-  color:#252831;
+  color:#2a2d35;
   letter-spacing:-0.02em;
 }
 
 .cards{
   display:grid;
   grid-template-columns:1fr;
-  gap:14px;
+  gap:12px;
 }
 
 .card{
   position:relative;
   overflow:hidden;
   display:block;
-  padding:22px 22px;
-  border-radius:24px;
-  background:rgba(255,255,255,.76);
+  padding:18px 18px;
+  border-radius:22px;
+  background:var(--card-bg);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
-  text-decoration:none;
-  color:var(--text1);
   box-shadow:
     var(--shadow-soft),
-    inset 0 1px 0 rgba(255,255,255,.98);
-  border:1px solid rgba(255,255,255,.8);
+    inset 0 1px 0 rgba(255,255,255,.96);
+  border:1px solid rgba(255,255,255,.82);
   transition:
     transform .22s ease,
     box-shadow .24s ease,
@@ -187,9 +281,9 @@ body{
 
 .card:hover{
   transform:translateY(-2px);
-  background:rgba(255,255,255,.86);
+  background:var(--card-bg-strong);
   box-shadow:
-    0 16px 32px rgba(25,31,52,.10),
+    0 16px 30px rgba(25,31,52,.10),
     inset 0 1px 0 rgba(255,255,255,.98);
 }
 
@@ -201,22 +295,24 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:16px;
+  gap:12px;
 }
 
-.card h2{
+.card-title{
   margin:0;
-  font-size:22px;
+  font-size:20px;
+  line-height:1.2;
   font-weight:800;
   letter-spacing:-0.03em;
+  color:#1d1f26;
 }
 
 .card-arrow{
   flex:0 0 auto;
-  width:42px;
-  height:42px;
+  width:38px;
+  height:38px;
   border-radius:999px;
-  background:rgba(255,255,255,.72);
+  background:rgba(255,255,255,.78);
   box-shadow:0 8px 18px rgba(20,24,42,.06);
   position:relative;
 }
@@ -226,200 +322,254 @@ body{
   position:absolute;
   top:50%;
   left:50%;
-  width:10px;
-  height:10px;
-  border-top:2.5px solid rgba(39,44,58,.7);
-  border-right:2.5px solid rgba(39,44,58,.7);
+  width:9px;
+  height:9px;
+  border-top:2px solid rgba(39,44,58,.68);
+  border-right:2px solid rgba(39,44,58,.68);
   transform:translate(-65%,-50%) rotate(45deg);
 }
 
-.card p{
-  margin:10px 0 0;
+.card-desc{
+  margin:8px 0 0;
   color:var(--text2);
-  font-size:15px;
-  line-height:1.75;
+  font-size:14px;
+  line-height:1.65;
   word-break:keep-all;
 }
 
-/* 메인 CTA */
-.main-cta{
-  max-width:860px;
-  margin:18px auto 0;
-}
-
-.main-cta a{
-  position:relative;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:70px;
-  padding:18px 22px;
-  border-radius:24px;
-  background:linear-gradient(135deg, var(--cta1) 0%, var(--cta2) 46%, var(--cta3) 100%);
-  color:#fff;
-  text-decoration:none;
-  font-weight:800;
-  font-size:19px;
-  letter-spacing:-0.02em;
-  box-shadow:
-    var(--shadow-cta),
-    inset 0 1px 0 rgba(255,255,255,.18);
-  transition:transform .22s ease, box-shadow .24s ease;
-}
-
-.main-cta a::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(115deg, transparent 0%, rgba(255,255,255,.24) 46%, transparent 70%);
-  transform:translateX(-120%);
-  transition:transform .72s ease;
-}
-
-.main-cta a:hover{
-  transform:translateY(-1px);
-  box-shadow:
-    0 22px 38px rgba(76,74,173,.34),
-    inset 0 1px 0 rgba(255,255,255,.22);
-}
-
-.main-cta a:hover::before{
-  transform:translateX(120%);
-}
-
-/* Q&A */
+/* FAQ */
 .qna{
-  max-width:860px;
-  margin:34px auto 0;
+  margin:0 auto;
 }
 
-.qna h2{
-  margin:0 0 14px;
-  font-size:18px;
+.qna-title{
+  margin:0 0 12px;
+  padding-left:4px;
+  font-size:16px;
   font-weight:800;
-  color:#252831;
+  color:#2a2d35;
   letter-spacing:-0.02em;
 }
 
 .qna-list{
   display:grid;
-  grid-template-columns:1fr;
-  gap:12px;
+  gap:10px;
 }
 
 .qna-item{
-  padding:18px 18px;
-  border-radius:20px;
-  background:rgba(255,255,255,.68);
+  border-radius:18px;
+  overflow:hidden;
+  background:rgba(255,255,255,.64);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   box-shadow:
     0 10px 22px rgba(20,24,42,.05),
     inset 0 1px 0 rgba(255,255,255,.96);
   border:1px solid rgba(255,255,255,.78);
+  transition:
+    background .26s ease,
+    box-shadow .26s ease,
+    border-color .26s ease;
+}
+
+.qna-item.active{
+  background:rgba(255,255,255,.90);
+  box-shadow:
+    0 14px 28px rgba(20,24,42,.08),
+    inset 0 1px 0 rgba(255,255,255,.98);
+  border-color:rgba(121,114,255,.16);
+}
+
+.qna-question{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:17px 18px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
   text-align:left;
+  font:inherit;
+  color:inherit;
 }
 
-.q{
+.qna-q{
+  font-size:14px;
+  line-height:1.55;
   font-weight:800;
-  margin-bottom:8px;
-  font-size:15px;
-  line-height:1.5;
-  color:#22252d;
+  color:#23262f;
+  letter-spacing:-0.01em;
+  word-break:keep-all;
 }
 
-.a{
+.qna-item.active .qna-q{
+  color:#161821;
+}
+
+.qna-icon{
+  flex:0 0 auto;
+  width:24px;
+  height:24px;
+  position:relative;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 6px 14px rgba(20,24,42,.05);
+}
+
+.qna-icon::before{
+  content:"";
+  position:absolute;
+  top:48%;
+  left:50%;
+  width:8px;
+  height:8px;
+  border-right:2px solid #747b88;
+  border-bottom:2px solid #747b88;
+  transform:translate(-50%,-65%) rotate(45deg);
+  transition:transform .28s ease, border-color .26s ease;
+}
+
+.qna-item.active .qna-icon::before{
+  transform:translate(-50%,-35%) rotate(-135deg);
+  border-color:#5b57d9;
+}
+
+.qna-answer{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:
+    max-height .42s var(--ease),
+    opacity .28s ease,
+    padding .28s ease;
+}
+
+.qna-answer-inner{
+  padding:0 18px 18px;
   color:var(--text2);
   font-size:14px;
   line-height:1.75;
   word-break:keep-all;
 }
 
-/* PC */
+.qna-item.active .qna-answer{
+  max-height:220px;
+  opacity:1;
+}
+
+/* DESKTOP */
 @media (min-width:900px){
+  .wrap{
+    padding-top:28px;
+  }
+
   .cards{
     grid-template-columns:1fr 1fr 1fr;
   }
 
   .card{
-    min-height:170px;
-  }
-
-  .card-top{
-    align-items:flex-start;
+    min-height:148px;
   }
 }
 
-/* 모바일 */
+/* MOBILE */
 @media (max-width:640px){
   .wrap{
-    padding:22px 12px 44px;
+    padding:20px 12px 38px;
   }
 
   .header-logo{
-    margin-bottom:18px;
-    font-size:13px;
-  }
-
-  .hero{
-    margin-bottom:18px;
+    margin-bottom:14px;
+    font-size:12px;
   }
 
   .hero-card{
-    border-radius:26px;
+    border-radius:24px;
     padding:10px;
   }
 
   .hero-card::before{
-    width:78px;
+    width:74px;
     height:6px;
     top:8px;
   }
 
   .hero-inner{
     border-radius:18px;
+    aspect-ratio:1 / 1;
   }
 
-  .hero-inner img{
-    border-radius:14px;
+  .hero-copy{
+    left:16px;
+    right:16px;
+    bottom:16px;
+  }
+
+  .hero-badge{
+    min-height:28px;
+    padding:6px 10px;
+    font-size:11px;
+    margin-bottom:10px;
   }
 
   .hero-title{
     font-size:26px;
+    line-height:1.08;
   }
 
   .hero-sub{
-    font-size:15px;
-  }
-
-  .card{
-    border-radius:20px;
-    padding:18px 18px;
-  }
-
-  .card h2{
-    font-size:20px;
-  }
-
-  .card p{
+    margin-top:8px;
     font-size:14px;
+    line-height:1.55;
   }
 
-  .card-arrow{
-    width:38px;
-    height:38px;
+  .main-cta{
+    margin:12px auto 24px;
   }
 
   .main-cta a{
-    min-height:62px;
-    font-size:17px;
+    min-height:54px;
+    border-radius:16px;
+    font-size:15px;
+  }
+
+  .section{
+    margin-bottom:24px;
+  }
+
+  .card{
+    padding:16px 16px;
     border-radius:18px;
+  }
+
+  .card-title{
+    font-size:18px;
+  }
+
+  .card-desc{
+    font-size:13px;
+    line-height:1.6;
+  }
+
+  .card-arrow{
+    width:34px;
+    height:34px;
   }
 
   .qna-item{
     border-radius:16px;
-    padding:16px 16px;
+  }
+
+  .qna-question{
+    padding:15px 16px;
+  }
+
+  .qna-answer-inner{
+    padding:0 16px 16px;
+    font-size:13px;
+    line-height:1.7;
   }
 }
 </style>
@@ -428,109 +578,175 @@ body{
 <body>
 
 <div class="wrap">
+  <div class="header-logo">PGO Global 🌏 오픈톡 가이드</div>
 
-    <div class="header-logo">PGO Global🌏오픈톡 가이드</div>
-
-  <!-- 히어로 -->
-  <div class="hero">
+  <!-- HERO -->
+  <section class="hero">
     <div class="hero-card">
       <div class="hero-inner">
         <img src="/hero-main.jpg" alt="Pokémon GO Global 메인 가이드">
+        <div class="hero-overlay"></div>
+
+        <div class="hero-copy">
+          <div class="hero-badge">Pokémon GO Global 🌏</div>
+          <h1 class="hero-title">레이드 오픈톡<br>가이드</h1>
+          <p class="hero-sub">
+            신입 · 주최자 · 참여자 흐름을<br>
+            한눈에 보기 쉽게 정리했어요
+          </p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="hero-copy">
-      <h1 class="hero-title">Pokémon GO Global 🌏</h1>
-      <p class="hero-sub">
-        처음 오신 분부터 주최자, 참여자까지<br>
-        필요한 흐름을 한눈에 확인할 수 있도록 정리한 안내 페이지입니다.
-      </p>
-    </div>
+  <!-- CTA -->
+  <div class="main-cta">
+    <a href="https://naver.me/GArMoG1P">우유는 누구인가?</a>
   </div>
 
-  <!-- 카테고리 -->
-  <div class="section">
+  <!-- GUIDE LIST -->
+  <section class="section">
     <h2 class="section-title">가이드 목록</h2>
 
     <div class="cards">
       <a href="newcomer.html" class="card">
         <div class="card-top">
-          <h2>신입 가이드</h2>
+          <h3 class="card-title">신입 가이드</h3>
           <span class="card-arrow" aria-hidden="true"></span>
         </div>
-        <p>처음 오신 분들이 꼭 먼저 확인해야 하는 기본 이용 가이드입니다.</p>
+        <p class="card-desc">처음 입장했다면 여기부터</p>
       </a>
 
       <a href="host.html" class="card">
         <div class="card-top">
-          <h2>주최자 가이드</h2>
+          <h3 class="card-title">주최자 가이드</h3>
           <span class="card-arrow" aria-hidden="true"></span>
         </div>
-        <p>레이드 모집, 비공개방 생성, 멘션과 추가 초대까지 주최 흐름을 안내합니다.</p>
+        <p class="card-desc">모집부터 초대까지</p>
       </a>
 
       <a href="participant.html" class="card">
         <div class="card-top">
-          <h2>참여자 가이드</h2>
+          <h3 class="card-title">참여자 가이드</h3>
           <span class="card-arrow" aria-hidden="true"></span>
         </div>
-        <p>레이드 참여, 친구코드 추가, 수락과 입장까지 참여자의 흐름을 정리했습니다.</p>
+        <p class="card-desc">신청부터 입장까지</p>
       </a>
     </div>
-  </div>
+  </section>
 
-  <!-- 메인 CTA -->
-<div class="main-cta">
-  <a href="https://naver.me/GArMoG1P">우유는 누구인가?</a>
-</div>
-
-  <!-- Q&A -->
-  <div class="qna">
-    <h2>Q&A</h2>
+  <!-- QNA -->
+  <section class="qna">
+    <h2 class="qna-title">자주 묻는 질문</h2>
 
     <div class="qna-list">
       <div class="qna-item">
-        <div class="q">Q. 닉네임은 왜 한글로 해야 하나요?</div>
-        <div class="a">톡방 안에서 서로 부르기 쉽고, 빠르게 인식할 수 있도록 하기 위한 기준입니다.</div>
+        <button class="qna-question" type="button">
+          <span class="qna-q">Q. 닉네임은 왜 한글로 해야 하나요?</span>
+          <span class="qna-icon" aria-hidden="true"></span>
+        </button>
+        <div class="qna-answer">
+          <div class="qna-answer-inner">
+            카카오톡 오픈채팅은 한국 사용자 중심이라, 닉네임과 게임 아이디를 모두 영문으로 사용할 경우 유저 식별이 어렵습니다. 한글 닉네임은 서로 부르기 쉽고 빠르게 인식할 수 있어 원활한 소통을 위한 기준입니다.
+          </div>
+        </div>
       </div>
 
       <div class="qna-item">
-        <div class="q">Q. 레이드 참여는 어떻게 하나요?</div>
-        <div class="a">참여자 가이드를 순서대로 보면, 모집글 확인부터 수락과 입장까지 자연스럽게 따라갈 수 있습니다.</div>
+        <button class="qna-question" type="button">
+          <span class="qna-q">Q. 레이드 참여는 어떻게 하나요?</span>
+          <span class="qna-icon" aria-hidden="true"></span>
+        </button>
+        <div class="qna-answer">
+          <div class="qna-answer-inner">
+            참여자 가이드를 순서대로 보면 모집글 확인부터 수락, 입장까지 자연스럽게 따라갈 수 있습니다.
+          </div>
+        </div>
       </div>
 
       <div class="qna-item">
-        <div class="q">Q. 레이드 주최를 하려는데 10분 미만이면 안 되나요?</div>
-        <div class="a">너무 촉박한 모집은 참여자 혼선이나 초대 누락이 생길 수 있어, 여유 있는 시간대에 진행하는 것을 권장합니다.</div>
+        <button class="qna-question" type="button">
+          <span class="qna-q">Q. 레이드 주최를 하려는데 10분 미만이면 안 되나요?</span>
+          <span class="qna-icon" aria-hidden="true"></span>
+        </button>
+        <div class="qna-answer">
+          <div class="qna-answer-inner">
+            너무 촉박한 모집은 참여자 혼선이나 초대 누락이 생길 수 있어, 여유 있는 시간대에 진행하는 것을 권장합니다. 레이드 진행시 문제가 생겨 리방을 해야 할 경우도 있기에 10분 미만 레이드는 금지하고 있습니다. 
+          </div>
+        </div>
       </div>
 
-            <div class="qna-item">
-        <div class="q">Q. 오픈프로필이 더이상 생성이 되지않으면 어떻게 하나요?</div>
-        <div class="a">꼭 오픈 프로필이 아니어도 괜찮으니 양식에 맞게 카카오 프로필로 부탁드립니다.</div>
-      </div>
-            <div class="qna-item">
-        <div class="q">Q. 먼저 참여한 레이드가 시간이 남아서 그런데 다른 곳데 명단에 올려도 되나요?</div>
-        <div class="a">중복참여는 혼선을 야기할 수 있음으로 한 곳에만 작성을 부탁드리며 참여와 포기 의사를 명확하게 알려주세요.</div>
-      </div>
-            <div class="qna-item">
-        <div class="q">Q. 포켓몬 거래 가능한 방인가요?</div>
-        <div class="a">교환은 만나서 자유롭게 하시면되지만 계정거래, 대리충전 등 금전적인 부분은 모두 금지입니다.</div>
-      </div>
-
-            <div class="qna-item">
-        <div class="q">Q. 취미로 유튜브, 개인방송을 하고 있어요 홍보해도 괜찮을까요?</div>
-        <div class="a">타 채팅방 및 방송 홍보에 대해서는 관리진 분들에게 먼저 문의 부탁드립니다.</div>
+      <div class="qna-item">
+        <button class="qna-question" type="button">
+          <span class="qna-q">Q. 오픈프로필이 더 이상 생성되지 않으면 어떻게 하나요?</span>
+          <span class="qna-icon" aria-hidden="true"></span>
+        </button>
+        <div class="qna-answer">
+          <div class="qna-answer-inner">
+            꼭 오픈프로필이 아니어도 괜찮으니, 양식에 맞게 카카오 프로필로 부탁드립니다.
+          </div>
+        </div>
       </div>
 
-                  <div class="qna-item">
-        <div class="q">Q. 친구 코드 공유해도 괜찮을까요? 베프작하실분~??</div>
-        <div class="a">공지사항 댓글란을 참고하여 신청 및 등록을 해주시면 됩니다.</div>
+      <div class="qna-item">
+        <button class="qna-question" type="button">
+          <span class="qna-q">Q. 먼저 참여한 레이드 시간이 남았는데 다른 곳 명단에도 올려도 되나요?</span>
+          <span class="qna-icon" aria-hidden="true"></span>
+        </button>
+        <div class="qna-answer">
+          <div class="qna-answer-inner">
+            중복 참여는 혼선을 만들 수 있으므로 한 곳에만 작성해 주세요. 참여와 포기 의사도 명확하게 알려주시면 좋습니다.
+          </div>
+        </div>
       </div>
-      
+
+      <div class="qna-item">
+        <button class="qna-question" type="button">
+          <span class="qna-q">Q. 포켓몬 거래 가능한 방인가요?</span>
+          <span class="qna-icon" aria-hidden="true"></span>
+        </button>
+        <div class="qna-answer">
+          <div class="qna-answer-inner">
+            교환은 만나서 자유롭게 하셔도 되지만, 계정 거래나 대리 충전 등 금전적인 부분은 모두 금지입니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="qna-item">
+        <button class="qna-question" type="button">
+          <span class="qna-q">Q. 취미로 유튜브나 개인방송을 하는데 홍보해도 괜찮을까요?</span>
+          <span class="qna-icon" aria-hidden="true"></span>
+        </button>
+        <div class="qna-answer">
+          <div class="qna-answer-inner">
+            타 채팅방 및 방송 홍보에 대해서는 관리진 분들에게 먼저 문의 부탁드립니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="qna-item">
+        <button class="qna-question" type="button">
+          <span class="qna-q">Q. 친구 코드 공유해도 괜찮을까요? 베프작 하실 분은요?</span>
+          <span class="qna-icon" aria-hidden="true"></span>
+        </button>
+        <div class="qna-answer">
+          <div class="qna-answer-inner">
+            공지사항 댓글란을 참고하여 신청 및 등록을 해주시면 됩니다.
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-
+  </section>
 </div>
+
+<script>
+document.querySelectorAll('.qna-question').forEach(button => {
+  button.addEventListener('click', () => {
+    const item = button.parentElement;
+    item.classList.toggle('active');
+  });
+});
+</script>
 
 </body>
 </html>
