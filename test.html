@@ -1128,6 +1128,13 @@ function getProfileAssets(profile) {
     advisor: `./images/advisor-1.png`
   };
 }
+
+  const SHARE_IMAGE_BASE_URL = `${window.location.origin}/images`;
+
+function getShareImageUrl(profile) {
+  const imageNumber = profile.icon.replace('icon-', '');
+  return `${SHARE_IMAGE_BASE_URL}/${imageNumber}.png`;
+}
   
 function renderCurrentPage() {
   const start = currentPage * QUESTIONS_PER_PAGE;
