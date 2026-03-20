@@ -111,6 +111,10 @@ body{
   background:#edf2f5;
   color:#21343f;
 }
+.btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
 
 .progress-box{
   margin-bottom:16px;
@@ -136,6 +140,20 @@ body{
   transition:width .3s ease;
 }
 
+.question-page-head{
+  margin-bottom:16px;
+}
+.question-page-head strong{
+  display:block;
+  font-size:18px;
+  margin-bottom:6px;
+}
+.question-page-head p{
+  margin:0;
+  color:#7a8792;
+  font-size:13px;
+}
+
 .question-card{
   background:#fff;
   border-radius:20px;
@@ -158,16 +176,11 @@ body{
   font-size:12px;
   font-weight:800;
 }
-.q-type{
-  font-size:12px;
-  color:#8a95a0;
-  font-weight:700;
-}
 .q-title{
   font-size:17px;
   font-weight:800;
   margin:0 0 14px;
-  line-height:1.45;
+  line-height:1.5;
 }
 .options{
   display:grid;
@@ -182,6 +195,11 @@ body{
   padding:14px;
   cursor:pointer;
   background:#fff;
+  transition:border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.option:hover{
+  border-color:#bfd6e2;
+  background:#fbfdff;
 }
 .option input{
   margin-top:3px;
@@ -191,7 +209,7 @@ body{
   line-height:1.5;
 }
 
-/* result page */
+/* result */
 .result-screen{
   position:relative;
   overflow:hidden;
@@ -399,9 +417,6 @@ body{
   border:4px solid rgba(255,255,255,.55);
   pointer-events:none;
 }
-.badge-band{
-  display:none;
-}
 .badge-stars{
   position:absolute;
   left:0; right:0; top:0; bottom:0;
@@ -422,6 +437,9 @@ body{
   opacity:1;
   transform:scale(1);
   transition:all .25s ease;
+}
+.badge-star.red-star{
+  color:#f05d7c;
 }
 
 .appraisal-panel{
@@ -519,7 +537,6 @@ body{
 .result-actions{
   margin-top:16px;
 }
-
 .share-preview{
   margin-top:14px;
   font-size:12px;
@@ -559,26 +576,34 @@ body{
     </div>
   </section>
 
-  <form id="quizForm" class="hidden">
-    <div class="progress-box">
-      <div class="progress-meta">
-        <span>진행률</span>
-        <span id="progressText">0 / 15</span>
-      </div>
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-    </div>
-
-    <div id="questionArea"></div>
-
+  <section class="hidden" id="quizSection">
     <div class="card">
-      <div class="btn-row">
-        <button class="btn btn-primary" type="submit">결과 보기</button>
-        <button class="btn btn-secondary" type="button" id="backBtn">처음으로</button>
+      <div class="progress-box">
+        <div class="progress-meta">
+          <span id="pageRangeText">1 - 3 / 15</span>
+          <span id="pageStepText">1 / 5</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
       </div>
+
+      <div class="question-page-head">
+        <strong>테스트 진행 중</strong>
+        <p>각 페이지마다 3문항씩 표시됩니다.</p>
+      </div>
+
+      <form id="quizForm">
+        <div id="questionArea"></div>
+
+        <div class="btn-row">
+          <button class="btn btn-secondary" type="button" id="prevBtn">이전</button>
+          <button class="btn btn-primary" type="button" id="nextBtn">다음</button>
+          <button class="btn btn-primary hidden" type="submit" id="submitBtn">결과 보기</button>
+        </div>
+      </form>
     </div>
-  </form>
+  </section>
 
   <section id="resultSection" class="hidden">
     <div class="result-screen" id="captureTarget">
@@ -596,7 +621,7 @@ body{
       </div>
 
       <div class="result-card">
-        <div class="nickname" id="resultNickname">자마젠타</div>
+        <div class="nickname" id="resultNickname">닉네임</div>
 
         <div class="hp-line"><div class="hp-fill"></div></div>
         <div class="hp-text" id="resultHpText">121 / 121 HP</div>
@@ -622,37 +647,36 @@ body{
           <div class="item-box">
             <img src="https://img.icons8.com/fluency/48/test-tube.png" alt="">
             <div>
-              <div class="item-value" id="resultHostValue">100</div>
-              <div class="item-label">Host Guide</div>
+              <div class="item-value" id="resultHostValue">0 / 5</div>
+              <div class="item-label">Host</div>
             </div>
           </div>
           <div class="item-box">
             <img src="https://img.icons8.com/fluency/48/filled-circle.png" alt="">
             <div>
-              <div class="item-value" id="resultParticipantValue">100</div>
-              <div class="item-label">Participant Guide</div>
+              <div class="item-value" id="resultParticipantValue">0 / 5</div>
+              <div class="item-label">Participant</div>
             </div>
           </div>
           <div class="item-box">
             <img src="https://img.icons8.com/fluency/48/triangle-stroked.png" alt="">
             <div>
-              <div class="item-value" id="resultChatValue">100</div>
+              <div class="item-value" id="resultChatValue">0 / 5</div>
               <div class="item-label">Chat Rules</div>
             </div>
           </div>
           <div class="item-box">
             <img src="https://img.icons8.com/fluency/48/appointment-reminders.png" alt="">
             <div>
-              <div class="item-value" id="resultTotalValue">100</div>
-              <div class="item-label">Total Score</div>
+              <div class="item-value" id="resultTotalValue">0 / 15</div>
+              <div class="item-label">Total</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="appraisal-badge" id="badge">
+      <div class="appraisal-badge">
         <div class="badge-disc orange" id="badgeDisc"></div>
-        <div class="badge-band"></div>
         <div class="badge-stars" id="badgeStars">
           <span class="badge-star">★</span>
           <span class="badge-star">★</span>
@@ -692,7 +716,7 @@ body{
       </div>
 
       <div class="speech-box" id="speechText">
-        이 트레이너는 가이드 흐름과 채팅 규칙을 안정적으로 이해하고 있습니다.
+        결과 분석 중입니다.
       </div>
     </div>
 
@@ -724,14 +748,13 @@ if (window.Kakao && !window.Kakao.isInitialized()) {
 }
 
 /* ========================
-   Current time/date
+   Time / Date
 ======================== */
 let currentTime = '';
 let currentDate = '';
 
 function setCurrentDateTime() {
   const now = new Date();
-
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   currentTime = `${hours}:${minutes}`;
@@ -743,63 +766,57 @@ function setCurrentDateTime() {
 }
 
 /* ========================
-   Questions
+   Question bank
 ======================== */
-const questions = [
-  { no:1, type:'Host Guide', group:'host', score:20, q:'주최자는 진행 전에 가이드와 공지 흐름을 먼저 정리하는 것이 좋다.', a:['맞다','틀리다'], correct:0 },
-  { no:2, type:'Host Guide', group:'host', score:20, q:'주최자는 시간과 진행 순서를 명확하게 안내하는 것이 중요하다.', a:['맞다','틀리다'], correct:0 },
-  { no:3, type:'Host Guide', group:'host', score:20, q:'주최자는 문제 상황이 생기면 차분하게 공지를 정리해 주는 것이 좋다.', a:['맞다','틀리다'], correct:0 },
-  { no:4, type:'Host Guide', group:'host', score:20, q:'주최자는 참여자 안내 없이 바로 진행해도 괜찮다.', a:['맞다','틀리다'], correct:1 },
-  { no:5, type:'Host Guide', group:'host', score:20, q:'주최자는 전체 흐름을 확인하고 필요한 경우 Q&A도 안내할 수 있어야 한다.', a:['맞다','틀리다'], correct:0 },
+const questionBank = [
+  { no: 1, group: 'host', question: '레이드 주최자가 모집을 시작하기 전에 가장 먼저 해야 할 것은 무엇인가요?', options: ['분위기를 보고 바로 시작한다', '참여자 수만 먼저 채운다', '모집글 양식과 진행 흐름을 정리한다', '일단 초대부터 보내본다'], correct: 3 },
+  { no: 2, group: 'host', question: '주최자가 참여자를 받을 때 가장 중요한 기준은 무엇인가요?', options: ['먼저 말한 사람', '본인이 아는 사람', '양식에 맞게 작성한 참여자', '아무나 빠르게'], correct: 3 },
+  { no: 3, group: 'host', question: '레이드 진행 중 가장 올바른 주최자의 행동은 무엇인가요?', options: ['조용히 진행한다', '참여자에게 상황을 안내하며 진행한다', '문제 생기면 종료한다', '참여자에게 맡긴다'], correct: 2 },
+  { no: 4, group: 'host', question: '참여자가 많을 경우 주최자가 해야 할 행동은 무엇인가요?', options: ['그냥 모두 초대한다', '순서를 무시한다', '상황에 따라 방을 나누거나 조절한다', '아무 설명 없이 진행한다'], correct: 3 },
+  { no: 5, group: 'host', question: '예상치 못한 문제가 발생했을 때 가장 적절한 대응은 무엇인가요?', options: ['바로 종료한다', '감정적으로 대응한다', '상황을 정리하고 안내한다', '참여자에게 책임을 돌린다'], correct: 3 },
 
-  { no:6, type:'Participant Guide', group:'participant', score:20, q:'참여자는 참여 전에 기본 가이드와 규칙을 먼저 확인하는 것이 좋다.', a:['맞다','틀리다'], correct:0 },
-  { no:7, type:'Participant Guide', group:'participant', score:20, q:'참여자는 닉네임과 참여 정보를 정확하게 맞추는 것이 좋다.', a:['맞다','틀리다'], correct:0 },
-  { no:8, type:'Participant Guide', group:'participant', score:20, q:'참여자는 본인 방식이 편하면 안내를 보지 않아도 된다.', a:['맞다','틀리다'], correct:1 },
-  { no:9, type:'Participant Guide', group:'participant', score:20, q:'참여자는 주최자 공지를 확인하면서 진행 흐름을 따라가는 것이 좋다.', a:['맞다','틀리다'], correct:0 },
-  { no:10, type:'Participant Guide', group:'participant', score:20, q:'참여자는 문제가 생기면 우선 가이드를 다시 확인하는 태도가 필요하다.', a:['맞다','틀리다'], correct:0 },
+  { no: 6, group: 'participant', question: '레이드에 참여할 때 가장 올바른 행동은 무엇인가요?', options: ['분위기를 보고 바로 참여한다', '주최자의 모집글 양식에 맞춰 작성한다', '주최자 친구추가 후 모집글을 다시 작성한다', '참여하고 싶다고 계속 멘션한다'], correct: 2 },
+  { no: 7, group: 'participant', question: '처음 들어온 참여자가 가장 바람직하게 행동하는 방법은 무엇인가요?', options: ['공지사항과 가이드를 읽고 양식에 맞춰 닉네임을 수정한다', '근처 레이드를 위해 바로 모집글을 작성한다', '일단 궁금한 것부터 묻는다', '모집글이 보이면 참여부터 한다'], correct: 1 },
+  { no: 8, group: 'participant', question: '참여 전 체크해야 할 항목이 아닌 것은 무엇인가요?', options: ['리모트 보유 수량 또는 코인 여부', '리모트 상한 여부', '현재 보스의 100CP를 외우는 것', '친구추가 여부 확인'], correct: 3 },
+  { no: 9, group: 'participant', question: '참여 중 문제가 발생했을 때 가장 먼저 할 행동은 무엇인가요?', options: ['바로 불만부터 표현한다', '주최자를 멘션한다', '공지사항을 확인한다', '다른 사람을 탓한다'], correct: 3 },
+  { no: 10, group: 'participant', question: '참여자로서 가장 바람직한 태도는 무엇인가요?', options: ['본인 방식대로 진행한다', '주최자 안내를 참고하며 흐름을 따른다', '언제 초대하는지 계속 멘션한다', '시간 상관없이 다 참여한다'], correct: 2 },
 
-  { no:11, type:'Chat Rules', group:'chat', score:20, q:'채팅창에서는 서로 예의를 지키며 소통하는 것이 중요하다.', a:['맞다','틀리다'], correct:0 },
-  { no:12, type:'Chat Rules', group:'chat', score:20, q:'채팅창에서는 상황과 관계없이 하고 싶은 말을 자유롭게 해도 된다.', a:['맞다','틀리다'], correct:1 },
-  { no:13, type:'Chat Rules', group:'chat', score:20, q:'질문이 있을 때는 차분하게 확인하고 문의하는 태도가 좋다.', a:['맞다','틀리다'], correct:0 },
-  { no:14, type:'Chat Rules', group:'chat', score:20, q:'운영 흐름을 방해하는 말투나 행동은 피하는 것이 좋다.', a:['맞다','틀리다'], correct:0 },
-  { no:15, type:'Chat Rules', group:'chat', score:20, q:'좋은 채팅 매너는 전체 참여 경험을 더 좋게 만든다.', a:['맞다','틀리다'], correct:0 }
+  { no: 11, group: 'chat', question: '채팅창에서 가장 기본적으로 지켜야 하는 것은 무엇인가요?', options: ['자유롭게 아무 말이나 한다', '한 문장으로 최대한 길게 작성한다', '포켓몬고 관련 혼잣말은 마음껏 해도 된다', '짧게 여러 번 채팅을 쳐서 존재를 알린다'], correct: 2 },
+  { no: 12, group: 'chat', question: '채팅창 흐름을 방해하지 않기 위해 가장 적절한 행동은 무엇인가요?', options: ['예의를 지키며 말을 정리해서 보낸다', '궁금한 점이 생길 때마다 여러 개를 연달아 보낸다', '레이드를 주최하는 사람에게 멘션하여 초대해달라고 한다', '감정적인 표현을 우선한다'], correct: 1 },
+  { no: 13, group: 'chat', question: '글로벌방에서 환영받을 수 있는 유저는 누구인가요?', options: ['방금 생긴 레이드를 하기 위해 입장한 유저', '일정이 궁금하고 포켓몬고를 배우기 위해 입장한 유저', '계정교환 할 사람을 구하기 위해 입장한 유저', '타 톡방 홍보를 위해 입장한 유저'], correct: 2 },
+  { no: 14, group: 'chat', question: '다음 중 글로벌 톡방에서 써도 되는 채팅은 무엇인가요?', options: ['레이드 하실분?', '초대안왔는데..', '이거 개체값좀 봐주세요!', '친추좀'], correct: 3 },
+  { no: 15, group: 'chat', question: '이 테스트의 목적과 가장 가까운 것은 무엇인가요?', options: ['누가 더 잘났는지 경쟁하기 위해', '틀리면 참여하지 못하게 하려고', '가이드 핵심을 이해했는지 확인하고 더 좋은 참여 흐름으로 이어지게 하기 위해', '운영자만 편하게 하기 위해'], correct: 3 }
 ];
 
-const questionArea = document.getElementById('questionArea');
-const progressText = document.getElementById('progressText');
-const progressFill = document.getElementById('progressFill');
-
-function renderQuestions() {
-  questionArea.innerHTML = questions.map(item => `
-    <div class="question-card">
-      <div class="q-top">
-        <div class="q-badge">Q${item.no}</div>
-        <div class="q-type">${item.type}</div>
-      </div>
-      <h3 class="q-title">${item.q}</h3>
-      <div class="options">
-        ${item.a.map((text, idx) => `
-          <label class="option">
-            <input type="radio" name="q${item.no}" value="${idx}">
-            <span>${text}</span>
-          </label>
-        `).join('')}
-      </div>
-    </div>
-  `).join('');
-}
-renderQuestions();
+let shuffledQuestions = [];
+let answers = {};
+let currentPage = 0;
+const QUESTIONS_PER_PAGE = 3;
+const TOTAL_PAGES = 5;
 
 /* ========================
-   Inputs / Validation
+   DOM
 ======================== */
 const introSection = document.getElementById('introSection');
-const quizForm = document.getElementById('quizForm');
+const quizSection = document.getElementById('quizSection');
 const resultSection = document.getElementById('resultSection');
 
 const trainerLevel = document.getElementById('trainerLevel');
 const nickname = document.getElementById('nickname');
 
+const questionArea = document.getElementById('questionArea');
+const progressFill = document.getElementById('progressFill');
+const pageRangeText = document.getElementById('pageRangeText');
+const pageStepText = document.getElementById('pageStepText');
+
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const submitBtn = document.getElementById('submitBtn');
+const quizForm = document.getElementById('quizForm');
+
+/* ========================
+   Validation
+======================== */
 nickname.addEventListener('input', () => {
   nickname.value = nickname.value.replace(/\s+/g, '').replace(/[^ㄱ-ㅎ가-힣ㅏ-ㅣ]/g, '');
   if (/^[ㄱ-ㅎ가-힣ㅏ-ㅣ]{0,8}$/.test(nickname.value)) {
@@ -811,11 +828,8 @@ nickname.addEventListener('input', () => {
 
 trainerLevel.addEventListener('input', () => {
   trainerLevel.value = trainerLevel.value.replace(/[^0-9]/g, '');
-
   if (trainerLevel.value === '') return;
-
   let v = Number(trainerLevel.value);
-
   if (v < 1) trainerLevel.value = '1';
   if (v > 80) trainerLevel.value = '80';
 });
@@ -846,111 +860,40 @@ function validateNickname() {
 }
 
 /* ========================
-   화면 전환
+   Utility
 ======================== */
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
 function showIntro() {
   introSection.classList.remove('hidden');
-  quizForm.classList.add('hidden');
+  quizSection.classList.add('hidden');
   resultSection.classList.add('hidden');
 }
+
 function showQuiz() {
   introSection.classList.add('hidden');
-  quizForm.classList.remove('hidden');
+  quizSection.classList.remove('hidden');
   resultSection.classList.add('hidden');
 }
+
 function showResult() {
   introSection.classList.add('hidden');
-  quizForm.classList.add('hidden');
+  quizSection.classList.add('hidden');
   resultSection.classList.remove('hidden');
 }
 
-document.getElementById('startBtn').addEventListener('click', () => {
-  if (!validateTrainerLevel()) return;
-  if (!validateNickname()) return;
-
-  setCurrentDateTime();
-
-  showQuiz();
-  updateProgress();
-  window.scrollTo({ top:0, behavior:'smooth' });
-});
-
-document.getElementById('backBtn').addEventListener('click', () => {
-  quizForm.reset();
-  showIntro();
-  window.scrollTo({ top:0, behavior:'smooth' });
-});
-
-document.getElementById('retryBtn').addEventListener('click', () => {
-  quizForm.reset();
-  document.getElementById('hostFill').style.width = '0%';
-  document.getElementById('participantFill').style.width = '0%';
-  document.getElementById('chatFill').style.width = '0%';
-  document.querySelectorAll('.badge-star').forEach(star => star.classList.remove('show'));
-  document.getElementById('resultLevel').textContent = '15';
-  showQuiz();
-  updateProgress();
-  window.scrollTo({ top:0, behavior:'smooth' });
-});
-
-/* ========================
-   Progress
-======================== */
-quizForm.addEventListener('change', updateProgress);
-
-function updateProgress() {
-  let count = 0;
-  questions.forEach(item => {
-    if (quizForm.querySelector(`input[name="q${item.no}"]:checked`)) count += 1;
-  });
-  progressText.textContent = `${count} / 15`;
-  progressFill.style.width = `${(count / 15) * 100}%`;
-}
-
-/* ========================
-   계산
-======================== */
-function calcGroupScore(group) {
-  return questions
-    .filter(q => q.group === group)
-    .reduce((sum, q) => {
-      const checked = quizForm.querySelector(`input[name="q${q.no}"]:checked`);
-      if (!checked) return sum;
-      return Number(checked.value) === q.correct ? sum + q.score : sum;
-    }, 0);
-}
-
-function getTotalAverage(host, participant, chat) {
-  return Math.round((host + participant + chat) / 3);
-}
-
-function getStarData(score) {
-  if (score === 100) return { stars: 3, theme: 'red' };
-  if (score >= 80) return { stars: 3, theme: 'orange' };
-  if (score >= 60) return { stars: 2, theme: 'orange' };
-  if (score >= 40) return { stars: 1, theme: 'orange' };
-  return { stars: 0, theme: 'orange' };
-}
-
-function getSpeech(score) {
-  if (score === 100) return '이 트레이너는 모든 가이드 흐름을 매우 완벽하게 이해하고 있습니다.';
-  if (score >= 80) return '이 트레이너는 주최자·참여자·채팅창 규칙을 안정적으로 이해하고 있습니다.';
-  if (score >= 60) return '이 트레이너는 핵심 흐름을 잘 파악하고 있으며, 조금 더 익히면 더욱 좋아집니다.';
-  if (score >= 40) return '이 트레이너는 일부 흐름을 이해했지만, 가이드를 한 번 더 읽어보는 것이 좋습니다.';
-  return '이 트레이너는 먼저 기본 가이드와 채팅 규칙부터 다시 확인하는 것이 좋습니다.';
-}
-
-/* ========================
-   포맷
-======================== */
-function formatStatusTime(timeValue) {
-  const [h, m] = timeValue.split(':');
-  return `${Number(h)}:${m}`;
-}
 function formatWeightFromTime(timeValue) {
   const [h, m] = timeValue.split(':');
   return `${Number(h)}.${m}kg`;
 }
+
 function formatHeightFromDate(dateValue) {
   const date = new Date(dateValue + 'T00:00:00');
   const yy = String(date.getFullYear()).slice(2);
@@ -958,6 +901,7 @@ function formatHeightFromDate(dateValue) {
   const day = String(date.getDate()).padStart(2, '0');
   return `${yy}.${month}${day}m`;
 }
+
 function getRandomHp() {
   return Math.floor(Math.random() * (400 - 20 + 1)) + 20;
 }
@@ -968,14 +912,162 @@ function getRandomAssetIndex() {
 
 function getAssets(index) {
   return {
-    pogo: `./assets/pogo/pogo-${index}.png`,
-    icon: `./assets/icons/icon-${index}.png`,
-    advisor: `./assets/advisors/advisor-1.png`
+    pogo: `./images/pogo-${index}.png`,
+    icon: `./images/icon-${index}.png`,
+    advisor: `./images/advisor-1.png`
   };
 }
 
 /* ========================
-   레벨 애니메이션
+   Paging
+======================== */
+function renderCurrentPage() {
+  const start = currentPage * QUESTIONS_PER_PAGE;
+  const end = start + QUESTIONS_PER_PAGE;
+  const pageQuestions = shuffledQuestions.slice(start, end);
+
+  pageRangeText.textContent = `${start + 1} - ${Math.min(end, 15)} / 15`;
+  pageStepText.textContent = `${currentPage + 1} / 5`;
+  progressFill.style.width = `${((currentPage + 1) / TOTAL_PAGES) * 100}%`;
+
+  questionArea.innerHTML = pageQuestions.map((item, idx) => {
+    const absoluteIndex = start + idx;
+    return `
+      <div class="question-card">
+        <div class="q-top">
+          <div class="q-badge">Q${absoluteIndex + 1}</div>
+        </div>
+        <h3 class="q-title">${item.question}</h3>
+        <div class="options">
+          ${item.options.map((optionText, optionIndex) => `
+            <label class="option">
+              <input
+                type="radio"
+                name="q-${item.no}"
+                value="${optionIndex + 1}"
+                ${answers[item.no] === (optionIndex + 1) ? 'checked' : ''}
+              >
+              <span>${optionText}</span>
+            </label>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  prevBtn.disabled = currentPage === 0;
+  if (currentPage === TOTAL_PAGES - 1) {
+    nextBtn.classList.add('hidden');
+    submitBtn.classList.remove('hidden');
+  } else {
+    nextBtn.classList.remove('hidden');
+    submitBtn.classList.add('hidden');
+  }
+}
+
+function saveCurrentPageAnswers() {
+  const start = currentPage * QUESTIONS_PER_PAGE;
+  const end = start + QUESTIONS_PER_PAGE;
+  const pageQuestions = shuffledQuestions.slice(start, end);
+
+  pageQuestions.forEach((q) => {
+    const checked = quizForm.querySelector(`input[name="q-${q.no}"]:checked`);
+    if (checked) {
+      answers[q.no] = Number(checked.value);
+    }
+  });
+}
+
+function pageAnsweredCount() {
+  const start = currentPage * QUESTIONS_PER_PAGE;
+  const end = start + QUESTIONS_PER_PAGE;
+  const pageQuestions = shuffledQuestions.slice(start, end);
+  let count = 0;
+  pageQuestions.forEach((q) => {
+    if (quizForm.querySelector(`input[name="q-${q.no}"]:checked`) || answers[q.no]) count++;
+  });
+  return count;
+}
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  if (!validateTrainerLevel()) return;
+  if (!validateNickname()) return;
+
+  setCurrentDateTime();
+  shuffledQuestions = shuffleArray(questionBank);
+  answers = {};
+  currentPage = 0;
+
+  showQuiz();
+  renderCurrentPage();
+  window.scrollTo({ top:0, behavior:'smooth' });
+});
+
+prevBtn.addEventListener('click', () => {
+  saveCurrentPageAnswers();
+  if (currentPage > 0) {
+    currentPage--;
+    renderCurrentPage();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  saveCurrentPageAnswers();
+  if (pageAnsweredCount() < QUESTIONS_PER_PAGE) {
+    alert('현재 페이지의 3문항을 모두 선택해 주세요.');
+    return;
+  }
+  if (currentPage < TOTAL_PAGES - 1) {
+    currentPage++;
+    renderCurrentPage();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+});
+
+/* ========================
+   Scoring
+======================== */
+function countGroupCorrect(groupName) {
+  return shuffledQuestions
+    .filter(q => q.group === groupName)
+    .reduce((sum, q) => sum + (answers[q.no] === q.correct ? 1 : 0), 0);
+}
+
+function getTotalCorrect() {
+  return shuffledQuestions.reduce((sum, q) => sum + (answers[q.no] === q.correct ? 1 : 0), 0);
+}
+
+function statCountToPercent(correctCount) {
+  switch (correctCount) {
+    case 0: return 0;
+    case 1: return 16.6667;  // 0.5칸
+    case 2: return 33.3333;  // 1칸
+    case 3: return 66.6667;  // 2칸
+    case 4: return 83.3333;  // 2.5칸
+    case 5: return 100;      // 3칸
+    default: return 0;
+  }
+}
+
+function getStarData(totalCorrect) {
+  if (totalCorrect === 15) return { stars: 3, theme: 'red', redStars: true };
+  if (totalCorrect >= 12) return { stars: 3, theme: 'orange', redStars: false };
+  if (totalCorrect >= 9) return { stars: 2, theme: 'orange', redStars: false };
+  if (totalCorrect >= 6) return { stars: 1, theme: 'orange', redStars: false };
+  return { stars: 0, theme: 'orange', redStars: false };
+}
+
+function getSpeech(totalCorrect) {
+  if (totalCorrect === 15) return '완벽합니다. 이 트레이너는 모든 가이드 흐름과 채팅 규칙을 정확히 이해하고 있습니다.';
+  if (totalCorrect >= 12) return '아주 좋습니다. 이 트레이너는 전체 흐름을 안정적으로 이해하고 있습니다.';
+  if (totalCorrect >= 9) return '좋습니다. 핵심 흐름은 잘 잡았고, 조금만 더 익히면 더욱 좋아집니다.';
+  if (totalCorrect >= 6) return '기본 이해는 되어 있습니다. 가이드를 한 번 더 읽으면 훨씬 수월해질 거예요.';
+  return '먼저 기본 가이드와 채팅 규칙부터 다시 확인하는 것을 추천합니다.';
+}
+
+/* ========================
+   Level animation
 ======================== */
 function animateLevelUp(targetLevel) {
   const el = document.getElementById('resultLevel');
@@ -1011,29 +1103,39 @@ function animateLevelUp(targetLevel) {
 }
 
 /* ========================
-   결과 렌더
+   Submit
 ======================== */
 let currentRendered = null;
 
-quizForm.addEventListener('submit', async (e) => {
+quizForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const unanswered = questions.filter(q => !quizForm.querySelector(`input[name="q${q.no}"]:checked`));
-  if (unanswered.length > 0) {
-    alert(`아직 답하지 않은 문항이 있습니다. (${15 - unanswered.length}/15)`);
+  saveCurrentPageAnswers();
+
+  if (Object.keys(answers).length < 15) {
+    alert('모든 문항에 답변해 주세요.');
     return;
   }
 
-  const host = calcGroupScore('host');
-  const participant = calcGroupScore('participant');
-  const chat = calcGroupScore('chat');
-  const total = getTotalAverage(host, participant, chat);
-  const starData = getStarData(total);
+  const hostCorrect = countGroupCorrect('host');
+  const participantCorrect = countGroupCorrect('participant');
+  const chatCorrect = countGroupCorrect('chat');
+  const totalCorrect = getTotalCorrect();
+
+  const hostPercent = statCountToPercent(hostCorrect);
+  const participantPercent = statCountToPercent(participantCorrect);
+  const chatPercent = statCountToPercent(chatCorrect);
+
+  const starData = getStarData(totalCorrect);
   const assetIndex = getRandomAssetIndex();
   const assets = getAssets(assetIndex);
   const randomHp = getRandomHp();
 
-  currentRendered = { host, participant, chat, total, starData, assetIndex, assets, randomHp };
+  currentRendered = {
+    hostCorrect, participantCorrect, chatCorrect, totalCorrect,
+    hostPercent, participantPercent, chatPercent,
+    starData, assets, randomHp
+  };
 
   document.getElementById('resultLevel').textContent = '15';
   document.getElementById('resultNickname').textContent = nickname.value;
@@ -1045,11 +1147,11 @@ quizForm.addEventListener('submit', async (e) => {
   document.getElementById('resultIcon').src = assets.icon;
   document.getElementById('resultCharacter').src = assets.advisor;
 
-  document.getElementById('resultHostValue').textContent = host;
-  document.getElementById('resultParticipantValue').textContent = participant;
-  document.getElementById('resultChatValue').textContent = chat;
-  document.getElementById('resultTotalValue').textContent = total;
-  document.getElementById('speechText').textContent = getSpeech(total);
+  document.getElementById('resultHostValue').textContent = `${hostCorrect} / 5`;
+  document.getElementById('resultParticipantValue').textContent = `${participantCorrect} / 5`;
+  document.getElementById('resultChatValue').textContent = `${chatCorrect} / 5`;
+  document.getElementById('resultTotalValue').textContent = `${totalCorrect} / 15`;
+  document.getElementById('speechText').textContent = getSpeech(totalCorrect);
 
   const badgeDisc = document.getElementById('badgeDisc');
   badgeDisc.className = `badge-disc ${starData.theme}`;
@@ -1062,8 +1164,10 @@ quizForm.addEventListener('submit', async (e) => {
   document.getElementById('participantFill').style.width = '0%';
   document.getElementById('chatFill').style.width = '0%';
 
-  document.querySelectorAll('.badge-star').forEach(star => {
-    star.classList.remove('show');
+  const badgeStars = document.querySelectorAll('.badge-star');
+  badgeStars.forEach(star => {
+    star.classList.remove('show', 'red-star');
+    if (starData.redStars) star.classList.add('red-star');
   });
 
   showResult();
@@ -1074,12 +1178,11 @@ quizForm.addEventListener('submit', async (e) => {
   }, 180);
 
   setTimeout(() => {
-    document.getElementById('hostFill').style.width = `${host}%`;
-    document.getElementById('participantFill').style.width = `${participant}%`;
-    document.getElementById('chatFill').style.width = `${chat}%`;
-  }, 200);
+    document.getElementById('hostFill').style.width = `${hostPercent}%`;
+    document.getElementById('participantFill').style.width = `${participantPercent}%`;
+    document.getElementById('chatFill').style.width = `${chatPercent}%`;
+  }, 220);
 
-  const badgeStars = document.querySelectorAll('.badge-star');
   setTimeout(() => {
     for (let i = 0; i < starData.stars; i++) {
       setTimeout(() => {
@@ -1090,18 +1193,21 @@ quizForm.addEventListener('submit', async (e) => {
 });
 
 /* ========================
-   공유용 이미지 생성
+   Retry
 ======================== */
-async function makeShareImageBlob() {
-  const target = document.getElementById('captureTarget');
-  const canvas = await html2canvas(target, {
-    useCORS: true,
-    backgroundColor: null,
-    scale: 2
-  });
-  return await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
-}
+document.getElementById('retryBtn').addEventListener('click', () => {
+  answers = {};
+  currentPage = 0;
+  trainerLevel.value = '';
+  nickname.value = '';
+  document.getElementById('resultLevel').textContent = '15';
+  showIntro();
+  window.scrollTo({ top:0, behavior:'smooth' });
+});
 
+/* ========================
+   Image export
+======================== */
 async function makeShareImageDataUrl() {
   const target = document.getElementById('captureTarget');
   const canvas = await html2canvas(target, {
@@ -1123,22 +1229,21 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
 /* ========================
    Kakao Share
 ======================== */
-document.getElementById('shareBtn').addEventListener('click', async () => {
+document.getElementById('shareBtn').addEventListener('click', () => {
   if (!currentRendered) return;
 
-  const total = currentRendered.total;
+  const totalCorrect = currentRendered.totalCorrect;
   const title = `${nickname.value}님의 트레이너 결과`;
-  const description = `Lv. ${trainerLevel.value} · ${total}점`;
+  const description = `Lv. ${trainerLevel.value} · ${totalCorrect} / 15`;
 
   const baseUrl = window.location.origin + window.location.pathname;
   const resultUrl = window.location.href;
+  const fallbackImage = 'https://pokemon-global.pages.dev/og.jpg';
 
   if (!window.Kakao || !window.Kakao.isInitialized()) {
     alert('카카오 공유 키 설정이 필요합니다.');
     return;
   }
-
-  const fallbackImage = 'https://pokemon-global.pages.dev/og.jpg';
 
   window.Kakao.Share.sendDefault({
     objectType: 'feed',
