@@ -4,7 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Pokémon GO Global | 내타입 포켓몬 확인하기</title>
-
+<link rel="icon" href="/images/favicon.png" />
+  
 <meta name="description" content="Trainer Test" />
 <meta property="og:title" content="Pokémon GO Global | Trainer Test" />
 <meta property="og:description" content="나와 같은타입의 포켓몬을 확인해보세요." />
@@ -1477,16 +1478,14 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
   a.download = `trainer-result-${Date.now()}.png`;
   a.click();
 });
-  
-document.getElementById('shareBtn').addEventListener('click', () => {
+  document.getElementById('shareBtn').addEventListener('click', () => {
   if (!currentRendered) return;
 
   const profile = currentRendered.profileResult;
   const shareImageUrl = currentRendered.shareImageUrl;
-  const baseUrl = window.location.origin + window.location.pathname;
 
-  const title = `${profile.type} 타입 트레이너 결과`;
-  const description = `${profile.mainCopy}`;
+  const baseUrl = window.location.origin + window.location.pathname;
+  const buttonUrl = `${baseUrl}?from=kakao_button`;
 
   if (!window.Kakao) {
     alert('카카오 SDK가 로드되지 않았습니다.');
@@ -1501,8 +1500,8 @@ document.getElementById('shareBtn').addEventListener('click', () => {
   window.Kakao.Share.sendDefault({
     objectType: 'feed',
     content: {
-      title: title,
-      description: description,
+      title: `${profile.type} 타입 트레이너 결과`,
+      description: `${profile.mainCopy}`,
       imageUrl: shareImageUrl,
       link: {
         mobileWebUrl: baseUrl,
@@ -1511,10 +1510,10 @@ document.getElementById('shareBtn').addEventListener('click', () => {
     },
     buttons: [
       {
-        title: '테스트 하러가기',
+        title: '나도 테스트 하러가기',
         link: {
-          mobileWebUrl: baseUrl,
-          webUrl: baseUrl
+          mobileWebUrl: buttonUrl,
+          webUrl: buttonUrl
         }
       }
     ]
