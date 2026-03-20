@@ -756,26 +756,28 @@ body{
         <div class="hp-line"><div class="hp-fill"></div></div>
         <div class="hp-text" id="resultHpText">121 / 121 HP</div>
 
-        <div class="info-3">
-          <div class="info-col">
-            <div class="info-value" id="resultWeight">9.57kg</div>
-            <div class="info-label">참여 시간</div>
-            <div class="type-detail-box">
+<div class="info-3">
+  <div class="info-col">
+    <div class="info-value" id="resultWeight">9.57kg</div>
+    <div class="info-label">참여 시간</div>
+  </div>
+
+  <div class="info-col">
+    <img class="info-icon" id="resultIcon" src="" alt="icon">
+    <div class="info-value info-type-value" id="resultType">🌿 풀</div>
+    <div class="info-label">타입</div>
+  </div>
+
+  <div class="info-col">
+    <div class="info-value" id="resultHeight">26.320m</div>
+    <div class="info-label">참여 날짜</div>
+  </div>
+</div>
+
+<div class="type-detail-box">
   <div class="type-maincopy" id="resultMainCopy">꾸준함으로 승리를 만드는 트레이너</div>
   <div class="type-playstyle" id="resultPlayStyle">서포트 / 장기전 / 안정 운영</div>
 </div>
-          </div>
-<div class="info-col">
-  <img class="info-icon" id="resultIcon" src="" alt="icon">
-  <div class="info-value info-type-value" id="resultType">🌿 풀</div>
-  <div class="info-label">타입</div>
-</div>
-          <div class="info-col">
-            <div class="info-value" id="resultHeight">26.320m</div>
-            <div class="info-label">참여 날짜</div>
-          </div>
-        </div>
-      </div>
 
       <div class="appraisal-badge">
         <img src="./images/badge-ring.png" class="badge-ring" alt="badge ring">
@@ -1187,7 +1189,7 @@ function pageAnsweredCount() {
   return count;
 }
 
-document.getElementById('resultPlayStyle').textContent = profileResult.playStyle;
+document.getElementById('startBtn').addEventListener('click', () => {
   if (!validateTrainerLevel()) return;
   if (!validateNickname()) return;
 
@@ -1361,7 +1363,7 @@ document.getElementById('resultHpText').textContent = `${randomHp} / ${randomHp}
 
 document.getElementById('resultType').textContent = profileResult.type;
 document.getElementById('resultMainCopy').textContent = profileResult.mainCopy;
-document.getElementById('resultPlayStyle').textContent = `${profileResult.playStyle} · ${profileResult.letters}`;
+document.getElementById('resultPlayStyle').textContent = profileResult.playStyle;
 
 document.getElementById('resultPogo').src = assets.pogo;
 document.getElementById('resultIcon').src = assets.icon;
