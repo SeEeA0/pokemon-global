@@ -677,6 +677,13 @@ body{
   .type-detail-box{
   margin:8px auto 0;
 }
+
+  .capture-ios{
+  width:390px !important;
+  max-width:390px !important;
+  min-width:390px !important;
+  margin:0 auto !important;
+}
   
 </style>
 </head>
@@ -905,7 +912,7 @@ const typeProfiles = {
   ESTP: { ex:'ex5', type:'불', mainCopy:'폭발적인 에너지로 판을 뒤집는 트레이너', playStyle:'공격 중심 / 빠른 전개', icon:'icon-5', pogo:'pogo-5' },
   ISFJ: { ex:'ex6', type:'바위', mainCopy:'흔들리지 않는 안정의 중심', playStyle:'수비형 / 버티기', icon:'icon-6', pogo:'pogo-6' },
   ESFJ: { ex:'ex7', type:'물', mainCopy:'흐름을 읽고 판을 지배하는 전략가', playStyle:'밸런스 / 상황 대응', icon:'icon-7', pogo:'pogo-7' },
-  ENFJ: { ex:'ex8', type:'페어리', mainCopy:'분위기를 바꾸는 감성 플레이어', playStyle:'팀 시너지 / 서포트', icon:'icon-8', pogo:'pogo-8' },
+  ENFJ: { ex:'ex8', type:'전기', mainCopy:'주변을 환하게 밝히는 사랑스러운 트레이너', playStyle:'친화형 / 밝은 에너지', icon:'icon-8', pogo:'pogo-8' },
   INTP: { ex:'ex9', type:'고스트', mainCopy:'보이지 않는 흐름을 읽는 플레이어', playStyle:'트릭형 / 변수 창출', icon:'icon-9', pogo:'pogo-9' },
   ESFP: { ex:'ex10', type:'격투', mainCopy:'정면 승부로 상대를 압도하는 트레이너', playStyle:'직진형 / 공격 집중', icon:'icon-10', pogo:'pogo-10' },
   ISFP: { ex:'ex11', type:'노말', mainCopy:'편안함 속에서 강함을 만드는 트레이너', playStyle:'안정형 / 무난 / 지속 성장', icon:'icon-11', pogo:'pogo-11' },
@@ -1439,11 +1446,21 @@ document.getElementById('retryBtn').addEventListener('click', () => {
 
 async function makeShareImageDataUrl() {
   const target = document.getElementById('captureTarget');
+
+  target.classList.add('capture-ios');
+
+  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+
   const canvas = await html2canvas(target, {
     useCORS: true,
     backgroundColor: null,
-    scale: 2
+    scale: 3,
+    width: 390,
+    windowWidth: 390
   });
+
+  target.classList.remove('capture-ios');
+
   return canvas.toDataURL('image/png');
 }
 
