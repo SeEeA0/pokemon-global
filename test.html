@@ -764,8 +764,8 @@ body{
 
   <div class="info-col">
     <img class="info-icon" id="resultIcon" src="" alt="icon">
-    <div class="info-value info-type-value" id="resultType">🌿 풀</div>
-    <div class="info-label">타입</div>
+    <div class="info-value info-type-value" id="resultType">풀</div>
+    <div class="info-label"></div>
   </div>
 
   <div class="info-col">
@@ -893,22 +893,22 @@ const questionBank = [
   const profileQuestionNos = [16, 17, 18, 19, 20];
 
 const typeProfiles = {
-  ESTJ: { ex:'ex1', type:'🌿 풀', mainCopy:'꾸준함으로 승리를 만드는 트레이너', playStyle:'서포트 / 장기전 / 안정 운영', icon:'icon-1', pogo:'pogo-1' },
-  ISTJ: { ex:'ex2', type:'❄️ 얼음', mainCopy:'냉정하게 판을 읽는 분석가', playStyle:'계산형 / 리스크 최소화', icon:'icon-2', pogo:'pogo-2' },
-  ENTJ: { ex:'ex3', type:'⚙️ 강철', mainCopy:'완벽을 추구하는 구조적 플레이어', playStyle:'체계적 운영 / 안정형', icon:'icon-3', pogo:'pogo-3' },
-  ENTP: { ex:'ex4', type:'🐉 드래곤', mainCopy:'압도적인 힘으로 판을 지배하는 존재', playStyle:'캐리형 / 하이리스크', icon:'icon-4', pogo:'pogo-4' },
-  ESTP: { ex:'ex5', type:'🔥 불', mainCopy:'폭발적인 에너지로 판을 뒤집는 트레이너', playStyle:'공격 중심 / 빠른 전개', icon:'icon-5', pogo:'pogo-5' },
-  ISFJ: { ex:'ex6', type:'🪨 바위', mainCopy:'흔들리지 않는 안정의 중심', playStyle:'수비형 / 버티기', icon:'icon-6', pogo:'pogo-6' },
-  ESFJ: { ex:'ex7', type:'💧 물', mainCopy:'흐름을 읽고 판을 지배하는 전략가', playStyle:'밸런스 / 상황 대응', icon:'icon-7', pogo:'pogo-7' },
-  ENFJ: { ex:'ex8', type:'✨ 페어리', mainCopy:'분위기를 바꾸는 감성 플레이어', playStyle:'팀 시너지 / 서포트', icon:'icon-8', pogo:'pogo-8' },
-  INTP: { ex:'ex9', type:'👻 고스트', mainCopy:'보이지 않는 흐름을 읽는 플레이어', playStyle:'트릭형 / 변수 창출', icon:'icon-9', pogo:'pogo-9' },
-  ESFP: { ex:'ex10', type:'👊 격투', mainCopy:'정면 승부로 상대를 압도하는 트레이너', playStyle:'직진형 / 공격 집중', icon:'icon-10', pogo:'pogo-10' },
-  ISFP: { ex:'ex11', type:'🟤 노말', mainCopy:'편안함 속에서 강함을 만드는 트레이너', playStyle:'안정형 / 무난 / 지속 성장', icon:'icon-11', pogo:'pogo-11' },
-  INTJ: { ex:'ex12', type:'🔮 에스퍼', mainCopy:'한 수 앞을 내다보는 전략 설계자', playStyle:'전략형 / 컨트롤', icon:'icon-12', pogo:'pogo-12' },
-  ISTP: { ex:'ex13', type:'🌍 땅', mainCopy:'현실적인 판단으로 승리를 쌓는 트레이너', playStyle:'실전형 / 기본기 중심', icon:'icon-13', pogo:'pogo-13' },
-  ENTJ_ALT: { ex:'ex14', type:'😈 악', mainCopy:'상대의 빈틈을 노리는 계산된 플레이어', playStyle:'심리전 / 카운터', icon:'icon-14', pogo:'pogo-14' },
-  INFP: { ex:'ex15', type:'🟤 노멀', mainCopy:'틀에 얽매이지 않는 자유로운 플레이어', playStyle:'자유형 / 유연 플레이', icon:'icon-15', pogo:'pogo-15' },
-  ENFP: { ex:'ex16', type:'🕊 비행', mainCopy:'자유로운 움직임으로 흐름을 바꾸는 플레이어', playStyle:'회피 / 기동 / 유연 대응', icon:'icon-16', pogo:'pogo-16' }
+  ESTJ: { ex:'ex1', type:'풀', mainCopy:'꾸준함으로 승리를 만드는 트레이너', playStyle:'서포트 / 장기전 / 안정 운영', icon:'icon-1', pogo:'pogo-1' },
+  ISTJ: { ex:'ex2', type:'얼음', mainCopy:'냉정하게 판을 읽는 분석가', playStyle:'계산형 / 리스크 최소화', icon:'icon-2', pogo:'pogo-2' },
+  ENTJ: { ex:'ex3', type:'강철', mainCopy:'완벽을 추구하는 구조적 플레이어', playStyle:'체계적 운영 / 안정형', icon:'icon-3', pogo:'pogo-3' },
+  ENTP: { ex:'ex4', type:'드래곤', mainCopy:'압도적인 힘으로 판을 지배하는 존재', playStyle:'캐리형 / 하이리스크', icon:'icon-4', pogo:'pogo-4' },
+  ESTP: { ex:'ex5', type:'불', mainCopy:'폭발적인 에너지로 판을 뒤집는 트레이너', playStyle:'공격 중심 / 빠른 전개', icon:'icon-5', pogo:'pogo-5' },
+  ISFJ: { ex:'ex6', type:'바위', mainCopy:'흔들리지 않는 안정의 중심', playStyle:'수비형 / 버티기', icon:'icon-6', pogo:'pogo-6' },
+  ESFJ: { ex:'ex7', type:'물', mainCopy:'흐름을 읽고 판을 지배하는 전략가', playStyle:'밸런스 / 상황 대응', icon:'icon-7', pogo:'pogo-7' },
+  ENFJ: { ex:'ex8', type:'페어리', mainCopy:'분위기를 바꾸는 감성 플레이어', playStyle:'팀 시너지 / 서포트', icon:'icon-8', pogo:'pogo-8' },
+  INTP: { ex:'ex9', type:'고스트', mainCopy:'보이지 않는 흐름을 읽는 플레이어', playStyle:'트릭형 / 변수 창출', icon:'icon-9', pogo:'pogo-9' },
+  ESFP: { ex:'ex10', type:'격투', mainCopy:'정면 승부로 상대를 압도하는 트레이너', playStyle:'직진형 / 공격 집중', icon:'icon-10', pogo:'pogo-10' },
+  ISFP: { ex:'ex11', type:'노말', mainCopy:'편안함 속에서 강함을 만드는 트레이너', playStyle:'안정형 / 무난 / 지속 성장', icon:'icon-11', pogo:'pogo-11' },
+  INTJ: { ex:'ex12', type:'에스퍼', mainCopy:'한 수 앞을 내다보는 전략 설계자', playStyle:'전략형 / 컨트롤', icon:'icon-12', pogo:'pogo-12' },
+  ISTP: { ex:'ex13', type:'땅', mainCopy:'현실적인 판단으로 승리를 쌓는 트레이너', playStyle:'실전형 / 기본기 중심', icon:'icon-13', pogo:'pogo-13' },
+  ENTJ_ALT: { ex:'ex14', type:'악', mainCopy:'상대의 빈틈을 노리는 계산된 플레이어', playStyle:'심리전 / 카운터', icon:'icon-14', pogo:'pogo-14' },
+  INFP: { ex:'ex15', type:'노멀', mainCopy:'틀에 얽매이지 않는 자유로운 플레이어', playStyle:'자유형 / 유연 플레이', icon:'icon-15', pogo:'pogo-15' },
+  ENFP: { ex:'ex16', type:'비행', mainCopy:'자유로운 움직임으로 흐름을 바꾸는 플레이어', playStyle:'회피 / 기동 / 유연 대응', icon:'icon-16', pogo:'pogo-16' }
 };
 
 let shuffledQuestions = [];
