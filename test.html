@@ -1353,12 +1353,13 @@ const starData = getStarData(totalCorrect);
 const profileLetters = getProfileLetters();
 const profileResult = getProfileByLetters(profileLetters);
 const assets = getProfileAssets(profileResult);
+const shareImageUrl = getShareImageUrl(profileResult);
 const randomHp = getRandomHp();
 
 currentRendered = {
   hostCorrect, participantCorrect, chatCorrect, totalCorrect,
   hostPercent, participantPercent, chatPercent,
-  starData, assets, randomHp, profileResult
+  starData, assets, shareImageUrl, randomHp, profileResult
 };
   
 document.getElementById('resultLevel').textContent = '15';
@@ -1446,17 +1447,18 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
   a.download = `trainer-result-${Date.now()}.png`;
   a.click();
 });
-
 document.getElementById('shareBtn').addEventListener('click', () => {
   if (!currentRendered) return;
 
   const totalCorrect = currentRendered.totalCorrect;
-  const title = `${nickname.value}님의 트레이너 결과`;
-  const description = `Trainer Lv. ${trainerLevel.value} · ${currentRendered.profileResult.type} · ${totalCorrect} / 15`;
+  const profile = currentRendered.profileResult;
+  const shareImageUrl = currentRendered.shareImageUrl;
 
   const baseUrl = window.location.origin + window.location.pathname;
   const resultUrl = window.location.href;
-  const fallbackImage = 'https://pokemon-global.pages.dev/og.jpg';
+
+  const title = `${profile.type} 트레이너 테스트`;
+  const description = `${profile.mainCopy} · ${profile.playStyle}`;
 
   if (!window.Kakao || !window.Kakao.isInitialized()) {
     alert('카카오 공유 키 설정이 필요합니다.');
@@ -1466,9 +1468,9 @@ document.getElementById('shareBtn').addEventListener('click', () => {
   window.Kakao.Share.sendDefault({
     objectType: 'feed',
     content: {
-      title,
-      description,
-      imageUrl: fallbackImage,
+      title: title,
+      description: description,
+      imageUrl: shareImageUrl,
       link: {
         mobileWebUrl: resultUrl,
         webUrl: resultUrl
@@ -1476,14 +1478,7 @@ document.getElementById('shareBtn').addEventListener('click', () => {
     },
     buttons: [
       {
-        title: '결과 보기',
-        link: {
-          mobileWebUrl: resultUrl,
-          webUrl: resultUrl
-        }
-      },
-      {
-        title: '테스트 하기',
+        title: '테스트 하러가기',
         link: {
           mobileWebUrl: baseUrl,
           webUrl: baseUrl
