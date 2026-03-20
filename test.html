@@ -857,8 +857,16 @@ body{
 
 <script>
 const KAKAO_JS_KEY = 'a9b34626a97035962f44ebb33091147d';
-if (window.Kakao && !window.Kakao.isInitialized()) {
-  try { window.Kakao.init(KAKAO_JS_KEY); } catch (e) {}
+
+if (!window.Kakao) {
+  console.error('Kakao SDK not loaded');
+} else if (!window.Kakao.isInitialized()) {
+  try {
+    window.Kakao.init(KAKAO_JS_KEY);
+    console.log('Kakao initialized:', window.Kakao.isInitialized());
+  } catch (e) {
+    console.error('Kakao init failed:', e);
+  }
 }
 
 let currentTime = '';
@@ -1136,7 +1144,7 @@ function getProfileAssets(profile) {
   };
 }
 
-  const SHARE_IMAGE_BASE_URL = `${window.location.origin}/images`;
+const SHARE_IMAGE_BASE_URL = `${window.location.origin}/images`;
 
 function getShareImageUrl(profile) {
   const imageNumber = profile.icon.replace('icon-', '');
@@ -1471,21 +1479,24 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
   a.download = `trainer-result-${Date.now()}.png`;
   a.click();
 });
+  
 document.getElementById('shareBtn').addEventListener('click', () => {
   if (!currentRendered) return;
 
-  const totalCorrect = currentRendered.totalCorrect;
   const profile = currentRendered.profileResult;
   const shareImageUrl = currentRendered.shareImageUrl;
-
   const baseUrl = window.location.origin + window.location.pathname;
-  const resultUrl = window.location.href;
 
-  const title = `${profile.type} 트레이너 테스트`;
-  const description = `${profile.mainCopy} · ${profile.playStyle}`;
+  const title = `${profile.type} 타입 트레이너 결과`;
+  const description = `${profile.mainCopy}`;
 
-  if (!window.Kakao || !window.Kakao.isInitialized()) {
-    alert('카카오 공유 키 설정이 필요합니다.');
+  if (!window.Kakao) {
+    alert('카카오 SDK가 로드되지 않았습니다.');
+    return;
+  }
+
+  if (!window.Kakao.isInitialized()) {
+    alert('카카오 JavaScript 키 또는 도메인 설정을 확인해주세요.');
     return;
   }
 
@@ -1496,8 +1507,8 @@ document.getElementById('shareBtn').addEventListener('click', () => {
       description: description,
       imageUrl: shareImageUrl,
       link: {
-        mobileWebUrl: resultUrl,
-        webUrl: resultUrl
+        mobileWebUrl: baseUrl,
+        webUrl: baseUrl
       }
     },
     buttons: [
