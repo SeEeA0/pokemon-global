@@ -252,41 +252,13 @@ body{
   font-size:13px;
 }
 
-.scale-guide{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:6px;
-  margin:12px 0 16px;
-}
-.scale-guide-item{
-  background:#f7f9ff;
-  border:1px solid #e6ecff;
-  border-radius:14px;
-  padding:8px 4px;
-  text-align:center;
-}
-.scale-guide-num{
-  display:block;
-  font-size:12px;
-  font-weight:900;
-  color:#4a59b7;
-  margin-bottom:3px;
-}
-.scale-guide-text{
-  display:block;
-  font-size:10px;
-  line-height:1.25;
-  color:#7b88a0;
-  font-weight:700;
-}
-
 .question-card{
   background:linear-gradient(180deg,#ffffff 0%, #fbfcff 100%);
   border:1px solid #edf1f7;
   border-radius:20px;
   box-shadow:0 10px 24px rgba(31,42,68,.05);
   padding:14px;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 .q-top{
   display:flex;
@@ -296,61 +268,109 @@ body{
   margin-bottom:8px;
 }
 .q-badge{
-  padding:5px 11px;
+  min-width:44px;
+  padding:6px 12px;
   border-radius:999px;
   background:linear-gradient(135deg,#eef2ff 0%, #edf7ff 100%);
   color:#4957b8;
-  font-size:11px;
-  font-weight:800;
+  font-size:12px;
+  font-weight:900;
   border:1px solid #dde5ff;
+  text-align:center;
 }
 .q-title{
   font-size:15px;
   font-weight:800;
-  margin:0 0 10px;
+  margin:0 0 14px;
   line-height:1.45;
   color:#213351;
   letter-spacing:-.01em;
 }
-.options{
+
+.scale-text-row{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:6px;
+  margin-bottom:10px;
 }
-.option{
+.scale-text-row div{
+  font-size:10px;
+  line-height:1.25;
+  color:#7b88a0;
+  font-weight:800;
+  text-align:center;
+  letter-spacing:-.02em;
+}
+.scale-text-row div:nth-child(1),
+.scale-text-row div:nth-child(5){
+  font-size:9px;
+}
+
+.options{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  align-items:center;
+  gap:0;
+  padding:8px 0 2px;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:none;
+}
+.scale-track{
+  position:absolute;
+  left:12%;
+  right:12%;
+  top:50%;
+  height:6px;
+  transform:translateY(-50%);
+  border-radius:999px;
+  background:linear-gradient(90deg,#e3e9f6 0%, #dfe6f4 100%);
+  z-index:0;
+}
+.scale-track-fill{
+  position:absolute;
+  left:12%;
+  width:0%;
+  top:50%;
+  height:6px;
+  transform:translateY(-50%);
+  border-radius:999px;
+  background:linear-gradient(90deg,#8d85ff 0%, #72dfff 55%, #7ef0cb 100%);
+  z-index:1;
+  transition:width .22s ease;
+}
+.circle{
+  position:relative;
+  z-index:2;
+  width:42px;
+  height:42px;
+  margin:0 auto;
+  border-radius:50%;
+  border:2px solid #dbe3f0;
+  background:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
-  border:1px solid #e7edf2;
-  border-radius:14px;
-  padding:10px 2px;
+  font-size:13px;
+  font-weight:900;
+  color:#61718b;
   cursor:pointer;
-  background:#fff;
-  transition:border-color .2s ease, background .2s ease, transform .18s ease, box-shadow .18s ease;
-  min-height:48px;
+  transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+  box-shadow:0 4px 10px rgba(21,31,63,.04);
 }
-.option:hover{
-  border-color:#cbd5ff;
-  background:#fafbff;
+.circle:hover{
   transform:translateY(-1px);
+  border-color:#bfcaff;
 }
-.option input{
-  display:none;
+.circle.active{
+  background:linear-gradient(135deg,#7b78ff 0%, #5b66ff 42%, #3e4dc8 100%);
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 10px 18px rgba(83,92,222,.24);
 }
-.option span{
-  font-size:12px;
-  line-height:1.2;
-  font-weight:800;
-  color:#4b5a77;
-  text-align:center;
-}
-.option.checked{
-  border-color:#7d84ff;
-  background:linear-gradient(180deg,#f4f5ff 0%, #eef6ff 100%);
-  box-shadow:0 8px 18px rgba(77,92,193,.10);
-}
-.option.checked span{
-  color:#3949b2;
+.circle span{
+  pointer-events:none;
 }
 
 .divider,
@@ -673,13 +693,59 @@ body{
   line-height:1.5;
 }
 
+#analyzingOverlay{
+  position:absolute;
+  inset:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(18,24,66,.28);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  border-radius:32px;
+}
+.analyzing-box{
+  min-width:220px;
+  padding:22px 20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 18px 34px rgba(17,24,58,.16);
+  text-align:center;
+}
+.analyzing-spinner{
+  width:34px;
+  height:34px;
+  margin:0 auto 12px;
+  border-radius:50%;
+  border:3px solid #dfe5ff;
+  border-top-color:#6e78ff;
+  animation:spinAnalyzing .9s linear infinite;
+}
+.analyzing-text{
+  font-size:15px;
+  font-weight:800;
+  color:#44557d;
+  letter-spacing:-.01em;
+}
+@keyframes spinAnalyzing{
+  to{ transform:rotate(360deg); }
+}
+
 @media (max-width:480px){
   .wrap{padding:18px 14px 72px}
   .hero h1{font-size:28px}
   .btn{font-size:14px}
   .input{font-size:16px}
   .q-title{font-size:14px}
-  .option span{font-size:11px}
+  .circle{
+    width:40px;
+    height:40px;
+    font-size:12px;
+  }
+  .scale-text-row div{
+    font-size:9px;
+  }
 }
 
 .info-type-value{
@@ -700,7 +766,6 @@ body{
   background:linear-gradient(180deg, rgba(126,122,255,.10) 0%, rgba(111,210,255,.08) 100%);
   border:1px solid rgba(112,120,255,.14);
 }
-
 .type-maincopy{
   font-size:18px;
   line-height:1.45;
@@ -708,7 +773,6 @@ body{
   color:#2f3f7b;
   letter-spacing:-.02em;
 }
-
 .type-playstyle{
   margin-top:8px;
   font-size:13px;
@@ -768,15 +832,7 @@ body{
 
       <div class="question-page-head">
         <strong>테스트 진행 중</strong>
-        <p>각 페이지마다 4문항씩, 가장 가까운 번호를 선택해 주세요.</p>
-      </div>
-
-      <div class="scale-guide">
-        <div class="scale-guide-item"><span class="scale-guide-num">1</span><span class="scale-guide-text">매우<br>그렇다</span></div>
-        <div class="scale-guide-item"><span class="scale-guide-num">2</span><span class="scale-guide-text">그렇다</span></div>
-        <div class="scale-guide-item"><span class="scale-guide-num">3</span><span class="scale-guide-text">보통</span></div>
-        <div class="scale-guide-item"><span class="scale-guide-num">4</span><span class="scale-guide-text">아니다</span></div>
-        <div class="scale-guide-item"><span class="scale-guide-num">5</span><span class="scale-guide-text">매우<br>아니다</span></div>
+        <p>각 페이지마다 4문항씩, 가장 가까운 정도를 선택해 주세요.</p>
       </div>
 
       <form id="quizForm">
@@ -793,6 +849,13 @@ body{
 
   <section id="resultSection" class="hidden">
     <div class="result-screen" id="captureTarget">
+      <div id="analyzingOverlay" class="hidden">
+        <div class="analyzing-box">
+          <div class="analyzing-spinner"></div>
+          <div class="analyzing-text">결과 분석 중입니다...</div>
+        </div>
+      </div>
+
       <div class="result-top">
         <div class="lv-text">
           <span class="lv-prefix">Trainer Lv.</span>
@@ -915,315 +978,56 @@ if (!window.Kakao) {
   }
 }
 
-const SCALE_OPTIONS = [
-  { value: 1, text: '1' },
-  { value: 2, text: '2' },
-  { value: 3, text: '3' },
-  { value: 4, text: '4' },
-  { value: 5, text: '5' }
-];
+const SCALE_LABELS = ['매우 그렇다', '그렇다', '보통', '아니다', '매우 아니다'];
 
 const questionBank = [
-  {
-    no: 1,
-    question: '레이드가 열리면 내가 먼저 사람을 모으고 흐름을 만드는 편이다.',
-    effects: { 전기: 2, 비행: 1, 격투: 1 }
-  },
-  {
-    no: 2,
-    question: '배틀 전에 상성, 기술, 순서를 먼저 계산해두는 편이다.',
-    effects: { 에스퍼: 2, 강철: 1, 얼음: 1 }
-  },
-  {
-    no: 3,
-    question: '이벤트에서는 순간 판단과 속도로 움직이는 편이다.',
-    effects: { 전기: 2, 불: 1, 비행: 1 }
-  },
-  {
-    no: 4,
-    question: '나는 꾸준히 플레이하면서 천천히 강해지는 스타일에 가깝다.',
-    effects: { 풀: 2, 물: 1, 노말: 1 }
-  },
-  {
-    no: 5,
-    question: '정면 승부가 필요한 상황에서는 망설이지 않고 밀어붙인다.',
-    effects: { 격투: 2, 불: 1, 드래곤: 1 }
-  },
-  {
-    no: 6,
-    question: '무너지지 않는 안정감과 버티는 운영이 더 편하다.',
-    effects: { 강철: 2, 바위: 1, 땅: 1 }
-  },
-  {
-    no: 7,
-    question: '상황에 따라 흐름을 바꾸고 유연하게 대응하는 편이다.',
-    effects: { 물: 2, 비행: 1, 페어리: 1 }
-  },
-  {
-    no: 8,
-    question: '상대가 예상하지 못한 변수와 기습을 만드는 플레이를 좋아한다.',
-    effects: { 고스트: 2, 악: 1, 전기: 1 }
-  },
-  {
-    no: 9,
-    question: '강한 힘과 존재감으로 판 전체를 장악하고 싶다.',
-    effects: { 드래곤: 2, 불: 1, 격투: 1 }
-  },
-  {
-    no: 10,
-    question: '기본기와 밸런스가 좋은 플레이가 가장 오래 간다고 생각한다.',
-    effects: { 노말: 2, 물: 1, 땅: 1 }
-  },
-  {
-    no: 11,
-    question: '상대의 빈틈을 보고 카운터를 치는 방식이 잘 맞는다.',
-    effects: { 악: 2, 에스퍼: 1, 고스트: 1 }
-  },
-  {
-    no: 12,
-    question: '복잡한 상황에서도 감정보다 냉정한 판단이 먼저다.',
-    effects: { 얼음: 2, 강철: 1, 에스퍼: 1 }
-  },
-  {
-    no: 13,
-    question: '내 플레이는 자유롭고 얽매이지 않는 편이라고 느낀다.',
-    effects: { 비행: 2, 페어리: 1, 전기: 1 }
-  },
-  {
-    no: 14,
-    question: '레이드나 이벤트에서는 주변 사람들과 호흡을 맞추는 게 중요하다.',
-    effects: { 페어리: 2, 풀: 1, 물: 1 }
-  },
-  {
-    no: 15,
-    question: '배틀은 결국 실전 감각과 현실적인 판단이 중요하다고 본다.',
-    effects: { 땅: 2, 바위: 1, 노말: 1 }
-  },
-  {
-    no: 16,
-    question: '상대의 다음 움직임을 먼저 읽고 한 수 앞서 가는 편이다.',
-    effects: { 에스퍼: 2, 얼음: 1, 고스트: 1 }
-  },
-  {
-    no: 17,
-    question: '느리더라도 묵직한 한 방이 있는 플레이가 더 좋다.',
-    effects: { 바위: 2, 강철: 1, 드래곤: 1 }
-  },
-  {
-    no: 18,
-    question: '전장의 중심을 잡아주고 팀 전체를 안정시키는 역할이 잘 맞는다.',
-    effects: { 물: 2, 풀: 1, 페어리: 1 }
-  },
-  {
-    no: 19,
-    question: '결정적인 순간에는 빠르게 치고 빠지는 움직임이 잘 맞는다.',
-    effects: { 전기: 2, 비행: 1, 고스트: 1 }
-  },
-  {
-    no: 20,
-    question: '나는 화려함보다 꾸준한 완성도와 신뢰감을 더 중요하게 본다.',
-    effects: { 노말: 2, 강철: 1, 땅: 1 }
-  }
+  { no: 1, question: '레이드가 열리면 내가 먼저 사람을 모으고 흐름을 만드는 편이다.', effects: { 전기: 2, 비행: 1, 격투: 1 } },
+  { no: 2, question: '배틀 전에 상성, 기술, 순서를 먼저 계산해두는 편이다.', effects: { 에스퍼: 2, 강철: 1, 얼음: 1 } },
+  { no: 3, question: '이벤트에서는 순간 판단과 속도로 움직이는 편이다.', effects: { 전기: 2, 불: 1, 비행: 1 } },
+  { no: 4, question: '나는 꾸준히 플레이하면서 천천히 강해지는 스타일에 가깝다.', effects: { 풀: 2, 물: 1, 노말: 1 } },
+  { no: 5, question: '정면 승부가 필요한 상황에서는 망설이지 않고 밀어붙인다.', effects: { 격투: 2, 불: 1, 드래곤: 1 } },
+  { no: 6, question: '무너지지 않는 안정감과 버티는 운영이 더 편하다.', effects: { 강철: 2, 바위: 1, 땅: 1 } },
+  { no: 7, question: '상황에 따라 흐름을 바꾸고 유연하게 대응하는 편이다.', effects: { 물: 2, 비행: 1, 페어리: 1 } },
+  { no: 8, question: '상대가 예상하지 못한 변수와 기습을 만드는 플레이를 좋아한다.', effects: { 고스트: 2, 악: 1, 전기: 1 } },
+  { no: 9, question: '강한 힘과 존재감으로 판 전체를 장악하고 싶다.', effects: { 드래곤: 2, 불: 1, 격투: 1 } },
+  { no: 10, question: '기본기와 밸런스가 좋은 플레이가 가장 오래 간다고 생각한다.', effects: { 노말: 2, 물: 1, 땅: 1 } },
+  { no: 11, question: '상대의 빈틈을 보고 카운터를 치는 방식이 잘 맞는다.', effects: { 악: 2, 에스퍼: 1, 고스트: 1 } },
+  { no: 12, question: '복잡한 상황에서도 감정보다 냉정한 판단이 먼저다.', effects: { 얼음: 2, 강철: 1, 에스퍼: 1 } },
+  { no: 13, question: '내 플레이는 자유롭고 얽매이지 않는 편이라고 느낀다.', effects: { 비행: 2, 페어리: 1, 전기: 1 } },
+  { no: 14, question: '레이드나 이벤트에서는 주변 사람들과 호흡을 맞추는 게 중요하다.', effects: { 페어리: 2, 풀: 1, 물: 1 } },
+  { no: 15, question: '배틀은 결국 실전 감각과 현실적인 판단이 중요하다고 본다.', effects: { 땅: 2, 바위: 1, 노말: 1 } },
+  { no: 16, question: '상대의 다음 움직임을 먼저 읽고 한 수 앞서 가는 편이다.', effects: { 에스퍼: 2, 얼음: 1, 고스트: 1 } },
+  { no: 17, question: '느리더라도 묵직한 한 방이 있는 플레이가 더 좋다.', effects: { 바위: 2, 강철: 1, 드래곤: 1 } },
+  { no: 18, question: '전장의 중심을 잡아주고 팀 전체를 안정시키는 역할이 잘 맞는다.', effects: { 물: 2, 풀: 1, 페어리: 1 } },
+  { no: 19, question: '결정적인 순간에는 빠르게 치고 빠지는 움직임이 잘 맞는다.', effects: { 전기: 2, 비행: 1, 고스트: 1 } },
+  { no: 20, question: '나는 화려함보다 꾸준한 완성도와 신뢰감을 더 중요하게 본다.', effects: { 노말: 2, 강철: 1, 땅: 1 } }
 ];
 
 const typeProfiles = {
-  풀: {
-    iconNo: 1,
-    type: '풀',
-    best: '물',
-    worst: '불',
-    mainCopy: '천천히 강해지는 플레이어',
-    playStyle: '꾸준함 / 회복 / 지속력',
-    story: '당신은 꾸준히 성장하는 타입입니다.\n빠르게 앞서가진 않지만, 끝까지 남는 힘이 있습니다.',
-    drive: 70,
-    strategy: 75,
-    team: 90
-  },
-  얼음: {
-    iconNo: 2,
-    type: '얼음',
-    best: '드래곤',
-    worst: '불',
-    mainCopy: '차분하게 흐름을 제어하는 플레이어',
-    playStyle: '냉정함 / 분석 / 제어',
-    story: '당신은 감정에 휘둘리지 않는 타입입니다.\n차분한 판단으로 흐름을 통제합니다.',
-    drive: 65,
-    strategy: 85,
-    team: 60
-  },
-  강철: {
-    iconNo: 3,
-    type: '강철',
-    best: '페어리',
-    worst: '불',
-    mainCopy: '무너지지 않는 구조를 만드는 플레이어',
-    playStyle: '안정감 / 방어 / 완성도',
-    story: '당신은 쉽게 무너지지 않는 타입입니다.\n어떤 상황에서도 버텨내며 기회를 만듭니다.',
-    drive: 60,
-    strategy: 90,
-    team: 75
-  },
-  드래곤: {
-    iconNo: 4,
-    type: '드래곤',
-    best: '드래곤',
-    worst: '페어리',
-    mainCopy: '압도적인 존재감으로 판을 지배하는 플레이어',
-    playStyle: '지배력 / 스케일 / 돌파력',
-    story: '당신은 전장을 지배하는 타입입니다.\n강한 존재감으로 흐름 자체를 바꿔버립니다.',
-    drive: 90,
-    strategy: 85,
-    team: 60
-  },
-  불: {
-    iconNo: 5,
-    type: '불',
-    best: '풀',
-    worst: '물',
-    mainCopy: '순간 폭발력으로 판을 뒤집는 플레이어',
-    playStyle: '직진 / 열정 / 폭발력',
-    story: '당신은 망설임 없이 밀어붙이는 타입입니다.\n결정적인 순간, 불꽃처럼 분위기를 바꿉니다.',
-    drive: 95,
-    strategy: 70,
-    team: 55
-  },
-  바위: {
-    iconNo: 6,
-    type: '바위',
-    best: '불',
-    worst: '물',
-    mainCopy: '묵직한 한 방으로 승부하는 플레이어',
-    playStyle: '중량감 / 버티기 / 한방',
-    story: '당신은 느리더라도 강한 한 방을 믿는 타입입니다.\n천천히, 그러나 확실하게 상대를 압박합니다.',
-    drive: 80,
-    strategy: 75,
-    team: 65
-  },
-  물: {
-    iconNo: 7,
-    type: '물',
-    best: '불',
-    worst: '전기',
-    mainCopy: '흐름을 읽고 안정적으로 대응하는 플레이어',
-    playStyle: '유연함 / 균형 / 대응력',
-    story: '당신은 흐름을 읽고 움직이는 타입입니다.\n상황에 맞춰 유연하게 대응하며 안정적으로 승리를 만듭니다.',
-    drive: 75,
-    strategy: 85,
-    team: 85
-  },
-  전기: {
-    iconNo: 8,
-    type: '전기',
-    best: '물',
-    worst: '땅',
-    mainCopy: '순간 판단으로 승부를 결정하는 플레이어',
-    playStyle: '속도 / 기습 / 민첩함',
-    story: '당신은 번개처럼 빠르게 움직이는 타입입니다.\n짧은 순간의 판단이 승부를 갈라놓습니다.',
-    drive: 90,
-    strategy: 80,
-    team: 65
-  },
-  고스트: {
-    iconNo: 9,
-    type: '고스트',
-    best: '에스퍼',
-    worst: '악',
-    mainCopy: '보이지 않는 틈을 파고드는 플레이어',
-    playStyle: '변수 / 기습 / 심리전',
-    story: '당신은 보이지 않는 곳에서 흐름을 흔드는 타입입니다.\n예상치 못한 순간에 판을 뒤집습니다.',
-    drive: 75,
-    strategy: 90,
-    team: 55
-  },
-  격투: {
-    iconNo: 10,
-    type: '격투',
-    best: '노말',
-    worst: '페어리',
-    mainCopy: '정면 승부를 두려워하지 않는 플레이어',
-    playStyle: '근성 / 돌파 / 압박',
-    story: '당신은 정면 승부를 두려워하지 않는 타입입니다.\n끝까지 밀어붙여 결국 결과를 만들어냅니다.',
-    drive: 95,
-    strategy: 75,
-    team: 60
-  },
-  노말: {
-    iconNo: 11,
-    type: '노말',
-    best: '노말',
-    worst: '격투',
-    mainCopy: '기본기가 탄탄한 안정형 플레이어',
-    playStyle: '균형 / 기본기 / 신뢰감',
-    story: '당신은 기본기에 충실한 타입입니다.\n큰 흔들림 없이 안정적인 흐름을 만들어냅니다.',
-    drive: 70,
-    strategy: 70,
-    team: 80
-  },
-  에스퍼: {
-    iconNo: 12,
-    type: '에스퍼',
-    best: '격투',
-    worst: '악',
-    mainCopy: '한 수 앞을 읽고 움직이는 플레이어',
-    playStyle: '예측 / 통찰 / 설계',
-    story: '당신은 흐름을 미리 읽는 타입입니다.\n상대보다 한 발 먼저 움직이며 판을 설계합니다.',
-    drive: 65,
-    strategy: 95,
-    team: 70
-  },
-  땅: {
-    iconNo: 13,
-    type: '땅',
-    best: '전기',
-    worst: '물',
-    mainCopy: '현실적인 판단으로 승리를 쌓는 플레이어',
-    playStyle: '실전감 / 기반 / 안정감',
-    story: '당신은 흔들리지 않는 기반을 가진 타입입니다.\n현실적인 판단으로 차근차근 승리를 쌓아갑니다.',
-    drive: 80,
-    strategy: 80,
-    team: 75
-  },
-  악: {
-    iconNo: 14,
-    type: '악',
-    best: '에스퍼',
-    worst: '격투',
-    mainCopy: '상대의 빈틈을 노리는 플레이어',
-    playStyle: '교란 / 카운터 / 혼란',
-    story: '당신은 예측을 깨는 타입입니다.\n상대를 흔들고 빈틈을 만들어 흐름을 뒤집습니다.',
-    drive: 85,
-    strategy: 80,
-    team: 55
-  },
-  페어리: {
-    iconNo: 15,
-    type: '페어리',
-    best: '드래곤',
-    worst: '강철',
-    mainCopy: '균형과 호흡을 만드는 플레이어',
-    playStyle: '조화 / 지원 / 팀플레이',
-    story: '당신은 균형을 만드는 타입입니다.\n혼자보다 함께일 때 더 큰 힘을 발휘합니다.',
-    drive: 65,
-    strategy: 75,
-    team: 95
-  },
-  비행: {
-    iconNo: 16,
-    type: '비행',
-    best: '격투',
-    worst: '전기',
-    mainCopy: '자유로운 움직임으로 흐름을 바꾸는 플레이어',
-    playStyle: '기동성 / 자유 / 회피',
-    story: '당신은 자유롭게 전장을 누비는 타입입니다.\n틀에 얽매이지 않는 움직임으로 기회를 만듭니다.',
-    drive: 85,
-    strategy: 75,
-    team: 80
-  }
+  풀: { iconNo: 1, type: '풀', best: '물', worst: '불', mainCopy: '천천히 강해지는 플레이어', playStyle: '꾸준함 / 회복 / 지속력', story: '당신은 꾸준히 성장하는 타입입니다.\n빠르게 앞서가진 않지만, 끝까지 남는 힘이 있습니다.', drive: 70, strategy: 75, team: 90 },
+  얼음: { iconNo: 2, type: '얼음', best: '드래곤', worst: '불', mainCopy: '차분하게 흐름을 제어하는 플레이어', playStyle: '냉정함 / 분석 / 제어', story: '당신은 감정에 휘둘리지 않는 타입입니다.\n차분한 판단으로 흐름을 통제합니다.', drive: 65, strategy: 85, team: 60 },
+  강철: { iconNo: 3, type: '강철', best: '페어리', worst: '불', mainCopy: '무너지지 않는 구조를 만드는 플레이어', playStyle: '안정감 / 방어 / 완성도', story: '당신은 쉽게 무너지지 않는 타입입니다.\n어떤 상황에서도 버텨내며 기회를 만듭니다.', drive: 60, strategy: 90, team: 75 },
+  드래곤: { iconNo: 4, type: '드래곤', best: '드래곤', worst: '페어리', mainCopy: '압도적인 존재감으로 판을 지배하는 플레이어', playStyle: '지배력 / 스케일 / 돌파력', story: '당신은 전장을 지배하는 타입입니다.\n강한 존재감으로 흐름 자체를 바꿔버립니다.', drive: 90, strategy: 85, team: 60 },
+  불: { iconNo: 5, type: '불', best: '풀', worst: '물', mainCopy: '순간 폭발력으로 판을 뒤집는 플레이어', playStyle: '직진 / 열정 / 폭발력', story: '당신은 망설임 없이 밀어붙이는 타입입니다.\n결정적인 순간, 불꽃처럼 분위기를 바꿉니다.', drive: 95, strategy: 70, team: 55 },
+  바위: { iconNo: 6, type: '바위', best: '불', worst: '물', mainCopy: '묵직한 한 방으로 승부하는 플레이어', playStyle: '중량감 / 버티기 / 한방', story: '당신은 느리더라도 강한 한 방을 믿는 타입입니다.\n천천히, 그러나 확실하게 상대를 압박합니다.', drive: 80, strategy: 75, team: 65 },
+  물: { iconNo: 7, type: '물', best: '불', worst: '전기', mainCopy: '흐름을 읽고 안정적으로 대응하는 플레이어', playStyle: '유연함 / 균형 / 대응력', story: '당신은 흐름을 읽고 움직이는 타입입니다.\n상황에 맞춰 유연하게 대응하며 안정적으로 승리를 만듭니다.', drive: 75, strategy: 85, team: 85 },
+  전기: { iconNo: 8, type: '전기', best: '물', worst: '땅', mainCopy: '순간 판단으로 승부를 결정하는 플레이어', playStyle: '속도 / 기습 / 민첩함', story: '당신은 번개처럼 빠르게 움직이는 타입입니다.\n짧은 순간의 판단이 승부를 갈라놓습니다.', drive: 90, strategy: 80, team: 65 },
+  고스트: { iconNo: 9, type: '고스트', best: '에스퍼', worst: '악', mainCopy: '보이지 않는 틈을 파고드는 플레이어', playStyle: '변수 / 기습 / 심리전', story: '당신은 보이지 않는 곳에서 흐름을 흔드는 타입입니다.\n예상치 못한 순간에 판을 뒤집습니다.', drive: 75, strategy: 90, team: 55 },
+  격투: { iconNo: 10, type: '격투', best: '노말', worst: '페어리', mainCopy: '정면 승부를 두려워하지 않는 플레이어', playStyle: '근성 / 돌파 / 압박', story: '당신은 정면 승부를 두려워하지 않는 타입입니다.\n끝까지 밀어붙여 결국 결과를 만들어냅니다.', drive: 95, strategy: 75, team: 60 },
+  노말: { iconNo: 11, type: '노말', best: '노말', worst: '격투', mainCopy: '기본기가 탄탄한 안정형 플레이어', playStyle: '균형 / 기본기 / 신뢰감', story: '당신은 기본기에 충실한 타입입니다.\n큰 흔들림 없이 안정적인 흐름을 만들어냅니다.', drive: 70, strategy: 70, team: 80 },
+  에스퍼: { iconNo: 12, type: '에스퍼', best: '격투', worst: '악', mainCopy: '한 수 앞을 읽고 움직이는 플레이어', playStyle: '예측 / 통찰 / 설계', story: '당신은 흐름을 미리 읽는 타입입니다.\n상대보다 한 발 먼저 움직이며 판을 설계합니다.', drive: 65, strategy: 95, team: 70 },
+  땅: { iconNo: 13, type: '땅', best: '전기', worst: '물', mainCopy: '현실적인 판단으로 승리를 쌓는 플레이어', playStyle: '실전감 / 기반 / 안정감', story: '당신은 흔들리지 않는 기반을 가진 타입입니다.\n현실적인 판단으로 차근차근 승리를 쌓아갑니다.', drive: 80, strategy: 80, team: 75 },
+  악: { iconNo: 14, type: '악', best: '에스퍼', worst: '격투', mainCopy: '상대의 빈틈을 노리는 플레이어', playStyle: '교란 / 카운터 / 혼란', story: '당신은 예측을 깨는 타입입니다.\n상대를 흔들고 빈틈을 만들어 흐름을 뒤집습니다.', drive: 85, strategy: 80, team: 55 },
+  페어리: { iconNo: 15, type: '페어리', best: '드래곤', worst: '강철', mainCopy: '균형과 호흡을 만드는 플레이어', playStyle: '조화 / 지원 / 팀플레이', story: '당신은 균형을 만드는 타입입니다.\n혼자보다 함께일 때 더 큰 힘을 발휘합니다.', drive: 65, strategy: 75, team: 95 },
+  비행: { iconNo: 16, type: '비행', best: '격투', worst: '전기', mainCopy: '자유로운 움직임으로 흐름을 바꾸는 플레이어', playStyle: '기동성 / 자유 / 회피', story: '당신은 자유롭게 전장을 누비는 타입입니다.\n틀에 얽매이지 않는 움직임으로 기회를 만듭니다.', drive: 85, strategy: 75, team: 80 }
 };
 
 let shuffledQuestions = [];
 let answers = {};
 let currentPage = 0;
+let currentRendered = null;
+let draggingScale = null;
+
 const QUESTIONS_PER_PAGE = 4;
 const TOTAL_PAGES = Math.ceil(questionBank.length / QUESTIONS_PER_PAGE);
 
@@ -1241,6 +1045,7 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const submitBtn = document.getElementById('submitBtn');
 const quizForm = document.getElementById('quizForm');
+const analyzingOverlay = document.getElementById('analyzingOverlay');
 
 nickname.addEventListener('input', () => {
   nickname.value = nickname.value.replace(/\s+/g, '').replace(/[^ㄱ-ㅎ가-힣ㅏ-ㅣ]/g, '');
@@ -1331,6 +1136,11 @@ function getShareImageUrl(profile) {
   return `${window.location.origin}/images/${profile.iconNo}.png`;
 }
 
+function getTrackFillPercent(value) {
+  if (!value) return 0;
+  return ((value - 1) / 4) * 76;
+}
+
 function renderCurrentPage() {
   const start = currentPage * QUESTIONS_PER_PAGE;
   const end = start + QUESTIONS_PER_PAGE;
@@ -1342,23 +1152,25 @@ function renderCurrentPage() {
 
   questionArea.innerHTML = pageQuestions.map((item, idx) => {
     const absoluteIndex = start + idx;
+    const savedValue = answers[item.no] || 0;
     return `
       <div class="question-card">
         <div class="q-top">
-          <div class="q-badge">Q${absoluteIndex + 1}</div>
+          <div class="q-badge">${String(absoluteIndex + 1).padStart(2, '0')}</div>
         </div>
         <h3 class="q-title">${item.question}</h3>
-        <div class="options">
-          ${SCALE_OPTIONS.map((option) => `
-            <label class="option ${answers[item.no] === option.value ? 'checked' : ''}">
-              <input
-                type="radio"
-                name="q-${item.no}"
-                value="${option.value}"
-                ${answers[item.no] === option.value ? 'checked' : ''}
-              >
-              <span>${option.text}</span>
-            </label>
+
+        <div class="scale-text-row">
+          ${SCALE_LABELS.map(label => `<div>${label}</div>`).join('')}
+        </div>
+
+        <div class="options scale-circle" data-q="${item.no}" data-value="${savedValue}">
+          <div class="scale-track"></div>
+          <div class="scale-track-fill" style="width:${getTrackFillPercent(savedValue)}%;"></div>
+          ${[1,2,3,4,5].map(num => `
+            <button type="button" class="circle ${savedValue === num ? 'active' : ''}" data-value="${num}" aria-label="${num} 선택">
+              <span>${num}</span>
+            </button>
           `).join('')}
         </div>
       </div>
@@ -1376,14 +1188,7 @@ function renderCurrentPage() {
 }
 
 function saveCurrentPageAnswers() {
-  const start = currentPage * QUESTIONS_PER_PAGE;
-  const end = start + QUESTIONS_PER_PAGE;
-  const pageQuestions = shuffledQuestions.slice(start, end);
-
-  pageQuestions.forEach((q) => {
-    const checked = quizForm.querySelector(`input[name="q-${q.no}"]:checked`);
-    if (checked) answers[q.no] = Number(checked.value);
-  });
+  return;
 }
 
 function pageAnsweredCount() {
@@ -1391,11 +1196,9 @@ function pageAnsweredCount() {
   const end = start + QUESTIONS_PER_PAGE;
   const pageQuestions = shuffledQuestions.slice(start, end);
   let count = 0;
-
   pageQuestions.forEach((q) => {
-    if (quizForm.querySelector(`input[name="q-${q.no}"]:checked`) || answers[q.no]) count++;
+    if (answers[q.no]) count++;
   });
-
   return count;
 }
 
@@ -1408,7 +1211,6 @@ function calculateTypeScores() {
   shuffledQuestions.forEach((q) => {
     const answer = answers[q.no];
     if (!answer) return;
-
     const baseScore = choiceValueToScore(answer);
     Object.entries(q.effects).forEach(([typeName, weight]) => {
       scores[typeName] += baseScore * weight;
@@ -1425,7 +1227,6 @@ function getResultType() {
 
 function getStarDataByStats(profile) {
   const avg = Math.round((profile.drive + profile.strategy + profile.team) / 3);
-
   if (avg >= 85) return { stars: 3, theme: 'red', redStars: true };
   if (avg >= 78) return { stars: 3, theme: 'orange', redStars: false };
   if (avg >= 70) return { stars: 2, theme: 'orange', redStars: false };
@@ -1488,7 +1289,60 @@ function animateStatBars(drive, strategy, team) {
   });
 }
 
-let currentRendered = null;
+function setScaleAnswer(qNo, value, container) {
+  answers[qNo] = value;
+  container.dataset.value = String(value);
+
+  const fill = container.querySelector('.scale-track-fill');
+  if (fill) {
+    fill.style.width = `${getTrackFillPercent(value)}%`;
+  }
+
+  container.querySelectorAll('.circle').forEach(circle => {
+    circle.classList.toggle('active', Number(circle.dataset.value) === value);
+  });
+}
+
+function getValueFromPointer(container, clientX) {
+  const rect = container.getBoundingClientRect();
+  const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+  const ratio = x / rect.width;
+  if (ratio < 0.2) return 1;
+  if (ratio < 0.4) return 2;
+  if (ratio < 0.6) return 3;
+  if (ratio < 0.8) return 4;
+  return 5;
+}
+
+questionArea.addEventListener('click', (e) => {
+  const circle = e.target.closest('.circle');
+  if (!circle) return;
+  const container = circle.closest('.scale-circle');
+  const qNo = Number(container.dataset.q);
+  const value = Number(circle.dataset.value);
+  setScaleAnswer(qNo, value, container);
+});
+
+questionArea.addEventListener('pointerdown', (e) => {
+  const container = e.target.closest('.scale-circle');
+  if (!container) return;
+  draggingScale = container;
+  const qNo = Number(container.dataset.q);
+  const value = getValueFromPointer(container, e.clientX);
+  setScaleAnswer(qNo, value, container);
+  container.setPointerCapture?.(e.pointerId);
+});
+
+questionArea.addEventListener('pointermove', (e) => {
+  if (!draggingScale) return;
+  const qNo = Number(draggingScale.dataset.q);
+  const value = getValueFromPointer(draggingScale, e.clientX);
+  setScaleAnswer(qNo, value, draggingScale);
+});
+
+window.addEventListener('pointerup', () => {
+  draggingScale = null;
+});
 
 document.getElementById('startBtn').addEventListener('click', () => {
   if (!validateTrainerLevel()) return;
@@ -1504,7 +1358,6 @@ document.getElementById('startBtn').addEventListener('click', () => {
 });
 
 prevBtn.addEventListener('click', () => {
-  saveCurrentPageAnswers();
   if (currentPage > 0) {
     currentPage--;
     renderCurrentPage();
@@ -1513,7 +1366,6 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-  saveCurrentPageAnswers();
   if (pageAnsweredCount() < QUESTIONS_PER_PAGE) {
     alert('현재 페이지의 4문항을 모두 선택해 주세요.');
     return;
@@ -1525,16 +1377,8 @@ nextBtn.addEventListener('click', () => {
   }
 });
 
-quizForm.addEventListener('change', (e) => {
-  if (e.target.matches('input[type="radio"]')) {
-    renderCurrentPage();
-  }
-});
-
 quizForm.addEventListener('submit', (e) => {
   e.preventDefault();
-
-  saveCurrentPageAnswers();
 
   if (Object.keys(answers).length < questionBank.length) {
     alert('모든 문항에 답변해 주세요.');
@@ -1559,65 +1403,76 @@ quizForm.addEventListener('submit', (e) => {
     randomHp
   };
 
+  showResult();
+  window.scrollTo({ top:0, behavior:'smooth' });
+
+  analyzingOverlay.classList.remove('hidden');
+
   document.getElementById('resultLevel').textContent = '15';
-  document.getElementById('resultNickname').textContent = nickname.value;
-  document.getElementById('resultHpText').textContent = `${randomHp} / ${randomHp} HP`;
-
-  document.getElementById('resultWeight').textContent = worstType;
-  document.getElementById('resultHeight').textContent = bestType;
-  document.getElementById('resultType').textContent = profile.type;
-
-  document.getElementById('resultMainCopy').textContent = profile.mainCopy;
-  document.getElementById('resultPlayStyle').textContent = profile.playStyle;
-
-  document.getElementById('resultPogo').src = pogoPath;
-  document.getElementById('resultIcon').src = getTypeIconPath(resultType);
-  document.getElementById('resultDefenseIcon').src = getTypeIconPath(worstType);
-  document.getElementById('resultAttackIcon').src = getTypeIconPath(bestType);
-  document.getElementById('resultCharacter').src = './images/advisor-1.png';
-
-  document.getElementById('speechText').textContent = profile.story;
-
-  document.getElementById('hostBar').className = `stat-bar ${starData.theme}`;
-  document.getElementById('participantBar').className = `stat-bar ${starData.theme}`;
-  document.getElementById('chatBar').className = `stat-bar ${starData.theme}`;
+  document.getElementById('hostFill').style.width = '0%';
+  document.getElementById('participantFill').style.width = '0%';
+  document.getElementById('chatFill').style.width = '0%';
 
   const badgeStars = document.querySelectorAll('.badge-star');
   badgeStars.forEach(star => {
     star.classList.remove('show', 'red-star', 'outline');
   });
 
-  showResult();
-  window.scrollTo({ top:0, behavior:'smooth' });
-
   setTimeout(() => {
-    animateStatBars(profile.drive, profile.strategy, profile.team);
-  }, 140);
+    document.getElementById('resultNickname').textContent = nickname.value;
+    document.getElementById('resultHpText').textContent = `${randomHp} / ${randomHp} HP`;
 
-  setTimeout(() => {
-    if (starData.stars === 0) {
-      badgeStars.forEach(star => {
-        star.classList.add('outline');
-      });
-    } else {
-      for (let i = 0; i < badgeStars.length; i++) {
-        if (i < starData.stars) {
-          setTimeout(() => {
-            badgeStars[i].classList.add('show');
-            if (starData.redStars) {
-              badgeStars[i].classList.add('red-star');
-            }
-          }, i * 180);
-        } else {
-          badgeStars[i].classList.add('outline');
+    document.getElementById('resultWeight').textContent = worstType;
+    document.getElementById('resultHeight').textContent = bestType;
+    document.getElementById('resultType').textContent = profile.type;
+
+    document.getElementById('resultMainCopy').textContent = profile.mainCopy;
+    document.getElementById('resultPlayStyle').textContent = profile.playStyle;
+
+    document.getElementById('resultPogo').src = pogoPath;
+    document.getElementById('resultIcon').src = getTypeIconPath(resultType);
+    document.getElementById('resultDefenseIcon').src = getTypeIconPath(worstType);
+    document.getElementById('resultAttackIcon').src = getTypeIconPath(bestType);
+    document.getElementById('resultCharacter').src = './images/advisor-1.png';
+
+    document.getElementById('speechText').textContent = profile.story;
+
+    document.getElementById('hostBar').className = `stat-bar ${starData.theme}`;
+    document.getElementById('participantBar').className = `stat-bar ${starData.theme}`;
+    document.getElementById('chatBar').className = `stat-bar ${starData.theme}`;
+
+    analyzingOverlay.classList.add('hidden');
+
+    setTimeout(() => {
+      animateStatBars(profile.drive, profile.strategy, profile.team);
+    }, 120);
+
+    setTimeout(() => {
+      if (starData.stars === 0) {
+        badgeStars.forEach(star => {
+          star.classList.add('outline');
+        });
+      } else {
+        for (let i = 0; i < badgeStars.length; i++) {
+          if (i < starData.stars) {
+            setTimeout(() => {
+              badgeStars[i].classList.add('show');
+              if (starData.redStars) {
+                badgeStars[i].classList.add('red-star');
+              }
+            }, i * 180);
+          } else {
+            badgeStars[i].classList.add('outline');
+          }
         }
       }
-    }
-  }, 420);
+    }, 260);
 
-  setTimeout(() => {
-    animateLevelUp(trainerLevel.value);
-  }, 760);
+    setTimeout(() => {
+      animateLevelUp(trainerLevel.value);
+    }, 500);
+
+  }, 2400);
 });
 
 document.getElementById('retryBtn').addEventListener('click', () => {
@@ -1626,6 +1481,7 @@ document.getElementById('retryBtn').addEventListener('click', () => {
   trainerLevel.value = '';
   nickname.value = '';
   document.getElementById('resultLevel').textContent = '15';
+  analyzingOverlay.classList.add('hidden');
   showIntro();
   window.scrollTo({ top:0, behavior:'smooth' });
 });
