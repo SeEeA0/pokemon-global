@@ -861,7 +861,7 @@ if (!window.Kakao) {
   console.error('Kakao SDK not loaded');
 } else if (!window.Kakao.isInitialized()) {
   try {
-    window.Kakao.init(a9b34626a97035962f44ebb33091147d);
+    window.Kakao.init(KAKAO_JS_KEY);
     console.log('Kakao initialized:', window.Kakao.isInitialized());
   } catch (e) {
     console.error('Kakao init failed:', e);
