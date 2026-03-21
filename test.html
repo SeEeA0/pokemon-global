@@ -1495,32 +1495,6 @@ document.getElementById('shareBtn').addEventListener('click', () => {
     return;
   }
 
-window.Kakao.Share.sendCustom({
-  templateId: 130888,
-  templateArgs: {
-    TYPE: profile.type,
-    MAINCOPY: profile.mainCopy,
-    PLAYSTYLE: profile.playStyle,
-    DESC: profile.type,
-    THU: shareImageUrl
-  }
-    
-document.getElementById('shareBtn').addEventListener('click', () => {
-  if (!currentRendered) return;
-
-  const profile = currentRendered.profileResult;
-  const shareImageUrl = currentRendered.shareImageUrl;
-
-  if (!window.Kakao) {
-    alert('카카오 SDK가 로드되지 않았습니다.');
-    return;
-  }
-
-  if (!window.Kakao.isInitialized()) {
-    alert('카카오 JavaScript 키 또는 도메인 설정을 확인해주세요.');
-    return;
-  }
-
   window.Kakao.Share.sendCustom({
     templateId: 1409816,
     templateArgs: {
