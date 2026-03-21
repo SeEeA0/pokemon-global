@@ -529,9 +529,10 @@ body{
   white-space:nowrap;
 }
 .info-label{
-  margin-top:4px;
-  font-size:11px;
-  color:#8996aa;
+  margin-top:6px;
+  font-size:12px;
+  color:#7c8aa5;
+  font-weight:700;
 }
 .info-icon{
   width:36px;
@@ -877,25 +878,22 @@ body{
         <div class="hp-line"><div class="hp-fill"></div></div>
         <div class="hp-text" id="resultHpText">121 / 121 HP</div>
 
-        <div class="info-3">
-          <div class="info-col">
-            <img class="info-icon" id="resultDefenseIcon" src="" alt="defense icon">
-            <div class="info-value" id="resultWeight">물</div>
-            <div class="info-label">방어</div>
-          </div>
+<div class="info-3">
+  <div class="info-col">
+    <img class="info-icon" id="resultDefenseIcon" src="" alt="defense icon">
+    <div class="info-label">방어</div>
+  </div>
 
-          <div class="info-col">
-            <img class="info-icon" id="resultIcon" src="" alt="icon">
-            <div class="info-value info-type-value" id="resultType">풀</div>
-            <div class="info-label">내 타입</div>
-          </div>
+  <div class="info-col">
+    <img class="info-icon" id="resultIcon" src="" alt="icon">
+    <div class="info-label">내 타입</div>
+  </div>
 
-          <div class="info-col">
-            <img class="info-icon" id="resultAttackIcon" src="" alt="attack icon">
-            <div class="info-value" id="resultHeight">불</div>
-            <div class="info-label">공격</div>
-          </div>
-        </div>
+  <div class="info-col">
+    <img class="info-icon" id="resultAttackIcon" src="" alt="attack icon">
+    <div class="info-label">공격</div>
+  </div>
+</div>
 
         <div class="type-detail-box">
           <div class="type-maincopy" id="resultMainCopy">꾸준히 강해지는 플레이어</div>
@@ -1421,10 +1419,6 @@ quizForm.addEventListener('submit', (e) => {
   setTimeout(() => {
     document.getElementById('resultNickname').textContent = nickname.value;
     document.getElementById('resultHpText').textContent = `${randomHp} / ${randomHp} HP`;
-
-    document.getElementById('resultWeight').textContent = worstType;
-    document.getElementById('resultHeight').textContent = bestType;
-    document.getElementById('resultType').textContent = profile.type;
 
     document.getElementById('resultMainCopy').textContent = profile.mainCopy;
     document.getElementById('resultPlayStyle').textContent = profile.playStyle;
