@@ -1495,15 +1495,15 @@ document.getElementById('shareBtn').addEventListener('click', () => {
     return;
   }
 
-  window.Kakao.Share.sendCustom({
-    templateId: 130888, // ← 본인 템플릿 ID 확인해서 맞으면 그대로, 다르면 바꾸기
-    templateArgs: {
-      TYPE: profile.type,
-      MAINCOPY: profile.mainCopy,
-      DESC: `${profile.type} 타입 트레이너 결과`,
-      THU: shareImageUrl
-    }
-  });
+window.Kakao.Share.sendCustom({
+  templateId: 130888,
+  templateArgs: {
+    TYPE: profile.type,
+    MAINCOPY: profile.mainCopy,
+    PLAYSTYLE: profile.playStyle,
+    DESC: profile.type,
+    THU: shareImageUrl
+  }
 });
 </script>
 </body>
