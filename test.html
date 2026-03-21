@@ -1504,7 +1504,7 @@ window.Kakao.Share.sendCustom({
     DESC: profile.type,
     THU: shareImageUrl
   }
-<script>
+    
 document.getElementById('shareBtn').addEventListener('click', () => {
   if (!currentRendered) return;
 
@@ -1522,7 +1522,7 @@ document.getElementById('shareBtn').addEventListener('click', () => {
   }
 
   window.Kakao.Share.sendCustom({
-    templateId: 130888,
+    templateId: 1409816,
     templateArgs: {
       TYPE: profile.type,
       MAINCOPY: profile.mainCopy,
@@ -1532,7 +1532,6 @@ document.getElementById('shareBtn').addEventListener('click', () => {
     }
   });
 });
-</script>
 </script>
 </body>
 </html>
