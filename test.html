@@ -1485,9 +1485,6 @@ document.getElementById('shareBtn').addEventListener('click', () => {
   const profile = currentRendered.profileResult;
   const shareImageUrl = currentRendered.shareImageUrl;
 
-  const baseUrl = window.location.origin + window.location.pathname;
-  const buttonUrl = `${baseUrl}?from=kakao_button`;
-
   if (!window.Kakao) {
     alert('카카오 SDK가 로드되지 않았습니다.');
     return;
@@ -1498,26 +1495,14 @@ document.getElementById('shareBtn').addEventListener('click', () => {
     return;
   }
 
-  window.Kakao.Share.sendDefault({
-    objectType: 'feed',
-    content: {
-      title: `${profile.type} 타입 트레이너 결과`,
-      description: `${profile.mainCopy}`,
-      imageUrl: shareImageUrl,
-      link: {
-        mobileWebUrl: baseUrl,
-        webUrl: baseUrl
-      }
-    },
-    buttons: [
-      {
-        title: '나도 테스트 하러가기',
-        link: {
-          mobileWebUrl: buttonUrl,
-          webUrl: buttonUrl
-        }
-      }
-    ]
+  window.Kakao.Share.sendCustom({
+    templateId: 1409816, // ← 본인 템플릿 ID 확인해서 맞으면 그대로, 다르면 바꾸기
+    templateArgs: {
+      TYPE: profile.type,
+      MAINCOPY: profile.mainCopy,
+      DESC: `${profile.type} 타입 트레이너 결과`,
+      THU: shareImageUrl
+    }
   });
 });
 </script>
