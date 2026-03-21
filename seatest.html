@@ -1,11 +1,11 @@
-이게 마지막 코드에요<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Pokémon GO Global | 내타입 포켓몬 확인하기</title>
 <link rel="icon" href="/images/favicon.png" />
-  
+
 <meta name="description" content="Trainer Test" />
 <meta property="og:title" content="Pokémon GO Global | Trainer Test" />
 <meta property="og:description" content="나와 같은타입의 포켓몬을 확인해보세요." />
@@ -238,7 +238,7 @@ body{
 }
 
 .question-page-head{
-  margin-bottom:16px;
+  margin-bottom:12px;
 }
 .question-page-head strong{
   display:block;
@@ -257,61 +257,122 @@ body{
   border:1px solid #edf1f7;
   border-radius:20px;
   box-shadow:0 10px 24px rgba(31,42,68,.05);
-  padding:18px;
-  margin-bottom:14px;
+  padding:14px;
+  margin-bottom:12px;
 }
 .q-top{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 .q-badge{
+  min-width:44px;
   padding:6px 12px;
   border-radius:999px;
   background:linear-gradient(135deg,#eef2ff 0%, #edf7ff 100%);
   color:#4957b8;
   font-size:12px;
-  font-weight:800;
+  font-weight:900;
   border:1px solid #dde5ff;
+  text-align:center;
 }
 .q-title{
-  font-size:17px;
+  font-size:15px;
   font-weight:800;
   margin:0 0 14px;
-  line-height:1.5;
+  line-height:1.45;
   color:#213351;
-}
-.options{
-  display:grid;
-  gap:10px;
-}
-.option{
-  display:flex;
-  gap:10px;
-  align-items:flex-start;
-  border:1px solid #e7edf2;
-  border-radius:16px;
-  padding:14px;
-  cursor:pointer;
-  background:#fff;
-  transition:border-color .2s ease, background .2s ease, transform .18s ease;
-}
-.option:hover{
-  border-color:#cbd5ff;
-  background:#fafbff;
-  transform:translateY(-1px);
-}
-.option input{
-  margin-top:3px;
-}
-.option span{
-  font-size:14px;
-  line-height:1.5;
+  letter-spacing:-.01em;
 }
 
-/* result */
+.scale-text-row{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:6px;
+  margin-bottom:10px;
+}
+.scale-text-row div{
+  font-size:10px;
+  line-height:1.25;
+  color:#7b88a0;
+  font-weight:800;
+  text-align:center;
+  letter-spacing:-.02em;
+}
+.scale-text-row div:nth-child(1),
+.scale-text-row div:nth-child(5){
+  font-size:9px;
+}
+
+.options{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  align-items:center;
+  gap:0;
+  padding:8px 0 2px;
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:none;
+}
+.scale-track{
+  position:absolute;
+  left:12%;
+  right:12%;
+  top:50%;
+  height:6px;
+  transform:translateY(-50%);
+  border-radius:999px;
+  background:linear-gradient(90deg,#e3e9f6 0%, #dfe6f4 100%);
+  z-index:0;
+}
+.scale-track-fill{
+  position:absolute;
+  left:12%;
+  width:0%;
+  top:50%;
+  height:6px;
+  transform:translateY(-50%);
+  border-radius:999px;
+  background:linear-gradient(90deg,#8d85ff 0%, #72dfff 55%, #7ef0cb 100%);
+  z-index:1;
+  transition:width .22s ease;
+}
+.circle{
+  position:relative;
+  z-index:2;
+  width:42px;
+  height:42px;
+  margin:0 auto;
+  border-radius:50%;
+  border:2px solid #dbe3f0;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  font-weight:900;
+  color:#61718b;
+  cursor:pointer;
+  transition:transform .18s ease, border-color .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+  box-shadow:0 4px 10px rgba(21,31,63,.04);
+}
+.circle:hover{
+  transform:translateY(-1px);
+  border-color:#bfcaff;
+}
+.circle.active{
+  background:linear-gradient(135deg,#7b78ff 0%, #5b66ff 42%, #3e4dc8 100%);
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 10px 18px rgba(83,92,222,.24);
+}
+.circle span{
+  pointer-events:none;
+}
+
 .divider,
 .item-grid{
   display:none;
@@ -407,7 +468,7 @@ body{
   border-radius:26px 26px 0 0;
   min-height:700px;
   color:#3c6670;
-  padding:80px 22px 220px; 
+  padding:80px 22px 220px;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
 }
 .nickname{
@@ -444,7 +505,7 @@ body{
   grid-template-columns:1fr 1fr 1fr;
   gap:0;
   align-items:start;
-  margin-top:34px;
+  margin-top:20px;
   text-align:center;
 }
 .info-col{
@@ -465,21 +526,24 @@ body{
   font-weight:600;
   letter-spacing:-.02em;
   color:#33447f;
+  white-space:nowrap;
 }
 .info-label{
-  margin-top:4px;
-  font-size:11px;
+  margin-top:10px;
+  font-size:13px;
   color:#8996aa;
+  font-weight:600;
+  letter-spacing:-0.01em;
 }
+  
 .info-icon{
   width:36px;
   height:36px;
   object-fit:contain;
   display:block;
-  margin:-6px auto 4px;  /* 🔥 위로 당김 */
+  margin:-6px auto 4px;
 }
 
-/* badge */
 .appraisal-badge{
   position:absolute;
   left:8px;
@@ -528,12 +592,11 @@ body{
   text-shadow:none;
 }
 
-/* stats */
 .appraisal-panel{
   position:absolute;
   left:38px;
   right:134px;
-  top:680px;
+  top:650px;
   background:rgba(255,255,255,.97);
   border-radius:14px;
   padding:18px 18px 16px;
@@ -582,7 +645,6 @@ body{
 .segment-line.one{left:33.333%}
 .segment-line.two{left:66.666%}
 
-/* character + speech */
 .result-character{
   position:absolute;
   right:-8px;
@@ -611,6 +673,7 @@ body{
   font-size:18px;
   line-height:1.55;
   font-weight:600;
+  white-space:pre-line;
 }
 .speech-box:before{
   content:"";
@@ -633,23 +696,71 @@ body{
   line-height:1.5;
 }
 
+#analyzingOverlay{
+  position:absolute;
+  inset:0;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(18,24,66,.28);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  border-radius:32px;
+}
+.analyzing-box{
+  min-width:220px;
+  padding:22px 20px;
+  border-radius:20px;
+  background:rgba(255,255,255,.96);
+  box-shadow:0 18px 34px rgba(17,24,58,.16);
+  text-align:center;
+}
+.analyzing-spinner{
+  width:34px;
+  height:34px;
+  margin:0 auto 12px;
+  border-radius:50%;
+  border:3px solid #dfe5ff;
+  border-top-color:#6e78ff;
+  animation:spinAnalyzing .9s linear infinite;
+}
+.analyzing-text{
+  font-size:15px;
+  font-weight:800;
+  color:#44557d;
+  letter-spacing:-.01em;
+}
+@keyframes spinAnalyzing{
+  to{ transform:rotate(360deg); }
+}
+
 @media (max-width:480px){
   .wrap{padding:18px 14px 72px}
   .hero h1{font-size:28px}
   .btn{font-size:14px}
   .input{font-size:16px}
+  .q-title{font-size:14px}
+  .circle{
+    width:40px;
+    height:40px;
+    font-size:12px;
+  }
+  .scale-text-row div{
+    font-size:9px;
+  }
 }
 
-  .info-type-value{
-  margin-top:-2px;
-  font-size:16px; 
+.info-type-value{
+  margin:24px auto 0;
+  font-size:16px;
   font-weight:600;
   color:#33447f;
   line-height:1.2;
 }
 
 .type-detail-box{
-  margin:12px auto 0;
+  margin:8px auto 0;
   width:100%;
   max-width:360px;
   text-align:center;
@@ -658,7 +769,6 @@ body{
   background:linear-gradient(180deg, rgba(126,122,255,.10) 0%, rgba(111,210,255,.08) 100%);
   border:1px solid rgba(112,120,255,.14);
 }
-
 .type-maincopy{
   font-size:18px;
   line-height:1.45;
@@ -666,7 +776,6 @@ body{
   color:#2f3f7b;
   letter-spacing:-.02em;
 }
-
 .type-playstyle{
   margin-top:8px;
   font-size:13px;
@@ -675,25 +784,27 @@ body{
   color:#7382a0;
 }
 
-  .type-detail-box{
-  margin:8px auto 0;
+.capture-fix .appraisal-badge,
+.capture-fix .badge-ring,
+.capture-fix .badge-stars,
+.capture-fix .badge-star{
+  transform: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  will-change: auto !important;
 }
 
-  .capture-ios{
-  width:390px !important;
-  max-width:390px !important;
-  min-width:390px !important;
-  margin:0 auto !important;
+.capture-fix .badge-star{
+  font-size: 22px !important;
 }
-  
 </style>
 </head>
 <body>
 
 <div class="wrap">
   <section class="hero">
-    <h1>Trainer Test</h1>
-    <p>레벨과 닉네임을 입력하고 테스트를 진행해 주세요.</p>
+    <h1>Pokémon GO Global 🌏</h1>
+    <p>만들다가 세아잡겠네</p>
   </section>
 
   <section class="card" id="introSection">
@@ -721,7 +832,7 @@ body{
     <div class="card">
       <div class="progress-box">
         <div class="progress-meta">
-          <span id="pageRangeText">1 - 3 / 15</span>
+          <span id="pageRangeText">1 - 4 / 20</span>
           <span id="pageStepText">1 / 5</span>
         </div>
         <div class="progress-bar">
@@ -731,7 +842,7 @@ body{
 
       <div class="question-page-head">
         <strong>테스트 진행 중</strong>
-        <p>각 페이지마다 3문항씩 표시됩니다.</p>
+        <p>각 페이지마다 4문항씩, 가장 가까운 정도를 선택해 주세요.</p>
       </div>
 
       <form id="quizForm">
@@ -748,6 +859,13 @@ body{
 
   <section id="resultSection" class="hidden">
     <div class="result-screen" id="captureTarget">
+      <div id="analyzingOverlay" class="hidden">
+        <div class="analyzing-box">
+          <div class="analyzing-spinner"></div>
+          <div class="analyzing-text">결과 분석 중입니다...</div>
+        </div>
+      </div>
+
       <div class="result-top">
         <div class="lv-text">
           <span class="lv-prefix">Trainer Lv.</span>
@@ -769,31 +887,30 @@ body{
         <div class="hp-line"><div class="hp-fill"></div></div>
         <div class="hp-text" id="resultHpText">121 / 121 HP</div>
 
-<div class="info-3">
-  <div class="info-col">
-    <div class="info-value" id="resultWeight">9.57kg</div>
-    <div class="info-label">참여 시간</div>
-  </div>
+        <div class="info-3">
+          <div class="info-col">
+            <img class="info-icon" id="resultDefenseIcon" src="" alt="defense icon">
+            <div class="info-label">방어</div>
+          </div>
 
-  <div class="info-col">
-    <img class="info-icon" id="resultIcon" src="" alt="icon">
-    <div class="info-value info-type-value" id="resultType">풀</div>
-    <div class="info-label"></div>
-  </div>
+          <div class="info-col">
+            <img class="info-icon" id="resultIcon" src="" alt="icon">
+            <div class="info-label">내 타입</div>
+          </div>
 
-  <div class="info-col">
-    <div class="info-value" id="resultHeight">26.320m</div>
-    <div class="info-label">참여 날짜</div>
-  </div>
-</div>
+          <div class="info-col">
+            <img class="info-icon" id="resultAttackIcon" src="" alt="attack icon">
+            <div class="info-label">공격</div>
+          </div>
+        </div>
 
-<div class="type-detail-box">
-  <div class="type-maincopy" id="resultMainCopy">꾸준함으로 승리를 만드는 트레이너</div>
-  <div class="type-playstyle" id="resultPlayStyle">서포트 / 장기전 / 안정 운영</div>
-</div>
-</div>
+        <div class="type-detail-box">
+          <div class="type-maincopy" id="resultMainCopy">꾸준히 강해지는 플레이어</div>
+          <div class="type-playstyle" id="resultPlayStyle">꾸준함 / 회복 / 지속력</div>
+        </div>
+      </div>
 
-<div class="appraisal-badge">
+      <div class="appraisal-badge">
         <img src="./images/badge-ring.png" class="badge-ring" alt="badge ring">
         <div class="badge-stars" id="badgeStars">
           <span class="badge-star">★</span>
@@ -804,7 +921,7 @@ body{
 
       <div class="appraisal-panel">
         <div class="stat-row">
-          <div class="stat-label">주최자</div>
+          <div class="stat-label">추진력</div>
           <div class="stat-bar orange" id="hostBar">
             <div class="stat-fill" id="hostFill"></div>
             <span class="segment-line one"></span>
@@ -812,7 +929,7 @@ body{
           </div>
         </div>
         <div class="stat-row">
-          <div class="stat-label">참여자</div>
+          <div class="stat-label">전략력</div>
           <div class="stat-bar orange" id="participantBar">
             <div class="stat-fill" id="participantFill"></div>
             <span class="segment-line one"></span>
@@ -820,7 +937,7 @@ body{
           </div>
         </div>
         <div class="stat-row">
-          <div class="stat-label">채팅창 규칙</div>
+          <div class="stat-label">팀워크</div>
           <div class="stat-bar orange" id="chatBar">
             <div class="stat-fill" id="chatFill"></div>
             <span class="segment-line one"></span>
@@ -840,7 +957,7 @@ body{
 
     <div class="result-actions">
       <div class="btn-row">
-        <button class="btn btn-primary" type="button" id="shareBtn">카카오톡 공유하기</button>
+        <button class="btn btn-primary hidden" type="button" id="shareBtn">카카오톡 공유하기</button>
         <button class="btn btn-secondary" type="button" id="downloadBtn">결과 이미지 저장</button>
         <button class="btn btn-secondary" type="button" id="retryBtn">다시 테스트하기</button>
       </div>
@@ -857,83 +974,65 @@ body{
 <script>
 const KAKAO_JS_KEY = 'a9b34626a97035962f44ebb33091147d';
 
-if (!window.Kakao) {
-  console.error('Kakao SDK not loaded');
-} else if (!window.Kakao.isInitialized()) {
+if (window.Kakao && !window.Kakao.isInitialized()) {
   try {
     window.Kakao.init(KAKAO_JS_KEY);
-    console.log('Kakao initialized:', window.Kakao.isInitialized());
   } catch (e) {
     console.error('Kakao init failed:', e);
   }
 }
 
-let currentTime = '';
-let currentDate = '';
-
-function setCurrentDateTime() {
-  const now = new Date();
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  currentTime = `${hours}:${minutes}`;
-
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  currentDate = `${year}-${month}-${day}`;
-}
+const SCALE_LABELS = ['매우 그렇다', '그렇다', '보통', '아니다', '매우 아니다'];
 
 const questionBank = [
-  { no: 1, group: 'host', question: '레이드 주최자가 모집을 시작하기 전에 하면 안되는 것은 무엇인가요?', options: ['참여자가 모이면 바로 초대한다', '15분 남은 레이드 모집을 한다', '일단 초대부터 보내본다', '초대하기 전과 후에는 참여자 멘션을 한다'], correct: 3 },
-  { no: 2, group: 'host', question: '주최자가 참여자를 받을 때 가장 중요한 기준은 무엇인가요?', options: ['먼저 말한 사람', '본인이 아는 사람', '양식에 맞게 작성한 참여자', '아무나 빠르게'], correct: 3 },
-  { no: 3, group: 'host', question: '레이드 진행 중 가장 올바른 주최자의 행동은 무엇인가요?', options: ['조용히 진행한다', '참여자에게 상황을 안내하며 진행한다', '문제 생기면 종료한다', '참여자에게 맡긴다'], correct: 2 },
-  { no: 4, group: 'host', question: '참여자가 많을 경우 주최자가 해야 할 행동은 무엇인가요?', options: ['그냥 모두 초대한다', '순서를 무시한다', '상황에 따라 방을 나누거나 조절한다', '아무 설명 없이 진행한다'], correct: 3 },
-  { no: 5, group: 'host', question: '예상치 못한 문제가 발생했을 때 가장 적절한 대응은 무엇인가요?', options: ['바로 종료한다', '감정적으로 대응한다', '상황을 정리하고 안내한다', '참여자에게 책임을 돌린다'], correct: 3 },
-
-  { no: 6, group: 'participant', question: '레이드에 참여할 때 가장 올바른 행동은 무엇인가요?', options: ['분위기를 보고 바로 참여한다', '주최자의 모집글을 복사하여 본인을 멘션한다', '주최자 친구추가 후 모집글을 다시 작성한다', '참여하고 싶다고 계속 멘션한다'], correct: 2 },
-  { no: 7, group: 'participant', question: '처음 들어온 참여자가 가장 바람직하게 행동하는 방법은 무엇인가요?', options: ['공지사항과 가이드를 읽고 양식에 맞춰 닉네임을 수정한다', '근처 레이드를 위해 바로 모집글을 작성한다', '일단 궁금한 것부터 묻는다', '모집글이 보이면 참여부터 한다'], correct: 1 },
-  { no: 8, group: 'participant', question: '참여 전 체크해야 할 항목이 아닌 것은 무엇인가요?', options: ['리모트 보유 수량 체크', '일일 리모트 상한 체크', '현재 보스의 100CP를 확인', '친구추가 여부 확인'], correct: 3 },
-  { no: 9, group: 'participant', question: '참여 중 문제가 발생했을 때 가장 먼저 할 행동은 무엇인가요?', options: ['바로 불만부터 표현한다', '주최자를 멘션하여 상황을 알린다', '공지사항을 확인 후 관리자를 멘션한다', '다른 사람을 탓한다'], correct: 3 },
-  { no: 10, group: 'participant', question: '참여자로서 가장 바람직한 태도는 무엇인가요?', options: ['본인 방식대로 진행한다', '주최자 안내를 참고하며 흐름을 따른다', '언제 초대하는지 계속 멘션한다', '시간 상관없이 다 참여한다'], correct: 2 },
-
-  { no: 11, group: 'chat', question: '채팅창에서 가장 기본적으로 지켜야 하는 것은 무엇인가요?', options: ['자유롭게 아무 말이나 한다', '한 문장으로 최대한 길게 작성한다', '포켓몬고 관련 혼잣말은 마음껏 해도 된다', '짧게 여러 번 채팅을 쳐서 존재를 알린다'], correct: 2 },
-  { no: 12, group: 'chat', question: '채팅창 흐름을 방해하지 않기 위해 가장 적절한 행동은 무엇인가요?', options: ['예의를 지키며 말을 정리해서 보낸다', '궁금한 점이 생길 때마다 여러 개를 연달아 보낸다', '레이드를 주최하는 사람에게 멘션하여 초대해달라고 한다', '감정적인 표현을 우선한다'], correct: 1 },
-  { no: 13, group: 'chat', question: '글로벌방에서 환영받을 수 있는 유저는 누구인가요?', options: ['방금 생긴 레이드를 하기 위해 입장한 유저', '일정이 궁금하고 포켓몬고를 배우기 위해 입장한 유저', '계정교환 할 사람을 구하기 위해 입장한 유저', '타 톡방 홍보를 위해 입장한 유저'], correct: 2 },
-  { no: 14, group: 'chat', question: '다음 중 글로벌 톡방에서 써도 되는 채팅은 무엇인가요?', options: ['레이드 하실분?', '초대안왔는데..', '이거 개체값좀 봐주세요!', '친추좀'], correct: 3 },
-  { no: 15, group: 'chat', question: '이 테스트의 목적과 가장 가까운 것은 무엇인가요?', options: ['누가 더 잘났는지 경쟁하기 위해', '틀리면 참여하지 못하게 하려고', '가이드 핵심을 이해했는지 확인하고 더 좋은 참여 흐름으로 이어지게 하기 위해', '운영자만 편하게 하기 위해'], correct: 3 },
-
-  { no: 16, group: 'profile', question: '새로운 지역에 도착했다. 당신의 첫 행동은?', options: ['근처 트레이너들과 바로 교류한다', '지형과 포켓몬 분포를 먼저 파악한다', '강한 포켓몬이 있는 장소부터 찾는다', '마음에 드는 포켓몬을 찾아 돌아다닌다'] },
-  { no: 17, group: 'profile', question: '포켓몬을 팀에 넣을 때 당신의 기준은?', options: ['타입 밸런스와 전투 효율', '희귀도나 성장 가능성', '외형과 분위기', '스토리나 애정'] },
-  { no: 18, group: 'profile', question: '체육관 배틀 직전 당신의 스타일은?', options: ['상대 타입과 기술을 완벽 분석', '기본 전략만 세우고 유연하게 대응', '강한 포켓몬으로 밀어붙인다', '흐름을 보면서 직감적으로 플레이'] },
-  { no: 19, group: 'profile', question: '포켓몬이 쓰러졌을 때 당신은?', options: ['원인을 분석하고 전략을 수정한다', '다음엔 더 준비해서 이긴다', '감정적으로 더 아껴주게 된다', '크게 신경 안 쓰고 다음 배틀로 간다'] },
-  { no: 20, group: 'profile', question: '당신이 생각하는 최고의 트레이너는?', options: ['어떤 상황에서도 승리를 만드는 사람', '전략과 계획으로 게임을 지배하는 사람', '포켓몬과 깊은 유대를 가진 사람', '자유롭게 즐기며 성장하는 사람'] }
+  { no: 1, question: '레이드가 열리면 내가 먼저 사람을 모으고 흐름을 만드는 편이다.', effects: { 전기: 2, 비행: 1, 격투: 1 } },
+  { no: 2, question: '배틀 전에 상성, 기술, 순서를 먼저 계산해두는 편이다.', effects: { 에스퍼: 2, 강철: 1, 얼음: 1 } },
+  { no: 3, question: '이벤트에서는 순간 판단과 속도로 움직이는 편이다.', effects: { 전기: 2, 불: 1, 비행: 1 } },
+  { no: 4, question: '나는 꾸준히 플레이하면서 천천히 강해지는 스타일에 가깝다.', effects: { 풀: 2, 물: 1, 노말: 1 } },
+  { no: 5, question: '정면 승부가 필요한 상황에서는 망설이지 않고 밀어붙인다.', effects: { 격투: 2, 불: 1, 드래곤: 1 } },
+  { no: 6, question: '무너지지 않는 안정감과 버티는 운영이 더 편하다.', effects: { 강철: 2, 바위: 1, 땅: 1 } },
+  { no: 7, question: '상황에 따라 흐름을 바꾸고 유연하게 대응하는 편이다.', effects: { 물: 2, 비행: 1, 페어리: 1 } },
+  { no: 8, question: '상대가 예상하지 못한 변수와 기습을 만드는 플레이를 좋아한다.', effects: { 고스트: 2, 악: 1, 전기: 1 } },
+  { no: 9, question: '강한 힘과 존재감으로 판 전체를 장악하고 싶다.', effects: { 드래곤: 2, 불: 1, 격투: 1 } },
+  { no: 10, question: '기본기와 밸런스가 좋은 플레이가 가장 오래 간다고 생각한다.', effects: { 노말: 2, 물: 1, 땅: 1 } },
+  { no: 11, question: '상대의 빈틈을 보고 카운터를 치는 방식이 잘 맞는다.', effects: { 악: 2, 에스퍼: 1, 고스트: 1 } },
+  { no: 12, question: '복잡한 상황에서도 감정보다 냉정한 판단이 먼저다.', effects: { 얼음: 2, 강철: 1, 에스퍼: 1 } },
+  { no: 13, question: '내 플레이는 자유롭고 얽매이지 않는 편이라고 느낀다.', effects: { 비행: 2, 페어리: 1, 전기: 1 } },
+  { no: 14, question: '레이드나 이벤트에서는 주변 사람들과 호흡을 맞추는 게 중요하다.', effects: { 페어리: 2, 풀: 1, 물: 1 } },
+  { no: 15, question: '배틀은 결국 실전 감각과 현실적인 판단이 중요하다고 본다.', effects: { 땅: 2, 바위: 1, 노말: 1 } },
+  { no: 16, question: '상대의 다음 움직임을 먼저 읽고 한 수 앞서 가는 편이다.', effects: { 에스퍼: 2, 얼음: 1, 고스트: 1 } },
+  { no: 17, question: '느리더라도 묵직한 한 방이 있는 플레이가 더 좋다.', effects: { 바위: 2, 강철: 1, 드래곤: 1 } },
+  { no: 18, question: '전장의 중심을 잡아주고 팀 전체를 안정시키는 역할이 잘 맞는다.', effects: { 물: 2, 풀: 1, 페어리: 1 } },
+  { no: 19, question: '결정적인 순간에는 빠르게 치고 빠지는 움직임이 잘 맞는다.', effects: { 전기: 2, 비행: 1, 고스트: 1 } },
+  { no: 20, question: '나는 화려함보다 꾸준한 완성도와 신뢰감을 더 중요하게 본다.', effects: { 노말: 2, 강철: 1, 땅: 1 } }
 ];
 
-  const profileQuestionNos = [16, 17, 18, 19, 20];
-
 const typeProfiles = {
-  ESTJ: { ex:'ex1', type:'풀', mainCopy:'꾸준함으로 승리를 만드는 트레이너', playStyle:'서포트 / 장기전 / 안정 운영', icon:'icon-1', pogo:'pogo-1' },
-  ISTJ: { ex:'ex2', type:'얼음', mainCopy:'냉정하게 판을 읽는 분석가', playStyle:'계산형 / 리스크 최소화', icon:'icon-2', pogo:'pogo-2' },
-  ENTJ: { ex:'ex3', type:'강철', mainCopy:'완벽을 추구하는 구조적 플레이어', playStyle:'체계적 운영 / 안정형', icon:'icon-3', pogo:'pogo-3' },
-  ENTP: { ex:'ex4', type:'드래곤', mainCopy:'압도적인 힘으로 판을 지배하는 존재', playStyle:'캐리형 / 하이리스크', icon:'icon-4', pogo:'pogo-4' },
-  ESTP: { ex:'ex5', type:'불', mainCopy:'폭발적인 에너지로 판을 뒤집는 트레이너', playStyle:'공격 중심 / 빠른 전개', icon:'icon-5', pogo:'pogo-5' },
-  ISFJ: { ex:'ex6', type:'바위', mainCopy:'흔들리지 않는 안정의 중심', playStyle:'수비형 / 버티기', icon:'icon-6', pogo:'pogo-6' },
-  ESFJ: { ex:'ex7', type:'물', mainCopy:'흐름을 읽고 판을 지배하는 전략가', playStyle:'밸런스 / 상황 대응', icon:'icon-7', pogo:'pogo-7' },
-  ENFJ: { ex:'ex8', type:'전기', mainCopy:'주변을 환하게 밝히는 사랑스러운 트레이너', playStyle:'친화형 / 밝은 에너지', icon:'icon-8', pogo:'pogo-8' },
-  INTP: { ex:'ex9', type:'고스트', mainCopy:'보이지 않는 흐름을 읽는 플레이어', playStyle:'트릭형 / 변수 창출', icon:'icon-9', pogo:'pogo-9' },
-  ESFP: { ex:'ex10', type:'격투', mainCopy:'정면 승부로 상대를 압도하는 트레이너', playStyle:'직진형 / 공격 집중', icon:'icon-10', pogo:'pogo-10' },
-  ISFP: { ex:'ex11', type:'노말', mainCopy:'편안함 속에서 강함을 만드는 트레이너', playStyle:'안정형 / 무난 / 지속 성장', icon:'icon-11', pogo:'pogo-11' },
-  INTJ: { ex:'ex12', type:'에스퍼', mainCopy:'한 수 앞을 내다보는 전략 설계자', playStyle:'전략형 / 컨트롤', icon:'icon-12', pogo:'pogo-12' },
-  ISTP: { ex:'ex13', type:'땅', mainCopy:'현실적인 판단으로 승리를 쌓는 트레이너', playStyle:'실전형 / 기본기 중심', icon:'icon-13', pogo:'pogo-13' },
-  ENTJ_ALT: { ex:'ex14', type:'악', mainCopy:'상대의 빈틈을 노리는 계산된 플레이어', playStyle:'심리전 / 카운터', icon:'icon-14', pogo:'pogo-14' },
-  INFP: { ex:'ex15', type:'노멀', mainCopy:'틀에 얽매이지 않는 자유로운 플레이어', playStyle:'자유형 / 유연 플레이', icon:'icon-15', pogo:'pogo-15' },
-  ENFP: { ex:'ex16', type:'비행', mainCopy:'자유로운 움직임으로 흐름을 바꾸는 플레이어', playStyle:'회피 / 기동 / 유연 대응', icon:'icon-16', pogo:'pogo-16' }
+  풀: { iconNo: 1, type: '풀', best: '물', worst: '불', mainCopy: '천천히 강해지는 플레이어', playStyle: '꾸준함 / 회복 / 지속력', story: '당신은 꾸준히 성장하는 타입입니다.\n빠르게 앞서가진 않지만, 끝까지 남는 힘이 있습니다.', drive: 70, strategy: 75, team: 90 },
+  얼음: { iconNo: 2, type: '얼음', best: '드래곤', worst: '불', mainCopy: '차분하게 흐름을 제어하는 플레이어', playStyle: '냉정함 / 분석 / 제어', story: '당신은 감정에 휘둘리지 않는 타입입니다.\n차분한 판단으로 흐름을 통제합니다.', drive: 65, strategy: 85, team: 60 },
+  강철: { iconNo: 3, type: '강철', best: '페어리', worst: '불', mainCopy: '무너지지 않는 구조를 만드는 플레이어', playStyle: '안정감 / 방어 / 완성도', story: '당신은 쉽게 무너지지 않는 타입입니다.\n어떤 상황에서도 버텨내며 기회를 만듭니다.', drive: 60, strategy: 90, team: 75 },
+  드래곤: { iconNo: 4, type: '드래곤', best: '드래곤', worst: '페어리', mainCopy: '압도적인 존재감으로 판을 지배하는 플레이어', playStyle: '지배력 / 스케일 / 돌파력', story: '당신은 전장을 지배하는 타입입니다.\n강한 존재감으로 흐름 자체를 바꿔버립니다.', drive: 90, strategy: 85, team: 60 },
+  불: { iconNo: 5, type: '불', best: '풀', worst: '물', mainCopy: '순간 폭발력으로 판을 뒤집는 플레이어', playStyle: '직진 / 열정 / 폭발력', story: '당신은 망설임 없이 밀어붙이는 타입입니다.\n결정적인 순간, 불꽃처럼 분위기를 바꿉니다.', drive: 95, strategy: 70, team: 55 },
+  바위: { iconNo: 6, type: '바위', best: '불', worst: '물', mainCopy: '묵직한 한 방으로 승부하는 플레이어', playStyle: '중량감 / 버티기 / 한방', story: '당신은 느리더라도 강한 한 방을 믿는 타입입니다.\n천천히, 그러나 확실하게 상대를 압박합니다.', drive: 80, strategy: 75, team: 65 },
+  물: { iconNo: 7, type: '물', best: '불', worst: '전기', mainCopy: '흐름을 읽고 안정적으로 대응하는 플레이어', playStyle: '유연함 / 균형 / 대응력', story: '당신은 흐름을 읽고 움직이는 타입입니다.\n상황에 맞춰 유연하게 대응하며 안정적으로 승리를 만듭니다.', drive: 75, strategy: 85, team: 85 },
+  전기: { iconNo: 8, type: '전기', best: '물', worst: '땅', mainCopy: '순간 판단으로 승부를 결정하는 플레이어', playStyle: '속도 / 기습 / 민첩함', story: '당신은 번개처럼 빠르게 움직이는 타입입니다.\n짧은 순간의 판단이 승부를 갈라놓습니다.', drive: 90, strategy: 80, team: 65 },
+  고스트: { iconNo: 9, type: '고스트', best: '에스퍼', worst: '악', mainCopy: '보이지 않는 틈을 파고드는 플레이어', playStyle: '변수 / 기습 / 심리전', story: '당신은 보이지 않는 곳에서 흐름을 흔드는 타입입니다.\n예상치 못한 순간에 판을 뒤집습니다.', drive: 75, strategy: 90, team: 55 },
+  격투: { iconNo: 10, type: '격투', best: '노말', worst: '페어리', mainCopy: '정면 승부를 두려워하지 않는 플레이어', playStyle: '근성 / 돌파 / 압박', story: '당신은 정면 승부를 두려워하지 않는 타입입니다.\n끝까지 밀어붙여 결국 결과를 만들어냅니다.', drive: 95, strategy: 75, team: 60 },
+  노말: { iconNo: 11, type: '노말', best: '노말', worst: '격투', mainCopy: '기본기가 탄탄한 안정형 플레이어', playStyle: '균형 / 기본기 / 신뢰감', story: '당신은 기본기에 충실한 타입입니다.\n큰 흔들림 없이 안정적인 흐름을 만들어냅니다.', drive: 70, strategy: 70, team: 80 },
+  에스퍼: { iconNo: 12, type: '에스퍼', best: '격투', worst: '악', mainCopy: '한 수 앞을 읽고 움직이는 플레이어', playStyle: '예측 / 통찰 / 설계', story: '당신은 흐름을 미리 읽는 타입입니다.\n상대보다 한 발 먼저 움직이며 판을 설계합니다.', drive: 65, strategy: 95, team: 70 },
+  땅: { iconNo: 13, type: '땅', best: '전기', worst: '물', mainCopy: '현실적인 판단으로 승리를 쌓는 플레이어', playStyle: '실전감 / 기반 / 안정감', story: '당신은 흔들리지 않는 기반을 가진 타입입니다.\n현실적인 판단으로 차근차근 승리를 쌓아갑니다.', drive: 80, strategy: 80, team: 75 },
+  악: { iconNo: 14, type: '악', best: '에스퍼', worst: '격투', mainCopy: '상대의 빈틈을 노리는 플레이어', playStyle: '교란 / 카운터 / 혼란', story: '당신은 예측을 깨는 타입입니다.\n상대를 흔들고 빈틈을 만들어 흐름을 뒤집습니다.', drive: 85, strategy: 80, team: 55 },
+  페어리: { iconNo: 15, type: '페어리', best: '드래곤', worst: '강철', mainCopy: '균형과 호흡을 만드는 플레이어', playStyle: '조화 / 지원 / 팀플레이', story: '당신은 균형을 만드는 타입입니다.\n혼자보다 함께일 때 더 큰 힘을 발휘합니다.', drive: 65, strategy: 75, team: 95 },
+  비행: { iconNo: 16, type: '비행', best: '격투', worst: '전기', mainCopy: '자유로운 움직임으로 흐름을 바꾸는 플레이어', playStyle: '기동성 / 자유 / 회피', story: '당신은 자유롭게 전장을 누비는 타입입니다.\n틀에 얽매이지 않는 움직임으로 기회를 만듭니다.', drive: 85, strategy: 75, team: 80 }
 };
 
 let shuffledQuestions = [];
 let answers = {};
 let currentPage = 0;
-const QUESTIONS_PER_PAGE = 3;
+let currentRendered = null;
+let draggingScale = null;
+
+const QUESTIONS_PER_PAGE = 4;
 const TOTAL_PAGES = Math.ceil(questionBank.length / QUESTIONS_PER_PAGE);
 
 const introSection = document.getElementById('introSection');
@@ -950,6 +1049,7 @@ const prevBtn = document.getElementById('prevBtn');
 const nextBtn = document.getElementById('nextBtn');
 const submitBtn = document.getElementById('submitBtn');
 const quizForm = document.getElementById('quizForm');
+const analyzingOverlay = document.getElementById('analyzingOverlay');
 
 nickname.addEventListener('input', () => {
   nickname.value = nickname.value.replace(/\s+/g, '').replace(/[^ㄱ-ㅎ가-힣ㅏ-ㅣ]/g, '');
@@ -993,15 +1093,6 @@ function validateNickname() {
   return true;
 }
 
-function shuffleArray(arr) {
-  const copy = [...arr];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
-
 function showIntro() {
   introSection.classList.remove('hidden');
   quizSection.classList.add('hidden');
@@ -1018,166 +1109,72 @@ function showResult() {
   resultSection.classList.remove('hidden');
 }
 
-function formatWeightFromTime(timeValue) {
-  const [h, m] = timeValue.split(':');
-  return `${Number(h)}.${m}kg`;
-}
-function formatHeightFromDate(dateValue) {
-  const date = new Date(dateValue + 'T00:00:00');
-  const yy = String(date.getFullYear()).slice(2);
-  const month = date.getMonth() + 1;
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${yy}.${month}${day}m`;
-}
 function getRandomHp() {
   return Math.floor(Math.random() * (400 - 20 + 1)) + 20;
 }
-function getRandomAssetIndex() {
-  return Math.floor(Math.random() * 18) + 1;
-}
-function getAssets(index) {
-  return {
-    pogo: `./images/pogo-${index}.png`,
-    icon: `./images/icon-${index}.png`,
-    advisor: `./images/advisor-1.png`
-  };
-}
 
-  function getKnowledgeQuestionCount() {
-  return questionBank.filter(q => q.group !== 'profile').length;
+function choiceValueToScore(value) {
+  if (value === 1) return 2;
+  if (value === 2) return 1;
+  if (value === 3) return 0;
+  if (value === 4) return -1;
+  if (value === 5) return -2;
+  return 0;
 }
 
-function getProfileLetters() {
-  const score = {
-    E: 0, I: 0,
-    S: 0, N: 0,
-    T: 0, F: 0,
-    J: 0, P: 0
-  };
-
-  profileQuestionNos.forEach((qNo) => {
-    const answer = answers[qNo];
-    if (!answer) return;
-
-    if (qNo === 16) {
-      if (answer === 1) score.E++;
-      if (answer === 2) score.I++;
-      if (answer === 3) score.T++;
-      if (answer === 4) score.F++;
-    }
-
-    if (qNo === 17) {
-      if (answer === 1) { score.S++; score.T++; }
-      if (answer === 2) { score.N++; score.I++; }
-      if (answer === 3) { score.F++; score.N++; }
-      if (answer === 4) { score.F++; score.N++; }
-    }
-
-    if (qNo === 18) {
-      if (answer === 1) { score.J++; score.T++; }
-      if (answer === 2) { score.P++; score.S++; }
-      if (answer === 3) { score.E++; score.T++; }
-      if (answer === 4) { score.P++; score.F++; }
-    }
-
-    if (qNo === 19) {
-      if (answer === 1) { score.T++; }
-      if (answer === 2) { score.J++; }
-      if (answer === 3) { score.F++; }
-      if (answer === 4) { score.P++; }
-    }
-
-    if (qNo === 20) {
-      if (answer === 1) { score.T++; }
-      if (answer === 2) { score.J++; }
-      if (answer === 3) { score.F++; }
-      if (answer === 4) { score.P++; score.N++; }
-    }
-  });
-
-  const EI = score.E >= score.I ? 'E' : 'I';
-  const SN = score.S >= score.N ? 'S' : 'N';
-  const TF = score.T >= score.F ? 'T' : 'F';
-  const JP = score.J >= score.P ? 'J' : 'P';
-
-  return `${EI}${SN}${TF}${JP}`;
+function getRandomPogoByType(typeName) {
+  const iconNo = typeProfiles[typeName].iconNo;
+  const pool = [
+    `./images/pogo-${iconNo}.png`,
+    `./images/pogo-${iconNo}-2.png`,
+    `./images/pogo-${iconNo}-3.png`
+  ];
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
-function getProfileByLetters(letters) {
-  const mappedKey = (() => {
-    if (letters === 'ESTJ') return 'ESTJ';
-    if (letters === 'ISTJ') return 'ISTJ';
-    if (letters === 'ENTJ') return 'ENTJ';
-    if (letters === 'ENTP') return 'ENTP';
-    if (letters === 'ESTP') return 'ESTP';
-    if (letters === 'ISFJ') return 'ISFJ';
-    if (letters === 'ESFJ') return 'ESFJ';
-    if (letters === 'ENFJ') return 'ENFJ';
-    if (letters === 'INTP') return 'INTP';
-    if (letters === 'ESFP') return 'ESFP';
-    if (letters === 'ISFP') return 'ISFP';
-    if (letters === 'INTJ') return 'INTJ';
-    if (letters === 'ISTP') return 'ISTP';
-    if (letters === 'INFJ') return 'ENTJ_ALT';
-    if (letters === 'INFP') return 'INFP';
-    if (letters === 'ENFP') return 'ENFP';
-    return 'ESTJ';
-  })();
-
-  const profile = typeProfiles[mappedKey];
-
-  return {
-    ...profile,
-    letters
-  };
+function getTypeIconPath(typeName) {
+  return `./images/icon-${typeProfiles[typeName].iconNo}.png`;
 }
-
-function getProfileAssets(profile) {
-  const iconNumber = profile.icon.replace('icon-', '');
-  const pogoNumber = profile.pogo.replace('pogo-', '');
-
-  return {
-    pogo: `./images/pogo-${pogoNumber}.png`,
-    icon: `./images/icon-${iconNumber}.png`,
-    advisor: `./images/advisor-1.png`
-  };
-}
-
-const SHARE_IMAGE_BASE_URL = `${window.location.origin}/images`;
 
 function getShareImageUrl(profile) {
-  const imageNumber = profile.icon.replace('icon-', '');
-  return `${SHARE_IMAGE_BASE_URL}/${imageNumber}.png`;
+  return `${window.location.origin}/images/${profile.iconNo}.png`;
 }
-  
+
+function getTrackFillPercent(value) {
+  if (!value) return 0;
+  return ((value - 1) / 4) * 76;
+}
+
 function renderCurrentPage() {
   const start = currentPage * QUESTIONS_PER_PAGE;
   const end = start + QUESTIONS_PER_PAGE;
   const pageQuestions = shuffledQuestions.slice(start, end);
 
-pageRangeText.textContent = `${start + 1} - ${Math.min(end, questionBank.length)} / ${questionBank.length}`;
-pageStepText.textContent = `${currentPage + 1} / ${TOTAL_PAGES}`;
+  pageRangeText.textContent = `${start + 1} - ${Math.min(end, questionBank.length)} / ${questionBank.length}`;
+  pageStepText.textContent = `${currentPage + 1} / ${TOTAL_PAGES}`;
   progressFill.style.width = `${((currentPage + 1) / TOTAL_PAGES) * 100}%`;
 
   questionArea.innerHTML = pageQuestions.map((item, idx) => {
     const absoluteIndex = start + idx;
+    const savedValue = answers[item.no] || 0;
     return `
       <div class="question-card">
         <div class="q-top">
-          <div class="q-badge">Q${absoluteIndex + 1}</div>
+          <div class="q-badge">${String(absoluteIndex + 1).padStart(2, '0')}</div>
         </div>
         <h3 class="q-title">${item.question}</h3>
-        <div class="options">
-          ${item.options.map((optionText, optionIndex) => `
-            <label class="option">
-              <input
-                type="radio"
-                name="q-${item.no}"
-                value="${optionIndex + 1}"
-                ${answers[item.no] === (optionIndex + 1) ? 'checked' : ''}
-              >
-              <span>${optionText}</span>
-            </label>
+
+        <div class="scale-text-row">
+          ${SCALE_LABELS.map(label => `<div>${label}</div>`).join('')}
+        </div>
+
+        <div class="options scale-circle" data-q="${item.no}" data-value="${savedValue}">
+          <div class="scale-track"></div>
+          <div class="scale-track-fill" style="width:${getTrackFillPercent(savedValue)}%;"></div>
+          ${[1,2,3,4,5].map(num => `
+            <button type="button" class="circle ${savedValue === num ? 'active' : ''}" data-value="${num}" aria-label="${num} 선택">
+              <span>${num}</span>
+            </button>
           `).join('')}
         </div>
       </div>
@@ -1194,102 +1191,46 @@ pageStepText.textContent = `${currentPage + 1} / ${TOTAL_PAGES}`;
   }
 }
 
-function saveCurrentPageAnswers() {
-  const start = currentPage * QUESTIONS_PER_PAGE;
-  const end = start + QUESTIONS_PER_PAGE;
-  const pageQuestions = shuffledQuestions.slice(start, end);
-
-  pageQuestions.forEach((q) => {
-    const checked = quizForm.querySelector(`input[name="q-${q.no}"]:checked`);
-    if (checked) answers[q.no] = Number(checked.value);
-  });
-}
-
 function pageAnsweredCount() {
   const start = currentPage * QUESTIONS_PER_PAGE;
   const end = start + QUESTIONS_PER_PAGE;
   const pageQuestions = shuffledQuestions.slice(start, end);
   let count = 0;
   pageQuestions.forEach((q) => {
-    if (quizForm.querySelector(`input[name="q-${q.no}"]:checked`) || answers[q.no]) count++;
+    if (answers[q.no]) count++;
   });
   return count;
 }
 
-document.getElementById('startBtn').addEventListener('click', () => {
-  if (!validateTrainerLevel()) return;
-  if (!validateNickname()) return;
+function calculateTypeScores() {
+  const scores = {};
+  Object.keys(typeProfiles).forEach((type) => {
+    scores[type] = 0;
+  });
 
-  setCurrentDateTime();
-  shuffledQuestions = shuffleArray(questionBank);
-  answers = {};
-  currentPage = 0;
+  shuffledQuestions.forEach((q) => {
+    const answer = answers[q.no];
+    if (!answer) return;
+    const baseScore = choiceValueToScore(answer);
+    Object.entries(q.effects).forEach(([typeName, weight]) => {
+      scores[typeName] += baseScore * weight;
+    });
+  });
 
-  showQuiz();
-  renderCurrentPage();
-  window.scrollTo({ top:0, behavior:'smooth' });
-});
-
-prevBtn.addEventListener('click', () => {
-  saveCurrentPageAnswers();
-  if (currentPage > 0) {
-    currentPage--;
-    renderCurrentPage();
-    window.scrollTo({ top:0, behavior:'smooth' });
-  }
-});
-
-nextBtn.addEventListener('click', () => {
-  saveCurrentPageAnswers();
-  if (pageAnsweredCount() < QUESTIONS_PER_PAGE) {
-    alert('현재 페이지의 3문항을 모두 선택해 주세요.');
-    return;
-  }
-  if (currentPage < TOTAL_PAGES - 1) {
-    currentPage++;
-    renderCurrentPage();
-    window.scrollTo({ top:0, behavior:'smooth' });
-  }
-});
-
-function countGroupCorrect(groupName) {
-  return shuffledQuestions
-    .filter(q => q.group === groupName)
-    .reduce((sum, q) => sum + (answers[q.no] === q.correct ? 1 : 0), 0);
+  return scores;
 }
 
-function getTotalCorrect() {
-  return shuffledQuestions
-    .filter(q => q.group === 'host' || q.group === 'participant' || q.group === 'chat')
-    .reduce((sum, q) => sum + (answers[q.no] === q.correct ? 1 : 0), 0);
+function getResultType() {
+  const scores = calculateTypeScores();
+  return Object.keys(scores).sort((a, b) => scores[b] - scores[a])[0];
 }
 
-function statCountToPercent(correctCount) {
-  switch (correctCount) {
-    case 0: return 0;
-    case 1: return 16.6667;
-    case 2: return 33.3333;
-    case 3: return 66.6667;
-    case 4: return 83.3333;
-    case 5: return 100;
-    default: return 0;
-  }
-}
-
-function getStarData(totalCorrect) {
-  if (totalCorrect === 15) return { stars: 3, theme: 'red', redStars: true };
-  if (totalCorrect >= 12) return { stars: 3, theme: 'orange', redStars: false };
-  if (totalCorrect >= 9) return { stars: 2, theme: 'orange', redStars: false };
-  if (totalCorrect >= 6) return { stars: 1, theme: 'orange', redStars: false };
-  return { stars: 0, theme: 'orange', redStars: false };
-}
-
-function getSpeech(totalCorrect) {
-  if (totalCorrect === 15) return '완벽합니다. 이 트레이너는 모든 가이드 흐름과 채팅 규칙을 정확히 이해하고 있습니다.';
-  if (totalCorrect >= 12) return '아주 좋습니다. 이 트레이너는 전체 흐름을 안정적으로 이해하고 있습니다.';
-  if (totalCorrect >= 9) return '좋습니다. 핵심 흐름은 잘 잡았고, 조금만 더 익히면 더욱 좋아집니다.';
-  if (totalCorrect >= 6) return '기본 이해는 되어 있습니다. 가이드를 한 번 더 읽으면 훨씬 수월해질 거예요.';
-  return '먼저 기본 가이드와 채팅 규칙부터 다시 확인하는 것을 추천합니다.';
+function getStarDataByStats(profile) {
+  const avg = Math.round((profile.drive + profile.strategy + profile.team) / 3);
+  if (avg >= 85) return { stars: 3, theme: 'red', redStars: true };
+  if (avg >= 78) return { stars: 3, theme: 'orange', redStars: false };
+  if (avg >= 70) return { stars: 2, theme: 'orange', redStars: false };
+  return { stars: 1, theme: 'orange', redStars: false };
 }
 
 function animateLevelUp(targetLevel) {
@@ -1311,7 +1252,6 @@ function animateLevelUp(targetLevel) {
     const progress = Math.min((now - startTime) / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
     const current = Math.round(startLevel + (endLevel - startLevel) * eased);
-
     el.textContent = current;
 
     if (progress < 1) {
@@ -1325,7 +1265,7 @@ function animateLevelUp(targetLevel) {
   requestAnimationFrame(tick);
 }
 
-function animateStatBars(hostPercent, participantPercent, chatPercent) {
+function animateStatBars(drive, strategy, team) {
   const hostFill = document.getElementById('hostFill');
   const participantFill = document.getElementById('participantFill');
   const chatFill = document.getElementById('chatFill');
@@ -1342,103 +1282,193 @@ function animateStatBars(hostPercent, participantPercent, chatPercent) {
       participantFill.style.transition = 'width 1s cubic-bezier(.22,.61,.36,1)';
       chatFill.style.transition = 'width 1s cubic-bezier(.22,.61,.36,1)';
 
-      hostFill.style.width = `${hostPercent}%`;
-      participantFill.style.width = `${participantPercent}%`;
-      chatFill.style.width = `${chatPercent}%`;
+      hostFill.style.width = `${drive}%`;
+      participantFill.style.width = `${strategy}%`;
+      chatFill.style.width = `${team}%`;
     });
   });
 }
 
-let currentRendered = null;
+function setScaleAnswer(qNo, value, container) {
+  answers[qNo] = value;
+  container.dataset.value = String(value);
+
+  const fill = container.querySelector('.scale-track-fill');
+  if (fill) {
+    fill.style.width = `${getTrackFillPercent(value)}%`;
+  }
+
+  container.querySelectorAll('.circle').forEach(circle => {
+    circle.classList.toggle('active', Number(circle.dataset.value) === value);
+  });
+}
+
+function getValueFromPointer(container, clientX) {
+  const rect = container.getBoundingClientRect();
+  const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+  const ratio = x / rect.width;
+  if (ratio < 0.2) return 1;
+  if (ratio < 0.4) return 2;
+  if (ratio < 0.6) return 3;
+  if (ratio < 0.8) return 4;
+  return 5;
+}
+
+questionArea.addEventListener('click', (e) => {
+  const circle = e.target.closest('.circle');
+  if (!circle) return;
+  const container = circle.closest('.scale-circle');
+  const qNo = Number(container.dataset.q);
+  const value = Number(circle.dataset.value);
+  setScaleAnswer(qNo, value, container);
+});
+
+questionArea.addEventListener('pointerdown', (e) => {
+  const container = e.target.closest('.scale-circle');
+  if (!container) return;
+  draggingScale = container;
+  const qNo = Number(container.dataset.q);
+  const value = getValueFromPointer(container, e.clientX);
+  setScaleAnswer(qNo, value, container);
+  container.setPointerCapture?.(e.pointerId);
+});
+
+questionArea.addEventListener('pointermove', (e) => {
+  if (!draggingScale) return;
+  const value = getValueFromPointer(draggingScale, e.clientX);
+  const qNo = Number(draggingScale.dataset.q);
+  setScaleAnswer(qNo, value, draggingScale);
+});
+
+window.addEventListener('pointerup', () => {
+  draggingScale = null;
+});
+
+document.getElementById('startBtn').addEventListener('click', () => {
+  if (!validateTrainerLevel()) return;
+  if (!validateNickname()) return;
+
+  shuffledQuestions = [...questionBank];
+  answers = {};
+  currentPage = 0;
+
+  showQuiz();
+  renderCurrentPage();
+  window.scrollTo({ top:0, behavior:'smooth' });
+});
+
+prevBtn.addEventListener('click', () => {
+  if (currentPage > 0) {
+    currentPage--;
+    renderCurrentPage();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  if (pageAnsweredCount() < QUESTIONS_PER_PAGE) {
+    alert('현재 페이지의 4문항을 모두 선택해 주세요.');
+    return;
+  }
+  if (currentPage < TOTAL_PAGES - 1) {
+    currentPage++;
+    renderCurrentPage();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+});
 
 quizForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  saveCurrentPageAnswers();
+  if (Object.keys(answers).length < questionBank.length) {
+    alert('모든 문항에 답변해 주세요.');
+    return;
+  }
 
-if (Object.keys(answers).length < questionBank.length) {
-  alert('모든 문항에 답변해 주세요.');
-  return;
-}
+  const resultType = getResultType();
+  const profile = typeProfiles[resultType];
+  const bestType = profile.best || '노말';
+  const worstType = profile.worst;
+  const starData = getStarDataByStats(profile);
+  const randomHp = getRandomHp();
+  const shareImageUrl = getShareImageUrl(profile);
+  const pogoPath = getRandomPogoByType(resultType);
 
-  const hostCorrect = countGroupCorrect('host');
-  const participantCorrect = countGroupCorrect('participant');
-  const chatCorrect = countGroupCorrect('chat');
-  const totalCorrect = getTotalCorrect();
+  currentRendered = {
+    profileResult: profile,
+    resultType,
+    shareImageUrl,
+    pogoPath,
+    starData,
+    randomHp
+  };
 
-  const hostPercent = statCountToPercent(hostCorrect);
-  const participantPercent = statCountToPercent(participantCorrect);
-  const chatPercent = statCountToPercent(chatCorrect);
+  showResult();
+  window.scrollTo({ top:0, behavior:'smooth' });
 
-const starData = getStarData(totalCorrect);
-const profileLetters = getProfileLetters();
-const profileResult = getProfileByLetters(profileLetters);
-const assets = getProfileAssets(profileResult);
-const shareImageUrl = getShareImageUrl(profileResult);
-const randomHp = getRandomHp();
+  analyzingOverlay.classList.remove('hidden');
 
-currentRendered = {
-  hostCorrect, participantCorrect, chatCorrect, totalCorrect,
-  hostPercent, participantPercent, chatPercent,
-  starData, assets, shareImageUrl, randomHp, profileResult
-};
-  
-document.getElementById('resultLevel').textContent = '15';
-document.getElementById('resultNickname').textContent = nickname.value;
-document.getElementById('resultWeight').textContent = formatWeightFromTime(currentTime);
-document.getElementById('resultHeight').textContent = formatHeightFromDate(currentDate);
-document.getElementById('resultHpText').textContent = `${randomHp} / ${randomHp} HP`;
-
-document.getElementById('resultType').textContent = profileResult.type;
-document.getElementById('resultMainCopy').textContent = profileResult.mainCopy;
-document.getElementById('resultPlayStyle').textContent = profileResult.playStyle;
-
-document.getElementById('resultPogo').src = assets.pogo;
-document.getElementById('resultIcon').src = assets.icon;
-document.getElementById('resultCharacter').src = assets.advisor;
-
-  document.getElementById('speechText').textContent = getSpeech(totalCorrect);
-
-  document.getElementById('hostBar').className = `stat-bar ${starData.theme}`;
-  document.getElementById('participantBar').className = `stat-bar ${starData.theme}`;
-  document.getElementById('chatBar').className = `stat-bar ${starData.theme}`;
+  document.getElementById('resultLevel').textContent = '15';
+  document.getElementById('hostFill').style.width = '0%';
+  document.getElementById('participantFill').style.width = '0%';
+  document.getElementById('chatFill').style.width = '0%';
 
   const badgeStars = document.querySelectorAll('.badge-star');
   badgeStars.forEach(star => {
     star.classList.remove('show', 'red-star', 'outline');
   });
 
-  showResult();
-  window.scrollTo({ top:0, behavior:'smooth' });
-
   setTimeout(() => {
-    animateStatBars(hostPercent, participantPercent, chatPercent);
-  }, 140);
+    document.getElementById('resultNickname').textContent = nickname.value;
+    document.getElementById('resultHpText').textContent = `${randomHp} / ${randomHp} HP`;
 
-  setTimeout(() => {
-    if (starData.stars === 0) {
-      badgeStars.forEach(star => {
-        star.classList.add('outline');
-      });
-    } else {
-      for (let i = 0; i < badgeStars.length; i++) {
-        if (i < starData.stars) {
-          setTimeout(() => {
-            badgeStars[i].classList.add('show');
-            if (starData.redStars) {
-              badgeStars[i].classList.add('red-star');
-            }
-          }, i * 180);
-        } else {
-          badgeStars[i].classList.add('outline');
+    document.getElementById('resultMainCopy').textContent = profile.mainCopy;
+    document.getElementById('resultPlayStyle').textContent = profile.playStyle;
+
+    document.getElementById('resultPogo').src = pogoPath;
+    document.getElementById('resultIcon').src = getTypeIconPath(resultType);
+    document.getElementById('resultDefenseIcon').src = getTypeIconPath(worstType);
+    document.getElementById('resultAttackIcon').src = getTypeIconPath(bestType);
+    document.getElementById('resultCharacter').src = './images/advisor-1.png';
+
+    document.getElementById('speechText').textContent = profile.story;
+
+    document.getElementById('hostBar').className = `stat-bar ${starData.theme}`;
+    document.getElementById('participantBar').className = `stat-bar ${starData.theme}`;
+    document.getElementById('chatBar').className = `stat-bar ${starData.theme}`;
+
+    analyzingOverlay.classList.add('hidden');
+
+    setTimeout(() => {
+      animateStatBars(profile.drive, profile.strategy, profile.team);
+    }, 120);
+
+    setTimeout(() => {
+      if (starData.stars === 0) {
+        badgeStars.forEach(star => {
+          star.classList.add('outline');
+        });
+      } else {
+        for (let i = 0; i < badgeStars.length; i++) {
+          if (i < starData.stars) {
+            setTimeout(() => {
+              badgeStars[i].classList.add('show');
+              if (starData.redStars) {
+                badgeStars[i].classList.add('red-star');
+              }
+            }, i * 180);
+          } else {
+            badgeStars[i].classList.add('outline');
+          }
         }
       }
-    }
-  }, 420);
+    }, 260);
 
-  setTimeout(() => {
-    animateLevelUp(trainerLevel.value);
-  }, 760);
+    setTimeout(() => {
+      animateLevelUp(trainerLevel.value);
+    }, 500);
+
+  }, 2400);
 });
 
 document.getElementById('retryBtn').addEventListener('click', () => {
@@ -1447,38 +1477,62 @@ document.getElementById('retryBtn').addEventListener('click', () => {
   trainerLevel.value = '';
   nickname.value = '';
   document.getElementById('resultLevel').textContent = '15';
+  analyzingOverlay.classList.add('hidden');
   showIntro();
   window.scrollTo({ top:0, behavior:'smooth' });
 });
 
 async function makeShareImageDataUrl() {
   const target = document.getElementById('captureTarget');
+  target.classList.add('capture-fix');
 
-  target.classList.add('capture-ios');
+  try {
+    const images = Array.from(target.querySelectorAll('img'));
+    await Promise.all(
+      images.map(img => {
+        if (img.complete) return Promise.resolve();
+        return new Promise(resolve => {
+          img.onload = resolve;
+          img.onerror = resolve;
+        });
+      })
+    );
 
-  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    await new Promise(resolve =>
+      requestAnimationFrame(() => requestAnimationFrame(resolve))
+    );
 
-  const canvas = await html2canvas(target, {
-    useCORS: true,
-    backgroundColor: null,
-    scale: 3,
-    width: 390,
-    windowWidth: 390
-  });
+    const rect = target.getBoundingClientRect();
 
-  target.classList.remove('capture-ios');
+    const canvas = await html2canvas(target, {
+      useCORS: true,
+      backgroundColor: null,
+      scale: 2,
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+      windowWidth: document.documentElement.clientWidth,
+      windowHeight: document.documentElement.clientHeight
+    });
 
-  return canvas.toDataURL('image/png');
+    return canvas.toDataURL('image/png');
+  } finally {
+    target.classList.remove('capture-fix');
+  }
 }
 
 document.getElementById('downloadBtn').addEventListener('click', async () => {
-  const dataUrl = await makeShareImageDataUrl();
-  const a = document.createElement('a');
-  a.href = dataUrl;
-  a.download = `trainer-result-${Date.now()}.png`;
-  a.click();
+  try {
+    const dataUrl = await makeShareImageDataUrl();
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = `trainer-result-${Date.now()}.png`;
+    a.click();
+  } catch (error) {
+    console.error(error);
+    alert('이미지 저장 중 오류가 발생했습니다.');
+  }
 });
-  
+
 document.getElementById('shareBtn').addEventListener('click', () => {
   if (!currentRendered) return;
 
@@ -1501,7 +1555,7 @@ document.getElementById('shareBtn').addEventListener('click', () => {
       TYPE: profile.type,
       MAINCOPY: profile.mainCopy,
       PLAYSTYLE: profile.playStyle,
-      DESC: profile.type,
+      DESC: profile.story.replace(/\n/g, ' '),
       THU: shareImageUrl
     }
   });
