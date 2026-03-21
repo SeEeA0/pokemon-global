@@ -784,6 +784,19 @@ body{
   color:#7382a0;
 }
 
+.capture-fix .appraisal-badge,
+.capture-fix .badge-ring,
+.capture-fix .badge-stars,
+.capture-fix .badge-star{
+  transform: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  will-change: auto !important;
+}
+
+.capture-fix .badge-star{
+  font-size: 22px !important;
+}
 </style>
 </head>
 <body>
@@ -1478,6 +1491,29 @@ document.getElementById('retryBtn').addEventListener('click', () => {
 
 async function makeShareImageDataUrl() {
   const target = document.getElementById('captureTarget');
+
+  // 👇 캡처용 안정화 모드 ON
+  target.classList.add('capture-fix');
+
+  await new Promise(resolve =>
+    requestAnimationFrame(() => requestAnimationFrame(resolve))
+  );
+
+  const rect = target.getBoundingClientRect();
+
+  const canvas = await html2canvas(target, {
+    useCORS: true,
+    backgroundColor: null,
+    scale: 2, // ❗ 중요 (3 쓰면 깨짐)
+    width: rect.width,
+    height: rect.height
+  });
+
+  // 👇 다시 원래 상태 복구
+  target.classList.remove('capture-fix');
+
+  return canvas.toDataURL('image/png');
+}
 
   // 이미지 로딩 완료 대기
   const images = Array.from(target.querySelectorAll('img'));
