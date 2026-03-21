@@ -1478,16 +1478,15 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
   a.download = `trainer-result-${Date.now()}.png`;
   a.click();
 });
-document.getElementById('shareBtn').addEventListener('click', async () => {
+  
+document.getElementById('shareBtn').addEventListener('click', () => {
   if (!currentRendered) return;
 
   const profile = currentRendered.profileResult;
+  const shareImageUrl = currentRendered.shareImageUrl;
 
   const baseUrl = window.location.origin + window.location.pathname;
   const buttonUrl = `${baseUrl}?from=kakao_button`;
-
-  // 👉 핵심: 캡처 이미지 생성
-  const dataUrl = await makeShareImageDataUrl();
 
   if (!window.Kakao) {
     alert('카카오 SDK가 로드되지 않았습니다.');
@@ -1504,7 +1503,7 @@ document.getElementById('shareBtn').addEventListener('click', async () => {
     content: {
       title: `${profile.type} 타입 트레이너 결과`,
       description: `${profile.mainCopy}`,
-      imageUrl: dataUrl, // 🔥 이게 핵심 (기존 shareImageUrl 삭제)
+      imageUrl: shareImageUrl,
       link: {
         mobileWebUrl: baseUrl,
         webUrl: baseUrl
