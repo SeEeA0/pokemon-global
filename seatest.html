@@ -784,12 +784,6 @@ body{
   color:#7382a0;
 }
 
-.capture-ios{
-  width:390px !important;
-  max-width:390px !important;
-  min-width:390px !important;
-  margin:0 auto !important;
-}
 </style>
 </head>
 <body>
@@ -1485,19 +1479,33 @@ document.getElementById('retryBtn').addEventListener('click', () => {
 async function makeShareImageDataUrl() {
   const target = document.getElementById('captureTarget');
 
-  target.classList.add('capture-ios');
+  // 이미지 로딩 완료 대기
+  const images = Array.from(target.querySelectorAll('img'));
+  await Promise.all(
+    images.map(img => {
+      if (img.complete) return Promise.resolve();
+      return new Promise(resolve => {
+        img.onload = resolve;
+        img.onerror = resolve;
+      });
+    })
+  );
 
-  await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  await new Promise(resolve =>
+    requestAnimationFrame(() => requestAnimationFrame(resolve))
+  );
+
+  const rect = target.getBoundingClientRect();
 
   const canvas = await html2canvas(target, {
     useCORS: true,
     backgroundColor: null,
     scale: 3,
-    width: 390,
-    windowWidth: 390
+    width: Math.round(rect.width),
+    height: Math.round(rect.height),
+    windowWidth: document.documentElement.clientWidth,
+    windowHeight: document.documentElement.clientHeight
   });
-
-  target.classList.remove('capture-ios');
 
   return canvas.toDataURL('image/png');
 }
